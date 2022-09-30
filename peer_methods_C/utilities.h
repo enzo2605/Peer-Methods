@@ -1,3 +1,9 @@
+/**
+ * Author: Vincenzo Iannucci
+ * Purpose: The library provides an implementation for useful functions
+ * like wrapper functions, functions used to dispay results and so on.
+ * **/
+
 #ifndef utilities_h
 #define utilities_h
 
