@@ -57,7 +57,39 @@ int main(int argc, char *argv[]) {
     int n_points_x;
     x_int = setDVector(x_int, x_start, x_end, Delta_x, &n_points_x);
 
-    
+    /*** Define initial conditions ***/
+    // u10_time
+    // Allocation of the vector
+    double *tempVecU10 = (double *)calloc(M, sizeof(double));
+    // Initialization with random values between 0 and 1
+    initializeRandomVector(tempVecU10, M);
+    // vector by scalar product
+    cblas_dscal(M, 0.7, tempVecU10, 1);
+    // Add the scalar alpha at every element of the array tempVecU10
+    double *u10_time = sumScalarByVector(tempVecU10, M, 1.4f);
+    printDVector(u10_time, M);
+
+    // u20_time
+    // Allocation of the vector
+    double *tempVecU20 = (double *)calloc(M, sizeof(double));
+    // Initialization with random values between 0 and 1
+    initializeRandomVector(tempVecU20, M);
+    // vector by scalar product
+    cblas_dscal(M, 0.7, tempVecU20, 1);
+    // Add the scalar alpha at every element of the array tempVecU20
+    double *u20_time = sumScalarByVector(tempVecU20, M, 1.4f);
+    printDVector(u20_time, M);
+
+    // w0_time
+    // Allocation of the vector
+    double *tempVecW0 = (double *)calloc(M, sizeof(double));
+    // Initialization with random values between 0 and 1
+    initializeRandomVector(tempVecW0, M);
+    // vector by scalar product
+    cblas_dscal(M, 0.07, tempVecW0, 1);
+    // Add the scalar alpha at every element of the array tempVecW0
+    double *w0_time = sumScalarByVector(tempVecW0, M, 0.14f);
+    printDVector(w0_time, M);
 
     exit(0);
 }

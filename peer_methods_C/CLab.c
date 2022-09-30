@@ -21,13 +21,7 @@ double *eyeD(double *a, int N) {
     int k = 0;
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            if (i == j) {
-                a[k] = 1;
-            }
-            else {
-                a[k] = 0;
-            }
-            k++;
+            a[k++] = (i == j) ? 1 : 0;
         }
     }
     return a;
@@ -51,4 +45,12 @@ double *zerosD(double *a, int N) {
         *(a + i) = 0.0f;
     }
     return a;
+}
+
+double *sumScalarByVector(double *in, int N, double alpha) {
+    int i;
+    for (i = 0; i < N; i++) {
+        in[i] += alpha;
+    }
+    return in;
 }

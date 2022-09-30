@@ -33,6 +33,12 @@ double *onesD(double *a, int N);
  * Return a vector of size N in which every element
  * has value 0.
  *****************************************************/
-double *zerosD(double *a, int N); 
+double *zerosD(double *a, int N);
+
+/*******************************************************
+ * Sum each element of vector in by the scalar alpha.
+ * Return the pointer at the resulting array. 
+ *****************************************************/
+double *sumScalarByVector(double *in, int N, double alpha);
 
 #endif // !CLab_h

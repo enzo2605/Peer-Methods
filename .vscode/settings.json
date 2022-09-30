@@ -2,6 +2,7 @@
     "files.associations": {
         "*.sql": "sql",
         "clapack.h": "c",
-        "cblas.h": "c"
+        "cblas.h": "c",
+        "clab.h": "c"
     }
 }

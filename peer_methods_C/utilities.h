@@ -9,6 +9,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
 
 /*************************************************
  *          Wrapper functions
@@ -21,5 +23,10 @@ void *Calloc(size_t nmemb, size_t size);
  ***********************************************/
 void printDMatrix(double *matrix, int M, int N);
 void printDVector(double *vector, int N);
+
+/*************************************************
+ *          Initialization functions
+ ***********************************************/
+void initializeRandomVector(double *vector, int N);
 
 #endif // !utilities_h

@@ -1,7 +1,7 @@
 all: clean main
 
 main: main.o CLab.o utilities.o
-	gcc main.o CLab.o utilities.o -o main.out
+	gcc main.o CLab.o utilities.o -o main.out -lcblas
 
 main.o: main.c CLab.h utilities.h
 	gcc -c main.c
