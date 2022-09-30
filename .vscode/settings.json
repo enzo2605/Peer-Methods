@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.sql": "sql",
+        "clapack.h": "c",
+        "cblas.h": "c"
+    }
+}
