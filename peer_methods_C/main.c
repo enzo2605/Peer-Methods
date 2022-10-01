@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
     cblas_dscal(M, 0.7, tempVecU20, 1);
     // Add the scalar alpha at every element of the array tempVecU20
     double *u20_time = sumScalarByVector(tempVecU20, M, 1.4f);
-    printDVector(u20_time, M);
+    //printDVector(u20_time, M);
 
     // w0_time
     // Allocation of the vector
@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
     cblas_dscal(M, 0.07, tempVecW0, 1);
     // Add the scalar alpha at every element of the array tempVecW0
     double *w0_time = sumScalarByVector(tempVecW0, M, 0.14f);
-    printDVector(w0_time, M);
+    //printDVector(w0_time, M);
 
     // Finite differences of order two and periodic boundary conditions
     /*
@@ -97,6 +97,13 @@ int main(int argc, char *argv[]) {
         Ldiff(1,M) = 1/Delta_x^2; Ldiff(M,1) = 1/Delta_x^2;
         L = blkdiag(Ldiff,D*Ldiff,d*Ldiff);
     */
+    double *eyeM = eyeD(eyeM, M);
+    cblas_dscal(M, -2.0f, eyeM, 1);
+
+    double *onesVector, *tempDiag; 
+    int sizeTempDiag;
+    tempDiag = diagD(onesD(onesVector, M - 1), M - 1, -1, &sizeTempDiag);
+    printf("sizeDiag: %d\n", sizeTempDiag);
 
     exit(0);
 }
