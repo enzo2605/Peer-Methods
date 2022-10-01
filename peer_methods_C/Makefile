@@ -1,5 +1,13 @@
 all: clean main
 
+test: clean utest
+
+utest: utest.o CLab.o utilities.o
+	gcc utest.o CLab.o utilities.o -o utest.out -lcblas
+
+utest.o: utest.c CLab.h utilities.h
+	gcc -c utest.c
+
 main: main.o CLab.o utilities.o
 	gcc main.o CLab.o utilities.o -o main.out -lcblas
 

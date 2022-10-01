@@ -54,3 +54,30 @@ double *sumScalarByVector(double *in, int N, double alpha) {
     }
     return in;
 }
+
+double *diagD(double *vector, int size, int k, int *matrix_size) {
+    // The dimension of the final matrix will be N x N
+    // with N = k + 1
+    int N = size + abs(k);
+    double *matrix = (double *)Calloc(N * N, sizeof(double));
+
+    int j = abs(k);
+    for (int i = 0; i < size; i++) {
+        if (k > 0) {
+            matrix[k++ * N + i] = vector[i];
+        }
+        else if (k < 0) {
+            matrix[i * N + j++] = vector[i];
+        }
+        else {
+            matrix[i * N + i] = vector[i];
+        }
+    }
+
+    *matrix_size = N;
+    return matrix;
+}
+
+double *threeBlockDiagD(int n, double *A, double *B, double *C) {
+    
+}

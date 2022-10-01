@@ -4,6 +4,7 @@
  * **/
 #include <math.h>
 #include <cblas.h>
+#include <string.h>
 #include "CLab.h"
 #include "utilities.h"
 
@@ -60,7 +61,7 @@ int main(int argc, char *argv[]) {
     /*** Define initial conditions ***/
     // u10_time
     // Allocation of the vector
-    double *tempVecU10 = (double *)calloc(M, sizeof(double));
+    double *tempVecU10 = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
     initializeRandomVector(tempVecU10, M);
     // vector by scalar product
@@ -71,7 +72,7 @@ int main(int argc, char *argv[]) {
 
     // u20_time
     // Allocation of the vector
-    double *tempVecU20 = (double *)calloc(M, sizeof(double));
+    double *tempVecU20 = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
     initializeRandomVector(tempVecU20, M);
     // vector by scalar product
@@ -82,7 +83,7 @@ int main(int argc, char *argv[]) {
 
     // w0_time
     // Allocation of the vector
-    double *tempVecW0 = (double *)calloc(M, sizeof(double));
+    double *tempVecW0 = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
     initializeRandomVector(tempVecW0, M);
     // vector by scalar product
@@ -90,6 +91,13 @@ int main(int argc, char *argv[]) {
     // Add the scalar alpha at every element of the array tempVecW0
     double *w0_time = sumScalarByVector(tempVecW0, M, 0.14f);
     printDVector(w0_time, M);
+
+    // Finite differences of order two and periodic boundary conditions
+    /*
+        Ldiff = (1/Delta_x^2)*(-2*eye(M)+diag(ones(M-1,1),1)+diag(ones(M-1,1),-1));
+        Ldiff(1,M) = 1/Delta_x^2; Ldiff(M,1) = 1/Delta_x^2;
+        L = blkdiag(Ldiff,D*Ldiff,d*Ldiff);
+    */
 
     exit(0);
 }
