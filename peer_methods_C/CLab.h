@@ -48,4 +48,16 @@ double *sumScalarByVector(double *in, int N, double alpha);
  *****************************************************/
 double *diagD(double *vector, int size, int k, int *matrix_size);
 
+/*******************************************************
+ * Packing three matrices side by side into one. It's
+ * an utility function for the threeBlockDiagD function
+ *****************************************************/
+double *packMatrices(int n, double *A, double *B, double *C);
+
+/*******************************************************
+ * Return a block diag matrix of three matrices passed
+ * by arguments of size n x n.
+ *****************************************************/
+double *threeBlockDiagD(int n, double *A, double *B, double *C);
+
 #endif // !CLab_h

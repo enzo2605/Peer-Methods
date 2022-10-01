@@ -78,6 +78,25 @@ double *diagD(double *vector, int size, int k, int *matrix_size) {
     return matrix;
 }
 
+double *packMatrices(int n, double *A, double *B, double *C) {
+    double *pack = (double *)Calloc(n * n * 3, sizeof(double));
+    memcpy(pack, A, n * n * sizeof(double));
+    memcpy(pack + n * n, B, n * n * sizeof(double));
+    memcpy(pack + n * n + n * n, C, n * n * sizeof(double));
+    return pack;
+}
+
 double *threeBlockDiagD(int n, double *A, double *B, double *C) {
-    
+    int newSize = n * 3;
+    double *blockMatrix = (double *)Calloc(newSize * newSize, sizeof(double));
+    double *pack = packMatrices(n, A, B, C);
+
+    // Copy row by row the element of pack into blockMatrix
+    for (int i = 0; i < newSize; i += n) {
+        for (int j = 0; j < n; j++) {
+            memcpy(blockMatrix + (i * newSize + i) + j * newSize, pack + (i * n) + j * n, n * sizeof(double));
+        }
+    }
+
+    return blockMatrix;
 }

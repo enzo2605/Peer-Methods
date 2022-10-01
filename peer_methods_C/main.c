@@ -4,7 +4,6 @@
  * **/
 #include <math.h>
 #include <cblas.h>
-#include <string.h>
 #include "CLab.h"
 #include "utilities.h"
 
