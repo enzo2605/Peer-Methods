@@ -52,12 +52,17 @@ double *diagD(double *vector, int size, int k, int *matrix_size);
  * Packing three matrices side by side into one. It's
  * an utility function for the threeBlockDiagD function
  *****************************************************/
-double *packMatrices(int n, double *A, double *B, double *C);
+double *packThreeMatrices(int n, double *A, double *B, double *C);
 
 /*******************************************************
  * Return a block diag matrix of three matrices passed
  * by arguments of size n x n.
  *****************************************************/
 double *threeBlockDiagD(int n, double *A, double *B, double *C);
+
+/*******************************************************
+ * Packing three vectors side by side into one.
+ *****************************************************/
+double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimension);
 
 #endif // !CLab_h

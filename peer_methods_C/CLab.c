@@ -59,8 +59,11 @@ double *diagD(double *vector, int size, int k, int *matrix_size) {
     // The dimension of the final matrix will be N x N
     // with N = k + 1
     int N = size + abs(k);
+
+    // Allocate dynamically the new matrix
     double *matrix = (double *)Calloc(N * N, sizeof(double));
 
+    // Decide where to place arguments based on the absoulute value of k
     int j = abs(k);
     for (int i = 0; i < size; i++) {
         if (k > 0) {
@@ -74,22 +77,32 @@ double *diagD(double *vector, int size, int k, int *matrix_size) {
         }
     }
 
+    // Saving the new matrix size
     *matrix_size = N;
+
     return matrix;
 }
 
-double *packMatrices(int n, double *A, double *B, double *C) {
+double *packThreeMatrices(int n, double *A, double *B, double *C) {
+    // Allocates the new matrix
     double *pack = (double *)Calloc(n * n * 3, sizeof(double));
+
+    // Copy the three matrix one side by another
     memcpy(pack, A, n * n * sizeof(double));
     memcpy(pack + n * n, B, n * n * sizeof(double));
     memcpy(pack + n * n + n * n, C, n * n * sizeof(double));
+
     return pack;
 }
 
 double *threeBlockDiagD(int n, double *A, double *B, double *C) {
+    // The new size will be the old one multiplied by 3
     int newSize = n * 3;
+
+    // Allocates the final matrix
     double *blockMatrix = (double *)Calloc(newSize * newSize, sizeof(double));
-    double *pack = packMatrices(n, A, B, C);
+    // Pack the three matrix into one using an apposite function
+    double *pack = packThreeMatrices(n, A, B, C);
 
     // Copy row by row the element of pack into blockMatrix
     for (int i = 0; i < newSize; i += n) {
@@ -99,4 +112,21 @@ double *threeBlockDiagD(int n, double *A, double *B, double *C) {
     }
 
     return blockMatrix;
+}
+
+double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimension) {
+    int newSize = n * 3;
+    
+    // Allocates the new vector
+    double *pack = (double *)Calloc(newSize, sizeof(double));
+
+    // Copy the three vector one side by another
+    memcpy(pack, A, n * sizeof(double));
+    memcpy(pack + n, B, n * sizeof(double));
+    memcpy(pack + 2 * n, C, n * sizeof(double));
+
+    // Saving the new dimension of the vector
+    *newDimension = newSize;
+
+    return pack;
 }

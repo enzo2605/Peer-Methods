@@ -17,6 +17,9 @@
 #define D  0.802
 
 int main(int argc, char *argv[]) {
+    // Randomly initialization for the seed
+    srand((unsigned int)time(NULL));
+    
     // intervals
     double t_start, t_end, x_start, x_end;
 
@@ -90,6 +93,15 @@ int main(int argc, char *argv[]) {
     // Add the scalar alpha at every element of the array tempVecW0
     double *w0_time = sumScalarByVector(tempVecW0, M, 0.14f);
     //printDVector(w0_time, M);
+
+    // Create vector y0 = [U10;U20;W0] with initial conditions
+    /*
+        y0 = zeros(3*M,1);
+        y0(1:M,1) = u10_time(1:M,1);
+        y0(M+1:2*M,1) = u20_time(1:M,1);
+        y0(2*M+1:3*M,1) = w0_time(1:M,1);
+    */
+
 
     // Finite differences of order two and periodic boundary conditions
     /*

@@ -41,7 +41,6 @@ void printDVector(double *vector, int N) {
 void initializeRandomVector(double *vector, int N) {
     int i;
     double randomNumber;
-    srand((unsigned int)time(NULL));
 
     for (i = 0; i < N; i++) {
         randomNumber = (double)rand() / ((double)RAND_MAX);
