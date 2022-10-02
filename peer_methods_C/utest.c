@@ -7,18 +7,18 @@
 int main(int argc, char *argv[]) {
     int rip = 1;
     while (rip == 1) {
-        int size, k, N_mat;
-        printf("\nInserisci n: ");
-        scanf("%d", &size);
+        int M, k, N_mat;
+        fprintf(stdout, "\nInserisci M: ");
+        scanf("%d", &M);
 
-        double *a = (double *)calloc(size * size, sizeof(double));
-        initializeRandomMatrix(a, size, size);
-        printDMatrix(a, size, size);
-        double *b = (double *)calloc(size * size, sizeof(double));
-        initializeRandomMatrix(b, size, size);
-        printDMatrix(b, size, size);
-        double *c = sumPuntSquareMatrices(a, b, size);
-        printDMatrix(c, size, size);
+        double *onesVector, *tempDiagOne, *tempDiagMinusOne; 
+        int sizeTempDiagOne, sizeTempDiagMinusOne;
+        onesVector = onesD(onesVector, M - 1);
+        printDVector(onesVector, M - 1);
+        fprintf(stdout, "hi\n");
+        tempDiagOne      = diagD(onesVector, M - 1, 1, &sizeTempDiagOne);
+        fprintf(stdout, "hi\n");
+        printDMatrix(tempDiagOne, sizeTempDiagOne, sizeTempDiagOne);
     }
     exit(0);
 }

@@ -71,4 +71,6 @@ double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimensi
  *****************************************************/
 double *sumPuntSquareMatrices(double *matrix1, double *matrix2, int size);
 
+void scalarByMatrix(double *matrix, int M, int N, double alpha);
+
 #endif // !CLab_h

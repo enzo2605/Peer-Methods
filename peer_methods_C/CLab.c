@@ -59,15 +59,17 @@ double *diagD(double *vector, int size, int k, int *matrix_size) {
     // The dimension of the final matrix will be N x N
     // with N = k + 1
     int N = size + abs(k);
+    fprintf(stdout, "N: %d\n", N);
 
     // Allocate dynamically the new matrix
     double *matrix = (double *)Calloc(N * N, sizeof(double));
 
     // Decide where to place arguments based on the absoulute value of k
     int j = abs(k);
+    fprintf(stdout, "j: %d\n", j);
     for (int i = 0; i < size; i++) {
         if (k > 0) {
-            matrix[k++ * N + i] = vector[i];
+            matrix[j++ * N + i] = vector[i];
         }
         else if (k < 0) {
             matrix[i * N + j++] = vector[i];
@@ -145,4 +147,14 @@ double *sumPuntSquareMatrices(double *matrix1, double *matrix2, int size) {
     }
 
     return result;
+}
+
+void scalarByMatrix(double *matrix, int M, int N, double alpha) {
+    int i, j;
+
+    for (i = 0; i < M; i++) {
+        for (j = 0; j < N; j++) {
+            matrix[j * M + i] *= alpha;
+        }
+    } 
 }

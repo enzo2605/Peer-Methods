@@ -20,22 +20,22 @@ void *Calloc(size_t nmemb, size_t size) {
 
 void printDMatrix(double *matrix, int M, int N) {
     int i, j;
-    printf("Matrix size: %d x %d\n", M, N);
+    fprintf(stdout, "Matrix size: %d x %d\n", M, N);
     for (i = 0; i < M; i++) {
         for (j = 0; j < N; j++) {
-            printf("%8.2f", matrix[j * M + i]);
+            fprintf(stdout, "%8.2f", matrix[j * M + i]);
         }
-        printf("\n");
+        fprintf(stdout, "\n");
     }
 }
 
 void printDVector(double *vector, int N) {
     int i;
-    printf("Vector size: %d\n", N);
+    fprintf(stdout, "Vector size: %d\n", N);
     for (i = 0; i < N; i++) {
-        printf("%8.2lf\n", vector[i]);
+        fprintf(stdout, "%8.2lf\n", vector[i]);
     }
-    printf("\n");
+    fprintf(stdout, "\n");
 }
 
 void initializeRandomVector(double *vector, int N) {
@@ -54,8 +54,7 @@ void initializeRandomMatrix(double *matrix, int M, int N) {
     // generation by columns starting by the index 1
     for (i = 0; i < N; i++) {
         for (j = 0; j < M; j++) {
-            //matrix[k++] = (double)rand() / ((double)RAND_MAX);
-            matrix[k++] = 1.0f;
+            matrix[k++] = (double)rand() / ((double)RAND_MAX);
         }
     }
 }

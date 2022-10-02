@@ -9,7 +9,7 @@ utest.o: utest.c CLab.h utilities.h
 	gcc -c utest.c
 
 main: main.o CLab.o utilities.o
-	gcc main.o CLab.o utilities.o -o main.out -lcblas
+	gcc -Wall main.o CLab.o utilities.o -o main.out -lcblas -ldl
 
 main.o: main.c CLab.h utilities.h
 	gcc -c main.c

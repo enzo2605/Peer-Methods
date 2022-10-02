@@ -25,8 +25,8 @@ int main(int argc, char *argv[]) {
 
     // Checking arguments passed by the user
     if (argc != 5) {
-        printf("Usage: %s t_start t_end x_start x_end\n", argv[0]);
-        printf("Using default parameters...\n\n");
+        fprintf(stdout, "Usage: %s t_start t_end x_start x_end\n", argv[0]);
+        fprintf(stdout, "Using default parameters...\n\n");
         t_start = 0.0f;
         t_end   = 50.0f;
         x_start = -50.0f;
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Printing the interval used
-    printf("Interval used:\ntime span: [%f, %f]\nspace span: [%f, %f]\n", t_start, t_end, x_start, x_end);
+    fprintf(stdout, "Interval used:\ntime span: [%f, %f]\nspace span: [%f, %f]\n", t_start, t_end, x_start, x_end);
 
     /*********************************************** 
      *          Time initialization 
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
     /*********************************************** 
      *          Space initialization 
      * *********************************************/
-    int M = 64;
+    int M = 16;
     double x_span[2] = { x_start, x_end };
     double Delta_x = (x_span[1] - x_span[0]) / M;
 
@@ -73,9 +73,10 @@ int main(int argc, char *argv[]) {
     // Initialization with random values between 0 and 1
     initializeRandomVector(tempVecU10, M);
     // vector by scalar product
-    cblas_dscal(M, 0.7, tempVecU10, 1);
+    scalarByMatrix(tempVecU10, M, M, 0.7);
     // Add the scalar alpha at every element of the array tempVecU10
     double *u10_time = sumScalarByVector(tempVecU10, M, 1.4f);
+    free(tempVecU10);
 
     /**** u20_time *****/
     // Allocation of the vector
@@ -83,9 +84,10 @@ int main(int argc, char *argv[]) {
     // Initialization with random values between 0 and 1
     initializeRandomVector(tempVecU20, M);
     // vector by scalar product
-    cblas_dscal(M, 0.7, tempVecU20, 1);
+    scalarByMatrix(tempVecU20, M, M, 0.7);
     // Add the scalar alpha at every element of the array tempVecU20
     double *u20_time = sumScalarByVector(tempVecU20, M, 1.4f);
+    free(tempVecU20);
 
     /**** w0_time *****/
     // Allocation of the vector
@@ -93,9 +95,10 @@ int main(int argc, char *argv[]) {
     // Initialization with random values between 0 and 1
     initializeRandomVector(tempVecW0, M);
     // vector by scalar product
-    cblas_dscal(M, 0.07, tempVecW0, 1);
+    scalarByMatrix(tempVecW0, M, M, 0.07);
     // Add the scalar alpha at every element of the array tempVecW0
     double *w0_time = sumScalarByVector(tempVecW0, M, 0.14f);
+    free(tempVecW0);
 
     /************************************************************** 
      *  Create vector y0 = [U10;U20;W0] with initial conditions 
@@ -113,12 +116,24 @@ int main(int argc, char *argv[]) {
         L = blkdiag(Ldiff,D*Ldiff,d*Ldiff);
     */
     double *eyeM = eyeD(eyeM, M);
-    cblas_dscal(M, -2.0f, eyeM, 1);
+    scalarByMatrix(eyeM, M, M, -2.0f);
 
-    double *onesVector, *tempDiag; 
-    int sizeTempDiag;
-    tempDiag = diagD(onesD(onesVector, M - 1), M - 1, -1, &sizeTempDiag);
-    printf("sizeDiag: %d\n", sizeTempDiag);
+    int sizeTempDiagOne, sizeTempDiagMinusOne;
+    double *onesVector = onesD(onesVector, M - 1);
+    printDVector(onesVector, M - 1);
+
+    double *tempDiagOne      = diagD(onesVector, M - 1, 1, &sizeTempDiagOne);
+    printDMatrix(tempDiagOne, sizeTempDiagOne, sizeTempDiagOne);
+    double *tempDiagMinusOne = diagD(onesVector, M - 1, -1, &sizeTempDiagMinusOne);
+    printDMatrix(tempDiagMinusOne, M, M);
+    exit(0);
+
+    double *addend1 = sumPuntSquareMatrices(eyeM, tempDiagOne, M);
+    scalarByMatrix(addend1, M, M, 1.0f / Delta_x * Delta_x);
+    printDMatrix(addend1, M, M);
+
+    double *Ldiff = sumPuntSquareMatrices(addend1, tempDiagMinusOne, M);
+    printDMatrix(Ldiff, M, M);
 
     exit(0);
 }
