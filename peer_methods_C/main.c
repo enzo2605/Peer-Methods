@@ -126,7 +126,6 @@ int main(int argc, char *argv[]) {
     printDMatrix(tempDiagOne, sizeTempDiagOne, sizeTempDiagOne);
     double *tempDiagMinusOne = diagD(onesVector, M - 1, -1, &sizeTempDiagMinusOne);
     printDMatrix(tempDiagMinusOne, M, M);
-    exit(0);
 
     double *addend1 = sumPuntSquareMatrices(eyeM, tempDiagOne, M);
     scalarByMatrix(addend1, M, M, 1.0f / Delta_x * Delta_x);
