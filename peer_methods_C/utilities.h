@@ -29,6 +29,6 @@ void printDVector(double *vector, int N);
  *          Initialization functions
  ***********************************************/
 void initializeRandomVector(double *vector, int N);
-void initializeMatrix(double *matrix, int M, int N);
+void initializeRandomMatrix(double *matrix, int M, int N);
 
 #endif // !utilities_h

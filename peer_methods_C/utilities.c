@@ -48,13 +48,14 @@ void initializeRandomVector(double *vector, int N) {
     }
 }
 
-void initializeMatrix(double *matrix, int M, int N) {
+void initializeRandomMatrix(double *matrix, int M, int N) {
     int k = 0;
     int i, j;
     // generation by columns starting by the index 1
     for (i = 0; i < N; i++) {
         for (j = 0; j < M; j++) {
-            matrix[k++] = (double)rand() / ((double)RAND_MAX);
+            //matrix[k++] = (double)rand() / ((double)RAND_MAX);
+            matrix[k++] = 1.0f;
         }
     }
 }

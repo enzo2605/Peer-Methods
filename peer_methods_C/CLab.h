@@ -65,4 +65,10 @@ double *threeBlockDiagD(int n, double *A, double *B, double *C);
  *****************************************************/
 double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimension);
 
+/*******************************************************
+ * Sum element by element of two square matrices
+ * of the same dimension.
+ *****************************************************/
+double *sumPuntSquareMatrices(double *matrix1, double *matrix2, int size);
+
 #endif // !CLab_h

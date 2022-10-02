@@ -108,7 +108,8 @@ int main(int argc, char *argv[]) {
      * *****************************************************************/
     /*
         Ldiff = (1/Delta_x^2)*(-2*eye(M)+diag(ones(M-1,1),1)+diag(ones(M-1,1),-1));
-        Ldiff(1,M) = 1/Delta_x^2; Ldiff(M,1) = 1/Delta_x^2;
+        Ldiff(1,M) = 1/Delta_x^2; 
+        Ldiff(M,1) = 1/Delta_x^2;
         L = blkdiag(Ldiff,D*Ldiff,d*Ldiff);
     */
     double *eyeM = eyeD(eyeM, M);

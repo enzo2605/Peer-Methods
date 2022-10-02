@@ -130,3 +130,19 @@ double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimensi
 
     return pack;
 }
+
+double *sumPuntSquareMatrices(double *matrix1, double *matrix2, int size) {
+    int i, j;
+
+    // Allocate the resulting matrix
+    double *result = (double *)Calloc(size * size, sizeof(double));
+
+    // Sum element by element of the matrices
+    for (i = 0; i < size; i++) {
+        for (j = 0; j < size; j++) {
+            result[i * size + j] = matrix1[i * size + j] + matrix2[i * size + j];
+        }
+    }
+
+    return result;
+}
