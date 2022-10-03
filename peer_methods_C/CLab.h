@@ -15,7 +15,7 @@
  * represented by step parameters. N represent the
  * size of the array at the end.
  *****************************************************/
-double *setDVector(double *vector, double first, double last, double step, int *N);
+double *intervalDiscretization(double *vector, double first, double last, double step, int *N);
 
 /*******************************************************
  * Return a square matrix of size N in which the  
@@ -39,7 +39,7 @@ double *zerosD(double *a, int N);
  * Sum each element of vector in by the scalar alpha.
  * Return the pointer at the resulting array. 
  *****************************************************/
-double *sumScalarByVector(double *in, int N, double alpha);
+void sumScalarByVector(double *in, int N, double alpha);
 
 /*******************************************************
  * Return a matrix matrix_size x matrix_size elements in 
@@ -71,6 +71,9 @@ double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimensi
  *****************************************************/
 double *sumPuntSquareMatrices(double *matrix1, double *matrix2, int size);
 
+/*******************************************************
+ * Multiply a scalar value for a matrix.
+ *****************************************************/
 void scalarByMatrix(double *matrix, int M, int N, double alpha);
 
 #endif // !CLab_h

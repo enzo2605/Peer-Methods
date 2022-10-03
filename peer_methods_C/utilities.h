@@ -12,6 +12,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdarg.h>
 
 /*************************************************
  *          Wrapper functions
@@ -22,7 +23,7 @@ void *Calloc(size_t nmemb, size_t size);
 /*************************************************
  *          Displaying stuff functions
  ***********************************************/
-void printDMatrix(double *matrix, int M, int N);
+void printDMatrix(double *matrix, int M, int N, const char *string);
 void printDVector(double *vector, int N);
 
 /*************************************************
@@ -30,5 +31,10 @@ void printDVector(double *vector, int N);
  ***********************************************/
 void initializeRandomVector(double *vector, int N);
 void initializeRandomMatrix(double *matrix, int M, int N);
+
+/*************************************************
+ *  Free all the memory dynamically allocated
+ ***********************************************/
+void freeEverything(void *arg1, ...);
 
 #endif // !utilities_h

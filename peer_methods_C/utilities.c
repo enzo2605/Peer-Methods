@@ -18,12 +18,12 @@ void *Calloc(size_t nmemb, size_t size) {
     return res;
 }
 
-void printDMatrix(double *matrix, int M, int N) {
+void printDMatrix(double *matrix, int M, int N, const char *string) {
     int i, j;
-    fprintf(stdout, "Matrix size: %d x %d\n", M, N);
+    fprintf(stdout, "%s\nMatrix size: %d x %d\n", string, M, N);
     for (i = 0; i < M; i++) {
         for (j = 0; j < N; j++) {
-            fprintf(stdout, "%8.2f", matrix[j * M + i]);
+            fprintf(stdout, "%10.4f", matrix[j * M + i]);
         }
         fprintf(stdout, "\n");
     }
@@ -33,7 +33,7 @@ void printDVector(double *vector, int N) {
     int i;
     fprintf(stdout, "Vector size: %d\n", N);
     for (i = 0; i < N; i++) {
-        fprintf(stdout, "%8.2lf\n", vector[i]);
+        fprintf(stdout, "%10.4lf\n", vector[i]);
     }
     fprintf(stdout, "\n");
 }
@@ -54,7 +54,21 @@ void initializeRandomMatrix(double *matrix, int M, int N) {
     // generation by columns starting by the index 1
     for (i = 0; i < N; i++) {
         for (j = 0; j < M; j++) {
-            matrix[k++] = (double)rand() / ((double)RAND_MAX);
+            matrix[i * N + j] = (double)rand() / ((double)RAND_MAX);
         }
     }
+}
+
+void freeEverything(void *arg1, ...) {
+    va_list args; // list of arguments
+    void *vp; // pointer to the i-th arguments
+    // Free the first argument
+    free(arg1);
+    va_start(args, arg1);
+    // Until you reach the end of the arguments, free the argument
+    // pointed by vp
+    while ((vp = va_arg(args, void *)) != 0) {
+        free(vp);
+    }
+    va_end(args);
 }

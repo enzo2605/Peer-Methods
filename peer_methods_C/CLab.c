@@ -1,6 +1,6 @@
 #include "CLab.h"
 
-double *setDVector(double *vector, double first, double last, double step, int *N) {
+double *intervalDiscretization(double *vector, double first, double last, double step, int *N) {
     // Number of elements
     int size = ((int)(last - first) / step) + 1;
     // Allocate the array using calloc
@@ -17,11 +17,11 @@ double *setDVector(double *vector, double first, double last, double step, int *
 double *eyeD(double *a, int N) {
     // Allocate the matrix, rembering that we need to allocate
     // the matrix by columns and start from 1
-    a = (double *)Calloc(N * N + 1, sizeof(double));
+    a = (double *)Calloc(N * N, sizeof(double));
     int k = 0;
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            a[k++] = (i == j) ? 1 : 0;
+            a[i * N + j] = (i == j) ? 1 : 0;
         }
     }
     return a;
@@ -47,26 +47,23 @@ double *zerosD(double *a, int N) {
     return a;
 }
 
-double *sumScalarByVector(double *in, int N, double alpha) {
+void sumScalarByVector(double *in, int N, double alpha) {
     int i;
     for (i = 0; i < N; i++) {
         in[i] += alpha;
     }
-    return in;
 }
 
 double *diagD(double *vector, int size, int k, int *matrix_size) {
     // The dimension of the final matrix will be N x N
     // with N = k + 1
     int N = size + abs(k);
-    fprintf(stdout, "N: %d\n", N);
 
     // Allocate dynamically the new matrix
     double *matrix = (double *)Calloc(N * N, sizeof(double));
 
     // Decide where to place arguments based on the absoulute value of k
     int j = abs(k);
-    fprintf(stdout, "j: %d\n", j);
     for (int i = 0; i < size; i++) {
         if (k > 0) {
             matrix[j++ * N + i] = vector[i];
@@ -154,7 +151,7 @@ void scalarByMatrix(double *matrix, int M, int N, double alpha) {
 
     for (i = 0; i < M; i++) {
         for (j = 0; j < N; j++) {
-            matrix[j * M + i] *= alpha;
+            matrix[i * N + j] *= alpha;
         }
     } 
 }

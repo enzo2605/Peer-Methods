@@ -15,6 +15,7 @@
 #define S  0.0002 
 #define d  500 
 #define D  0.802
+#define NDIM 2
 
 int main(int argc, char *argv[]) {
     // Random initialization for the seed
@@ -50,7 +51,7 @@ int main(int argc, char *argv[]) {
 
     double *t_int;
     int n_points_t;
-    t_int = setDVector(t_int, t_start, t_end, Delta_t, &n_points_t);
+    t_int = intervalDiscretization(t_int, t_start, t_end, Delta_t, &n_points_t);
     int N = (t_span[1] - t_span[0]) / Delta_t;
 
     /*********************************************** 
@@ -59,46 +60,44 @@ int main(int argc, char *argv[]) {
     int M = 16;
     double x_span[2] = { x_start, x_end };
     double Delta_x = (x_span[1] - x_span[0]) / M;
+    printf("Delta_x: %f\n",Delta_x);
 
     double *x_int;
     int n_points_x;
-    x_int = setDVector(x_int, x_start, x_end, Delta_x, &n_points_x);
+    x_int = intervalDiscretization(x_int, x_start, x_end, Delta_x, &n_points_x);
 
     /*********************************************** 
      *          Define initial conditions 
      * *********************************************/
     /**** u10_time *****/
     // Allocation of the vector
-    double *tempVecU10 = (double *)Calloc(M, sizeof(double));
+    double *u10_time = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
-    initializeRandomVector(tempVecU10, M);
+    initializeRandomVector(u10_time, M);
     // vector by scalar product
-    scalarByMatrix(tempVecU10, M, M, 0.7);
-    // Add the scalar alpha at every element of the array tempVecU10
-    double *u10_time = sumScalarByVector(tempVecU10, M, 1.4f);
-    free(tempVecU10);
+    cblas_dscal(M, 0.7, u10_time, 1);
+    // Add the scalar alpha at every element of the array u10_time
+    sumScalarByVector(u10_time, M, 1.4f);
 
     /**** u20_time *****/
     // Allocation of the vector
-    double *tempVecU20 = (double *)Calloc(M, sizeof(double));
+    double *u20_time = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
-    initializeRandomVector(tempVecU20, M);
+    initializeRandomVector(u20_time, M);
     // vector by scalar product
-    scalarByMatrix(tempVecU20, M, M, 0.7);
-    // Add the scalar alpha at every element of the array tempVecU20
-    double *u20_time = sumScalarByVector(tempVecU20, M, 1.4f);
-    free(tempVecU20);
+    cblas_dscal(M, 0.7, u20_time, 1);
+    // Add the scalar alpha at every element of the array u20_time
+    sumScalarByVector(u20_time, M, 1.4f);
 
     /**** w0_time *****/
     // Allocation of the vector
-    double *tempVecW0 = (double *)Calloc(M, sizeof(double));
+    double *w0_time = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
-    initializeRandomVector(tempVecW0, M);
+    initializeRandomVector(w0_time, M);
     // vector by scalar product
-    scalarByMatrix(tempVecW0, M, M, 0.07);
-    // Add the scalar alpha at every element of the array tempVecW0
-    double *w0_time = sumScalarByVector(tempVecW0, M, 0.14f);
-    free(tempVecW0);
+    cblas_dscal(M, 0.07, w0_time, 1);
+    // Add the scalar alpha at every element of the array w0_time
+    sumScalarByVector(w0_time, M, 0.14f);
 
     /************************************************************** 
      *  Create vector y0 = [U10;U20;W0] with initial conditions 
@@ -117,22 +116,30 @@ int main(int argc, char *argv[]) {
     */
     double *eyeM = eyeD(eyeM, M);
     scalarByMatrix(eyeM, M, M, -2.0f);
+    printDMatrix(eyeM, M, M, "-2.0 * eye(M)");
 
     int sizeTempDiagOne, sizeTempDiagMinusOne;
     double *onesVector = onesD(onesVector, M - 1);
     printDVector(onesVector, M - 1);
 
-    double *tempDiagOne      = diagD(onesVector, M - 1, 1, &sizeTempDiagOne);
-    printDMatrix(tempDiagOne, sizeTempDiagOne, sizeTempDiagOne);
+    double *tempDiagOne = diagD(onesVector, M - 1, 1, &sizeTempDiagOne);
+    printDMatrix(tempDiagOne, sizeTempDiagOne, sizeTempDiagOne, "diag(ones(M-1,1),1)");
+    
     double *tempDiagMinusOne = diagD(onesVector, M - 1, -1, &sizeTempDiagMinusOne);
-    printDMatrix(tempDiagMinusOne, M, M);
+    printDMatrix(tempDiagMinusOne, M, M, "diag(ones(M-1,1),-1)");
 
     double *addend1 = sumPuntSquareMatrices(eyeM, tempDiagOne, M);
-    scalarByMatrix(addend1, M, M, 1.0f / Delta_x * Delta_x);
-    printDMatrix(addend1, M, M);
+    printDMatrix(addend1, M, M, "-2*eye(M)+diag(ones(M-1,1),1)");
+    printf("Scalar: %f", 1.0f / Delta_x * Delta_x);
 
     double *Ldiff = sumPuntSquareMatrices(addend1, tempDiagMinusOne, M);
-    printDMatrix(Ldiff, M, M);
+    printDMatrix(Ldiff, M, M, "(-2*eye(M)+diag(ones(M-1,1),1)+diag(ones(M-1,1),-1))");
+    
+    scalarByMatrix(Ldiff, M, M, 1.0f / (Delta_x * Delta_x));
+    printDMatrix(Ldiff, M, M, "(1/Delta_x^2)*(-2*eye(M)+diag(ones(M-1,1),1)+diag(ones(M-1,1),-1))");
+
+    // Free all the memory dynamically allocated
+    freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, addend1, Ldiff, (void *)0);
 
     exit(0);
 }
