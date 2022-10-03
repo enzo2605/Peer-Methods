@@ -58,7 +58,7 @@ double *packThreeMatrices(int n, double *A, double *B, double *C);
  * Return a block diag matrix of three matrices passed
  * by arguments of size n x n.
  *****************************************************/
-double *threeBlockDiagD(int n, double *A, double *B, double *C);
+double *threeBlockDiagD(int n, double *A, double *B, double *C, int *blckSize);
 
 /*******************************************************
  * Packing three vectors side by side into one.
@@ -74,6 +74,6 @@ double *sumPuntSquareMatrices(double *matrix1, double *matrix2, int size);
 /*******************************************************
  * Multiply a scalar value for a matrix.
  *****************************************************/
-void scalarByMatrix(double *matrix, int M, int N, double alpha);
+double *scalarByMatrix(double *matrix, int M, int N, double alpha);
 
 #endif // !CLab_h

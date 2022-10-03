@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
     /*********************************************** 
      *          Space initialization 
      * *********************************************/
-    int M = 16;
+    int M = 64;
     double x_span[2] = { x_start, x_end };
     double Delta_x = (x_span[1] - x_span[0]) / M;
     printf("Delta_x: %f\n",Delta_x);
@@ -108,35 +108,26 @@ int main(int argc, char *argv[]) {
     /********************************************************************
      * Finite differences of order two and periodic boundary conditions
      * *****************************************************************/
-    /*
-        Ldiff = (1/Delta_x^2)*(-2*eye(M)+diag(ones(M-1,1),1)+diag(ones(M-1,1),-1));
-        Ldiff(1,M) = 1/Delta_x^2; 
-        Ldiff(M,1) = 1/Delta_x^2;
-        L = blkdiag(Ldiff,D*Ldiff,d*Ldiff);
-    */
-    double *eyeM = eyeD(eyeM, M);
-    scalarByMatrix(eyeM, M, M, -2.0f);
-    printDMatrix(eyeM, M, M, "-2.0 * eye(M)");
-
+    // Calculate Ldiff
     int sizeTempDiagOne, sizeTempDiagMinusOne;
+    double *eyeM = eyeD(eyeM, M);
+    eyeM = scalarByMatrix(eyeM, M, M, -2.0f);
     double *onesVector = onesD(onesVector, M - 1);
-    printDVector(onesVector, M - 1);
-
     double *tempDiagOne = diagD(onesVector, M - 1, 1, &sizeTempDiagOne);
-    printDMatrix(tempDiagOne, sizeTempDiagOne, sizeTempDiagOne, "diag(ones(M-1,1),1)");
-    
     double *tempDiagMinusOne = diagD(onesVector, M - 1, -1, &sizeTempDiagMinusOne);
-    printDMatrix(tempDiagMinusOne, M, M, "diag(ones(M-1,1),-1)");
-
     double *addend1 = sumPuntSquareMatrices(eyeM, tempDiagOne, M);
-    printDMatrix(addend1, M, M, "-2*eye(M)+diag(ones(M-1,1),1)");
-    printf("Scalar: %f", 1.0f / Delta_x * Delta_x);
-
     double *Ldiff = sumPuntSquareMatrices(addend1, tempDiagMinusOne, M);
-    printDMatrix(Ldiff, M, M, "(-2*eye(M)+diag(ones(M-1,1),1)+diag(ones(M-1,1),-1))");
     
-    scalarByMatrix(Ldiff, M, M, 1.0f / (Delta_x * Delta_x));
-    printDMatrix(Ldiff, M, M, "(1/Delta_x^2)*(-2*eye(M)+diag(ones(M-1,1),1)+diag(ones(M-1,1),-1))");
+    Ldiff = scalarByMatrix(Ldiff, M, M, 1.0f / (Delta_x * Delta_x));
+    Ldiff[M - 1] = 1.0f / (Delta_x * Delta_x);
+    Ldiff[(M - 1) * M] = 1.0f / (Delta_x * Delta_x);
+
+    // Calculate the matrix L
+    int LSize;
+    double *DLdiff = scalarByMatrix(Ldiff, M, M, D);
+    double *dLdiff = scalarByMatrix(Ldiff, M, M, d);
+    double *L = threeBlockDiagD(M, Ldiff, DLdiff, dLdiff, &LSize);
+    printDMatrix(L, LSize, LSize, "L");
 
     // Free all the memory dynamically allocated
     freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, addend1, Ldiff, (void *)0);

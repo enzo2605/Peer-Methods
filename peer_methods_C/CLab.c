@@ -94,7 +94,7 @@ double *packThreeMatrices(int n, double *A, double *B, double *C) {
     return pack;
 }
 
-double *threeBlockDiagD(int n, double *A, double *B, double *C) {
+double *threeBlockDiagD(int n, double *A, double *B, double *C, int *blckSize) {
     // The new size will be the old one multiplied by 3
     int newSize = n * 3;
 
@@ -109,7 +109,7 @@ double *threeBlockDiagD(int n, double *A, double *B, double *C) {
             memcpy(blockMatrix + (i * newSize + i) + j * newSize, pack + (i * n) + j * n, n * sizeof(double));
         }
     }
-
+    *blckSize = newSize;
     return blockMatrix;
 }
 
@@ -146,12 +146,15 @@ double *sumPuntSquareMatrices(double *matrix1, double *matrix2, int size) {
     return result;
 }
 
-void scalarByMatrix(double *matrix, int M, int N, double alpha) {
+double *scalarByMatrix(double *matrix, int M, int N, double alpha) {
     int i, j;
+    double *newMatrix = (double *)Calloc(M * N, sizeof(double));
 
     for (i = 0; i < M; i++) {
         for (j = 0; j < N; j++) {
-            matrix[i * N + j] *= alpha;
+            newMatrix[i * N + j] = matrix[i * N + j] * alpha;
         }
-    } 
+    }
+
+    return newMatrix;
 }
