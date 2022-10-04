@@ -32,6 +32,21 @@
 end
 */
 
-double *Sherrat(double *U, double *V, double W, double *L) {
+double *Sherratt(double *y0, double *U, double *V, double *W, int m, double *L, int Lsize) {
+    int newSize = M * 3;
+    double *fun = (double *)Calloc(newSize, sizeof(double));
 
+    for (int i = 0; i < M; i++) {
+        fun[i] = W[i] * U[i] * (U[i] + H * V[i]) - B1 * U[i] - S * U[i] * V[i];
+        fun[i + M] = F * W[i] * V[i] * (U[i] + H * V[i]) - B2 * V[i];
+        fun[i + 2 * M] = a - W[i] - W[i] * (U[i] + V[i]) * (U[i] + H * V[i]);
+    }
+
+    // Matrix by vector product
+    double *Ly = (double *)Calloc(newSize, sizeof(double));
+    cblas_dgemv(CblasRowMajor, CblasNoTrans, Lsize, Lsize, 1, L, Lsize, y0, 1, 0, Ly, 1);
+    // Sum of two matrices of the same size
+    double *dydt = sumPuntSquareMatrices(Ly, fun, Lsize);
+
+    return dydt;
 }

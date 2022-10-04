@@ -3,6 +3,8 @@
         "*.sql": "sql",
         "clapack.h": "c",
         "cblas.h": "c",
-        "clab.h": "c"
+        "clab.h": "c",
+        "utilities.h": "c",
+        "peermethods.h": "c"
     }
 }

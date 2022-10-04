@@ -117,7 +117,13 @@ int main(int argc, char *argv[]) {
     double *DLdiff = scalarByMatrix(Ldiff, M, M, D);
     double *dLdiff = scalarByMatrix(Ldiff, M, M, d);
     double *L = threeBlockDiagD(M, Ldiff, DLdiff, dLdiff, &LSize);
-    printDMatrix(L, LSize, LSize, "L");
+
+    printDVector(u10_time, M);
+    printDVector(u20_time, M);
+    printDVector(w0_time, M);
+
+    double *sherrattRes = Sherratt(y0, u10_time, u20_time, w0_time, M, L, LSize);
+    printDVector(sherrattRes, LSize);
 
     // Free all the memory dynamically allocated
     freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, addend1, Ldiff, (void *)0);
