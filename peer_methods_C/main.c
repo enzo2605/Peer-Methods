@@ -8,16 +8,6 @@
 #include "utilities.h"
 #include "peerMethods.h"
 
-#define a  1.5
-#define B1 0.45
-#define B2 0.3611 
-#define F  0.802 
-#define H  0.802 
-#define S  0.0002 
-#define d  500 
-#define D  0.802
-#define NDIM 2
-
 int main(int argc, char *argv[]) {
     // Random initialization for the seed
     srand((unsigned int)time(NULL));
@@ -58,7 +48,6 @@ int main(int argc, char *argv[]) {
     /*********************************************** 
      *          Space initialization 
      * *********************************************/
-    int M = 64;
     double x_span[2] = { x_start, x_end };
     double Delta_x = (x_span[1] - x_span[0]) / M;
     printf("Delta_x: %f\n",Delta_x);
