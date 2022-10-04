@@ -1,3 +1,8 @@
+/**
+ * Author: Vincenzo Iannucci
+ * Purpose: The library provides an implementation for the main function
+ * for solving peer method.
+ * **/
 #ifndef peerMethods_h
 #define peerMethods_h
 
