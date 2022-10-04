@@ -6,6 +6,7 @@
 #include <cblas.h>
 #include "CLab.h"
 #include "utilities.h"
+#include "peerMethods.h"
 
 #define a  1.5
 #define B1 0.45

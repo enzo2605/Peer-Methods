@@ -8,11 +8,14 @@ utest: utest.o CLab.o utilities.o
 utest.o: utest.c CLab.h utilities.h
 	gcc -c utest.c
 
-main: main.o CLab.o utilities.o
+main: main.o CLab.o peerMethods.o utilities.o
 	gcc -Wall main.o CLab.o utilities.o -o main.out -lcblas -ldl
 
-main.o: main.c CLab.h utilities.h
+main.o: main.c CLab.h peerMethods.h utilities.h
 	gcc -c main.c
+
+peerMethods.o: peerMethods.h peerMethods.c
+	gcc -c peerMethods.c
 
 CLab.o: CLab.h CLab.c
 	gcc -c CLab.c
