@@ -1,8 +1,7 @@
 #include "peerMethods.h"
 
 double *Sherratt(double *y0, int y0Size, double *L, int Lsize, int *sherrattSize) {
-    int newSize = M * 3;
-
+    // Declaring three dynamic array representing the three function contained in y0
     double *U = (double *)Calloc(M, sizeof(double));
     double *V = (double *)Calloc(M, sizeof(double));
     double *W = (double *)Calloc(M, sizeof(double));
@@ -12,6 +11,7 @@ double *Sherratt(double *y0, int y0Size, double *L, int Lsize, int *sherrattSize
         W[i] = y0[i + 2 * M];
     }
 
+    int newSize = M * 3;
     double *fun = (double *)Calloc(newSize, sizeof(double));
     for (int i = 0; i < M; i++) {
         fun[i] = W[i] * U[i] * (U[i] + H * V[i]) - B1 * U[i] - S * U[i] * V[i];
@@ -26,6 +26,9 @@ double *Sherratt(double *y0, int y0Size, double *L, int Lsize, int *sherrattSize
     // Sum of two matrices of the same size
     double *dydt = sumPuntSquareMatrices(Ly, fun, Lsize);
     *sherrattSize = Lsize;
+
+    // Free all the useless memory allocated
+    freeEverything(U, V, W, fun, Ly);
 
     return dydt;
 }
