@@ -33,6 +33,7 @@ void printDVector(double *vector, int N, const char *string);
 void initializeRandomVector(double *vector, int N);
 void initializeRandomMatrix(double *matrix, int M, int N);
 int initMatrixByRowWithValuesFromVector(double *matrix, int M, int N, double *vector, int vector_size);
+void initVectorWAnotherVector(double *newVector, double *oldVector, int n);
 
 /*************************************************
  *  Free all the memory dynamically allocated

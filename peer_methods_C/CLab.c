@@ -58,6 +58,24 @@ void sumScalarByVector(double *in, int N, double alpha) {
     }
 }
 
+void scalarByVector(double *in, int N, double alpha) {
+    int i;
+    for (i = 0; i < N; i++) {
+        in[i] *= alpha;
+    }
+}
+
+double *sumPuntVectors(double *v1, double *v2, int size) {
+    double *res = (double *)Calloc(size, sizeof(double));
+
+    for (int i = 0; i < size; i++) {
+        printf("i: %d\n", i);
+        res[i] = v1[i] + v2[i];
+    }
+
+    return res;
+}
+
 double *diagD(double *vector, int size, int k, int *matrix_size) {
     // The dimension of the final matrix will be N x N
     // with N = k + 1

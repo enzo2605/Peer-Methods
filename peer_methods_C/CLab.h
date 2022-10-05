@@ -48,6 +48,18 @@ double *zerosMatrixD(int M, int N);
 void sumScalarByVector(double *in, int N, double alpha);
 
 /*******************************************************
+ * Multiply each element of vector in by the scalar alpha.
+ * Return the pointer at the resulting array. 
+ *****************************************************/
+void scalarByVector(double *in, int N, double alpha);
+
+/*******************************************************
+ * Sum each element of vector v1 and v2 in the same 
+ * position and store the result in res vector. 
+ *****************************************************/
+double *sumPuntVectors(double *v1, double *v2, int size);
+
+/*******************************************************
  * Return a matrix of matrix_size x matrix_size elements 
  * in which each element of the k-th diagonal is an 
  * element of the vector passed by parameter.

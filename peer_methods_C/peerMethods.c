@@ -23,12 +23,12 @@ double *Sherratt(double *y0, int y0Size, double *L, int Lsize, int *sherrattSize
     double *Ly = (double *)Calloc(newSize, sizeof(double));
     cblas_dgemv(CblasRowMajor, CblasNoTrans, Lsize, Lsize, 1, L, Lsize, y0, 1, 0, Ly, 1);
 
-    // Sum of two matrices of the same size
-    double *dydt = sumPuntSquareMatrices(Ly, fun, Lsize);
+    // Punctual sum of two vectors
+    double *dydt = sumPuntVectors(Ly, fun, Lsize);
     *sherrattSize = Lsize;
 
     // Free all the useless memory allocated
-    freeEverything(U, V, W, fun, Ly);
+    freeEverything(U, V, W, fun, Ly, (void *)0);
 
     return dydt;
 }
@@ -41,17 +41,63 @@ A = [0 0 0 0;1/2 0 0 0;0 1/2 0 0;0 0 1 0];
 b = [1/6,1/3,1/3,1/6];
 
 Y1 = y0;
-Y2 = y0 + h*A(2,1)*funz(t0,Y1);
-Y3 = y0 + h*A(3,2)*funz(t0+c(2)*h,Y2);
-Y4 = y0 + h*A(4,3)*funz(t0+c(3)*h,Y3);
+Y2 = y0 + h*A(2,1)*Sherratt(t0,Y1);
+Y3 = y0 + h*A(3,2)*Sherratt(t0+c(2)*h,Y2);
+Y4 = y0 + h*A(4,3)*Sherratt(t0+c(3)*h,Y3);
 
-y = y0 + h*(b(1)*funz(t0,Y1) + b(2)*funz(t0+c(2)*h,Y2) + ...
-    b(3)*funz(t0+c(3)*h,Y3) + b(4)*funz(t0+c(4)*h,Y4));
+y = y0 + h*(b(1)*Sherratt(t0,Y1) + b(2)*Sherratt(t0+c(2)*h,Y2) + ...
+    b(3)*Sherratt(t0+c(3)*h,Y3) + b(4)*Sherratt(t0+c(4)*h,Y4));
 
 end
 */
-void RungeKutta4th(double h, double t0, double *y0, int y0Size, double *y, int *ySize) {
-    
+void RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, int Lsize, double *y, int *ySize) {
+    double c[4] = { 0.0f, 1.0f / 2.0f, 1.0f / 2.0f, 1.0f };
+    double A[4][4] = { 
+                        { 0.0f, 0.0f, 0.0f, 0.0f }, 
+                        { 1.0f / 2.0f, 0.0f, 0.0f, 0.0f }, 
+                        { 0.0f, 1.0f / 2.0f, 0.0f, 0.0f }, 
+                        { 0.0f, 0.0f, 1.0f, 0.0f }
+                    };
+    double b[4] = { 1.0f / 6.0f, 1.0f / 3.0f, 1.0f / 3.0f, 1.0f / 6.0f };
+
+    // Compute Y1
+    double *Y1 = y0;
+
+    // Compute Y2
+    int fY1_size;
+    double *fY1 = Sherratt(Y1, y0Size, L, Lsize, &fY1_size);
+    scalarByVector(fY1, fY1_size, h * A[1][0]);
+    double *Y2 = sumPuntVectors(y0, fY1, fY1_size);
+
+    // Compute Y3
+    int fY2_size;
+    double *fY2 = Sherratt(Y2, y0Size, L, Lsize, &fY2_size);
+    scalarByVector(fY2, fY2_size, h * A[2][1]);
+    double *Y3 = sumPuntVectors(y0, fY2, fY2_size);
+
+    // Compute Y4
+    int fY3_size;
+    double *fY3 = Sherratt(Y3, y0Size, L, Lsize, &fY3_size);
+    scalarByVector(fY3, fY3_size, h * A[3][2]);
+    double *Y4 = sumPuntVectors(y0, fY3, fY3_size);
+
+    int fY4_size;
+    double *fY4;
+    // Compute y
+    fY1 = Sherratt(Y1, y0Size, L, Lsize, &fY1_size);
+    fY2 = Sherratt(Y2, y0Size, L, Lsize, &fY2_size);
+    fY3 = Sherratt(Y3, y0Size, L, Lsize, &fY3_size);
+    fY4 = Sherratt(Y4, y0Size, L, Lsize, &fY4_size);
+
+    scalarByVector(fY1, fY1_size, h * b[0]);
+    scalarByVector(fY2, fY2_size, b[1]);
+    scalarByVector(fY2, fY2_size, b[2]);
+    scalarByVector(fY4, fY4_size, b[3]);
+
+    y = sumPuntVectors(y0, fY1, y0Size);
+    y = sumPuntVectors(y, fY2, y0Size);
+    y = sumPuntVectors(y, fY2, y0Size);
+    y = sumPuntVectors(y, fY4, y0Size);
 }
 
 /*

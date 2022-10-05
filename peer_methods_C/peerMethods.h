@@ -29,9 +29,9 @@ double *Sherratt(double *y0, int y0Size, double *L, int Lsize, int *sherrattSize
 
 /*********************************************************************************
  * Given the increase h, the initial time t0 and the vector y0 with ySize elements
- * return the vector y with ySize element.
+ * and the matrix L with Lsize elements, return the vector y with ySize element.
  ********************************************************************************/
-void RungeKutta4th(double h, double t0, double *y0, int y0Size, double *y, int *ySize);
+void RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, int Lsize, double *y, int *ySize);
 
 
 void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, 

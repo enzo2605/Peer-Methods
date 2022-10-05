@@ -75,6 +75,13 @@ int initMatrixByRowWithValuesFromVector(double *matrix, int M, int N, double *ve
     return 0;
 }
 
+void initVectorWAnotherVector(double *newVector, double *oldVector, int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+        newVector[i] = oldVector[i];
+    }
+}
+
 void freeEverything(void *arg1, ...) {
     va_list args; // list of arguments
     void *vp; // pointer to the i-th arguments

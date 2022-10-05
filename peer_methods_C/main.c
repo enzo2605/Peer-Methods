@@ -8,13 +8,6 @@
 #include "utilities.h"
 #include "peerMethods.h"
 
-void initVectorWAnotherVector(double *newVector, double oldVector[], int n) {
-    int i;
-    for (i = 0; i < n; i++) {
-        newVector[i] = oldVector[i];
-    }
-}
-
 int main(int argc, char *argv[]) {
     // Random initialization for the seed
     srand((unsigned int)time(NULL));
@@ -145,6 +138,12 @@ int main(int argc, char *argv[]) {
     int sherrattSize;
     double *sherrattRes = Sherratt(y0, y0Dimension, L, LSize, &sherrattSize);
     printDVector(sherrattRes, sherrattSize, "Sherratt");
+
+    double *y;
+    int ySize;
+    RungeKutta4th(0, 0, y0, y0Dimension, L, LSize, y, &ySize);
+    printDVector(y, ySize, "y");
+    exit(0);
 
     double *yT_ClPeer; int yT_ClPeer_rows; int yT_ClPeer_cols; double *y_ClPeer; int y_ClPeer_size; double *t;  int t_size;
     fPeerClassic_twoStages(N, t_span, 2, L, LSize, y0, y0Dimension, yT_ClPeer, &yT_ClPeer_rows, &yT_ClPeer_cols, y_ClPeer, &y_ClPeer_size, t, &t_size);
