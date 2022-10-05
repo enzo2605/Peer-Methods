@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdarg.h>
+#include <math.h>
 
 /*************************************************
  *          Wrapper functions
@@ -31,6 +32,7 @@ void printDVector(double *vector, int N, const char *string);
  ***********************************************/
 void initializeRandomVector(double *vector, int N);
 void initializeRandomMatrix(double *matrix, int M, int N);
+int initMatrixByRowWithValuesFromVector(double *matrix, int M, int N, double *vector, int vector_size);
 
 /*************************************************
  *  Free all the memory dynamically allocated

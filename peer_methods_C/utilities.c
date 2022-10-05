@@ -59,6 +59,22 @@ void initializeRandomMatrix(double *matrix, int M, int N) {
     }
 }
 
+int initMatrixByRowWithValuesFromVector(double *matrix, int M, int N, double *vector, int vector_size) {
+    if (M * N != vector_size) {
+        fprintf(stdout, "\nIt has been impossible to initialize the matrix with the vector passed.");
+        fprintf(stdout, "\nThe size of matrix and the vector are incompatible.\nReturned -1\n");
+        return -1;
+    }
+
+    int k = 0;
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            matrix[i * N + j] = vector[k++];
+        }
+    }
+    return 0;
+}
+
 void freeEverything(void *arg1, ...) {
     va_list args; // list of arguments
     void *vp; // pointer to the i-th arguments

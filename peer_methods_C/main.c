@@ -46,11 +46,13 @@ int main(int argc, char *argv[]) {
      * *********************************************/
     double t_span[2] = { t_start, t_end };
     double Delta_t = 1.0f / pow(2.0f, 11.0f);
+    fprintf(stdout, "Delta_t: %f\n", Delta_t);
 
     double *t_int;
     int n_points_t;
     t_int = intervalDiscretization(t_int, t_start, t_end, Delta_t, &n_points_t);
     int N = (t_span[1] - t_span[0]) / Delta_t;
+    fprintf(stdout, "N: %d\n", N);
 
     /*********************************************** 
      *          Space initialization 

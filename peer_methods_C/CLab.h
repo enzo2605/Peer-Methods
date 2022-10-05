@@ -42,9 +42,9 @@ double *zerosD(double *a, int N);
 void sumScalarByVector(double *in, int N, double alpha);
 
 /*******************************************************
- * Return a matrix matrix_size x matrix_size elements in 
- * which each element of the k-th diagonal is an element 
- * of the vector passed by parameter.
+ * Return a matrix of matrix_size x matrix_size elements 
+ * in which each element of the k-th diagonal is an 
+ * element of the vector passed by parameter.
  *****************************************************/
 double *diagD(double *vector, int size, int k, int *matrix_size);
 
