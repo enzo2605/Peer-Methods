@@ -69,7 +69,7 @@ int initMatrixByRowWithValuesFromVector(double *matrix, int M, int N, double *ve
     int k = 0;
     for (int i = 0; i < M; i++) {
         for (int j = 0; j < N; j++) {
-            matrix[i * N + j] = vector[k++];
+            matrix[j * M + i] = vector[k++];
         }
     }
     return 0;

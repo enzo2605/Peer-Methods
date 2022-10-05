@@ -145,6 +145,9 @@ int main(int argc, char *argv[]) {
     double *sherrattRes = Sherratt(y0, u10_time, u20_time, w0_time, M, L, LSize);
     printDVector(sherrattRes, LSize, "Sherratt");
 
+    double *yT_ClPeer; int yT_ClPeer_rows; int yT_ClPeer_cols; double *y_ClPeer; int y_ClPeer_size; double *t;  int t_size;
+    fPeerClassic_twoStages(N, t_span, 2, y0, y0Dimension, yT_ClPeer, &yT_ClPeer_rows, &yT_ClPeer_cols, y_ClPeer, &y_ClPeer_size, t, &t_size);
+
     // Free all the memory dynamically allocated
     freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, addend1, Ldiff, DLdiff, dLdiff, L, (void *)0);
 
