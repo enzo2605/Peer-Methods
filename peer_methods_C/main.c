@@ -77,36 +77,36 @@ int main(int argc, char *argv[]) {
     double *u10_time = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
     initVectorWAnotherVector(u10_time, test_u10, M);
-    printDVector(u10_time, M, "u10_time");
     //initializeRandomVector(u10_time, M);
     // vector by scalar product
     cblas_dscal(M, 0.7, u10_time, 1);
     // Add the scalar alpha at every element of the array u10_time
     sumScalarByVector(u10_time, M, 1.4f);
+    printDVector(u10_time, M, "u10_time");
 
     /**** u20_time *****/
     // Allocation of the vector
     double *u20_time = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
     initVectorWAnotherVector(u20_time, test_u20, M);
-    printDVector(u20_time, M, "u20_time");
     //initializeRandomVector(u20_time, M);
     // vector by scalar product
     cblas_dscal(M, 0.7, u20_time, 1);
     // Add the scalar alpha at every element of the array u20_time
     sumScalarByVector(u20_time, M, 1.4f);
+    printDVector(u20_time, M, "u20_time");
 
     /**** w0_time *****/
     // Allocation of the vector
     double *w0_time = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
     initVectorWAnotherVector(w0_time, test_w0, M);
-    printDVector(w0_time, M, "w0_time");
     //initializeRandomVector(w0_time, M);
     // vector by scalar product
     cblas_dscal(M, 0.07, w0_time, 1);
     // Add the scalar alpha at every element of the array w0_time
     sumScalarByVector(w0_time, M, 0.14f);
+    printDVector(w0_time, M, "w0_time");
 
     /************************************************************** 
      *  Create vector y0 = [U10;U20;W0] with initial conditions 
@@ -144,7 +144,7 @@ int main(int argc, char *argv[]) {
     printDVector(sherrattRes, LSize, "Sherratt");
 
     // Free all the memory dynamically allocated
-    freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, addend1, Ldiff, (void *)0);
+    freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, addend1, Ldiff, DLdiff, dLdiff, L, (void *)0);
 
     exit(0);
 }
