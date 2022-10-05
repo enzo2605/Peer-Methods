@@ -18,7 +18,7 @@
 #define S  0.0002 
 #define d  500 
 #define D  0.802
-#define M  8
+#define M  4
 
 double *Sherratt(double *y0, double *U, double *V, double *W, int m, double *L, int Lsize);
 

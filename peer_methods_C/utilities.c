@@ -20,7 +20,7 @@ void *Calloc(size_t nmemb, size_t size) {
 
 void printDMatrix(double *matrix, int M, int N, const char *string) {
     int i, j;
-    fprintf(stdout, "%s\nMatrix size: %d x %d\n", string, M, N);
+    fprintf(stdout, "\n%s\nMatrix size: %d x %d\n", string, M, N);
     for (i = 0; i < M; i++) {
         for (j = 0; j < N; j++) {
             fprintf(stdout, "%10.4f", matrix[j * M + i]);
@@ -29,9 +29,9 @@ void printDMatrix(double *matrix, int M, int N, const char *string) {
     }
 }
 
-void printDVector(double *vector, int N) {
+void printDVector(double *vector, int N, const char *string) {
     int i;
-    fprintf(stdout, "Vector size: %d\n", N);
+    fprintf(stdout, "\n%s\nVector size: %d\n", string, N);
     for (i = 0; i < N; i++) {
         fprintf(stdout, "%10.4lf\n", vector[i]);
     }

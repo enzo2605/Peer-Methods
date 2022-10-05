@@ -24,7 +24,7 @@ void *Calloc(size_t nmemb, size_t size);
  *          Displaying stuff functions
  ***********************************************/
 void printDMatrix(double *matrix, int M, int N, const char *string);
-void printDVector(double *vector, int N);
+void printDVector(double *vector, int N, const char *string);
 
 /*************************************************
  *          Initialization functions

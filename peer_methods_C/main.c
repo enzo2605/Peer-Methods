@@ -8,6 +8,13 @@
 #include "utilities.h"
 #include "peerMethods.h"
 
+void initVectorWAnotherVector(double *newVector, double oldVector[], int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+        newVector[i] = oldVector[i];
+    }
+}
+
 int main(int argc, char *argv[]) {
     // Random initialization for the seed
     srand((unsigned int)time(NULL));
@@ -59,11 +66,19 @@ int main(int argc, char *argv[]) {
     /*********************************************** 
      *          Define initial conditions 
      * *********************************************/
+
+    // Test values
+    double test_u10[] = { 0.9528, 0.7041, 0.9539, 0.5982, 0.8407, 0.4428, 0.8368, 0.5187 };
+    double test_u20[] = { 0.0222, 0.3759, 0.8986, 0.4290, 0.1996, 0.3031, 0.5383, 0.9102 };
+    double test_w0[]  = { 0.5253, 0.3068, 0.0345, 0.7153, 0.7687, 0.0595, 0.6271, 0.2652 };
+
     /**** u10_time *****/
     // Allocation of the vector
     double *u10_time = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
-    initializeRandomVector(u10_time, M);
+    initVectorWAnotherVector(u10_time, test_u10, M);
+    printDVector(u10_time, M, "u10_time");
+    //initializeRandomVector(u10_time, M);
     // vector by scalar product
     cblas_dscal(M, 0.7, u10_time, 1);
     // Add the scalar alpha at every element of the array u10_time
@@ -73,7 +88,9 @@ int main(int argc, char *argv[]) {
     // Allocation of the vector
     double *u20_time = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
-    initializeRandomVector(u20_time, M);
+    initVectorWAnotherVector(u20_time, test_u20, M);
+    printDVector(u20_time, M, "u20_time");
+    //initializeRandomVector(u20_time, M);
     // vector by scalar product
     cblas_dscal(M, 0.7, u20_time, 1);
     // Add the scalar alpha at every element of the array u20_time
@@ -83,7 +100,9 @@ int main(int argc, char *argv[]) {
     // Allocation of the vector
     double *w0_time = (double *)Calloc(M, sizeof(double));
     // Initialization with random values between 0 and 1
-    initializeRandomVector(w0_time, M);
+    initVectorWAnotherVector(w0_time, test_w0, M);
+    printDVector(w0_time, M, "w0_time");
+    //initializeRandomVector(w0_time, M);
     // vector by scalar product
     cblas_dscal(M, 0.07, w0_time, 1);
     // Add the scalar alpha at every element of the array w0_time
@@ -94,6 +113,7 @@ int main(int argc, char *argv[]) {
      * ***********************************************************/
     int y0Dimension;
     double *y0 = packThreeVectors(M, u10_time, u20_time, w0_time, &y0Dimension);
+    printDVector(y0, y0Dimension, "y0");
 
     /********************************************************************
      * Finite differences of order two and periodic boundary conditions
@@ -111,19 +131,17 @@ int main(int argc, char *argv[]) {
     Ldiff = scalarByMatrix(Ldiff, M, M, 1.0f / (Delta_x * Delta_x));
     Ldiff[M - 1] = 1.0f / (Delta_x * Delta_x);
     Ldiff[(M - 1) * M] = 1.0f / (Delta_x * Delta_x);
+    printDMatrix(Ldiff, M, M, "Ldiff");
 
     // Calculate the matrix L
     int LSize;
     double *DLdiff = scalarByMatrix(Ldiff, M, M, D);
     double *dLdiff = scalarByMatrix(Ldiff, M, M, d);
     double *L = threeBlockDiagD(M, Ldiff, DLdiff, dLdiff, &LSize);
-
-    printDVector(u10_time, M);
-    printDVector(u20_time, M);
-    printDVector(w0_time, M);
+    printDMatrix(L, LSize, LSize, "L");
 
     double *sherrattRes = Sherratt(y0, u10_time, u20_time, w0_time, M, L, LSize);
-    printDVector(sherrattRes, LSize);
+    printDVector(sherrattRes, LSize, "Sherratt");
 
     // Free all the memory dynamically allocated
     freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, addend1, Ldiff, (void *)0);
