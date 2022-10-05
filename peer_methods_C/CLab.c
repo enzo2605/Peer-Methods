@@ -158,3 +158,17 @@ double *scalarByMatrix(double *matrix, int M, int N, double alpha) {
 
     return newMatrix;
 }
+
+double *linspace(double x1, double x2, int n) {
+    // Allocate the vector of size n dynamically
+    double *v = (double *)Calloc(n, sizeof(double));
+    // Define the spacing between eache element of the vector
+    double step = (x2 - x1) / (n - 1);
+    // Generate the values of the vector
+    v[0] = x1;
+    for (int i = 1; i < n; i++) {
+        v[i] = v[i - 1] + step;
+    }
+
+    return v;
+}

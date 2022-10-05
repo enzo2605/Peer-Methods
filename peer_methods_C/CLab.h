@@ -76,4 +76,10 @@ double *sumPuntSquareMatrices(double *matrix1, double *matrix2, int size);
  *****************************************************/
 double *scalarByMatrix(double *matrix, int M, int N, double alpha);
 
+/****************************************************
+ * Generates n points. The spacing between the points 
+ * is (x2-x1)/(n-1)
+ ***************************************************/
+double *linspace(double x1, double x2, int n);
+
 #endif // !CLab_h
