@@ -38,12 +38,16 @@ double *onesD(double *a, int N) {
 }
 
 double *zerosD(double *a, int N) {
-    // Allocate the array using calloc
+    // Allocate the array using calloc and initialize automatically
+    // every element with 0
     a = (double *)Calloc(N, sizeof(double));
-    // Fill the array
-    for (int i = 0; i < N; i++) {
-        *(a + i) = 0.0f;
-    }
+    return a;
+}
+
+double *zerosMatrixD(int M, int N) {
+    // Allocate the array using calloc and initialize automatically
+    // every element with 0
+    double *a = (double *)Calloc(M * N, sizeof(double));
     return a;
 }
 

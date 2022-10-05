@@ -36,6 +36,12 @@ double *onesD(double *a, int N);
 double *zerosD(double *a, int N);
 
 /*******************************************************
+ * Return a matrix of size M * N in which every element
+ * has value 0.
+ *****************************************************/
+double *zerosMatrixD(int M, int N);
+
+/*******************************************************
  * Sum each element of vector in by the scalar alpha.
  * Return the pointer at the resulting array. 
  *****************************************************/

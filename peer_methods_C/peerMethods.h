@@ -21,7 +21,8 @@
 #define M  4
 #define STAGES 2
 
-double *Sherratt(double *y0, double *U, double *V, double *W, int m, double *L, int Lsize);
-void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *y0, int y0_size, double *yT_ClPeer, int *yT_ClPeer_rows, int *yT_ClPeer_cols, double *y_ClPeer, int *y_ClPeer_size, double *t,  int *t_size);
+double *Sherratt(double *y0, int y0Size, double *L, int Lsize, int *sherrattSize);
+void RungeKutta4th(double h, double t0, double *y0, int y0Size, double *y, int *ySize);
+void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size, double *yT_ClPeer, int *yT_ClPeer_rows, int *yT_ClPeer_cols, double *y_ClPeer, int *y_ClPeer_size, double *t,  int *t_size);
 
 #endif // !peerMethods_h
