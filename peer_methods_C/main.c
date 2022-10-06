@@ -137,10 +137,11 @@ int main(int argc, char *argv[]) {
     double *L = threeBlockDiagD(M, Ldiff, DLdiff, dLdiff, &LSize);
     printDMatrix(L, LSize, LSize, "L");
 
+    /*
     int ySize;
     double *y = RungeKutta4th(2.0f, 0.0f, y0, y0Dimension, L, LSize, &ySize);
     printDVector(y, ySize, "y");
-    exit(0);
+    */
 
     double *yT_ClPeer; int yT_ClPeer_rows; int yT_ClPeer_cols; double *y_ClPeer; int y_ClPeer_size; double *t;  int t_size;
     fPeerClassic_twoStages(N, t_span, 2, L, LSize, y0, y0Dimension, yT_ClPeer, &yT_ClPeer_rows, &yT_ClPeer_cols, y_ClPeer, &y_ClPeer_size, t, &t_size);
