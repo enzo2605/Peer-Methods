@@ -38,7 +38,9 @@ int main(int argc, char *argv[]) {
      *          Time initialization 
      * *********************************************/
     double t_span[2] = { t_start, t_end };
-    double Delta_t = 1.0f / pow(2.0f, 11.0f);
+    // for test
+    double Delta_t = 1.0f / 2.0f;
+    //double Delta_t = 1.0f / pow(2.0f, 11.0f);
     fprintf(stdout, "Delta_t: %f\n", Delta_t);
 
     double *t_int;
@@ -135,13 +137,8 @@ int main(int argc, char *argv[]) {
     double *L = threeBlockDiagD(M, Ldiff, DLdiff, dLdiff, &LSize);
     printDMatrix(L, LSize, LSize, "L");
 
-    int sherrattSize;
-    double *sherrattRes = Sherratt(y0, y0Dimension, L, LSize, &sherrattSize);
-    printDVector(sherrattRes, sherrattSize, "Sherratt");
-
-    double *y;
     int ySize;
-    RungeKutta4th(0, 0, y0, y0Dimension, L, LSize, y, &ySize);
+    double *y = RungeKutta4th(2.0f, 0.0f, y0, y0Dimension, L, LSize, &ySize);
     printDVector(y, ySize, "y");
     exit(0);
 

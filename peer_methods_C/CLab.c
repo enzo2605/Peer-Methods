@@ -69,7 +69,6 @@ double *sumPuntVectors(double *v1, double *v2, int size) {
     double *res = (double *)Calloc(size, sizeof(double));
 
     for (int i = 0; i < size; i++) {
-        printf("i: %d\n", i);
         res[i] = v1[i] + v2[i];
     }
 

@@ -50,7 +50,7 @@ y = y0 + h*(b(1)*Sherratt(t0,Y1) + b(2)*Sherratt(t0+c(2)*h,Y2) + ...
 
 end
 */
-void RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, int Lsize, double *y, int *ySize) {
+double *RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, int Lsize, int *ySize) {
     double c[4] = { 0.0f, 1.0f / 2.0f, 1.0f / 2.0f, 1.0f };
     double A[4][4] = { 
                         { 0.0f, 0.0f, 0.0f, 0.0f }, 
@@ -62,42 +62,52 @@ void RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, int L
 
     // Compute Y1
     double *Y1 = y0;
+    printDVector(Y1, y0Size, "Y1");
 
     // Compute Y2
     int fY1_size;
     double *fY1 = Sherratt(Y1, y0Size, L, Lsize, &fY1_size);
-    scalarByVector(fY1, fY1_size, h * A[1][0]);
-    double *Y2 = sumPuntVectors(y0, fY1, fY1_size);
+    printDVector(fY1, y0Size, "fY1");
+    scalarByVector(fY1, y0Size, h * A[1][0]);
+    printDVector(fY1, y0Size, "fY1");
+    double *Y2 = sumPuntVectors(y0, fY1, y0Size);
+    printDVector(Y2, y0Size, "Y2");
 
     // Compute Y3
     int fY2_size;
     double *fY2 = Sherratt(Y2, y0Size, L, Lsize, &fY2_size);
     scalarByVector(fY2, fY2_size, h * A[2][1]);
     double *Y3 = sumPuntVectors(y0, fY2, fY2_size);
+    printDVector(Y3, y0Size, "Y3");
 
     // Compute Y4
     int fY3_size;
     double *fY3 = Sherratt(Y3, y0Size, L, Lsize, &fY3_size);
     scalarByVector(fY3, fY3_size, h * A[3][2]);
     double *Y4 = sumPuntVectors(y0, fY3, fY3_size);
+    printDVector(Y4, y0Size, "Y4");
 
+    // Compute y
     int fY4_size;
     double *fY4;
-    // Compute y
     fY1 = Sherratt(Y1, y0Size, L, Lsize, &fY1_size);
     fY2 = Sherratt(Y2, y0Size, L, Lsize, &fY2_size);
     fY3 = Sherratt(Y3, y0Size, L, Lsize, &fY3_size);
     fY4 = Sherratt(Y4, y0Size, L, Lsize, &fY4_size);
 
     scalarByVector(fY1, fY1_size, h * b[0]);
-    scalarByVector(fY2, fY2_size, b[1]);
-    scalarByVector(fY2, fY2_size, b[2]);
-    scalarByVector(fY4, fY4_size, b[3]);
+    scalarByVector(fY2, fY2_size, h * b[1]);
+    scalarByVector(fY3, fY3_size, h * b[2]);
+    scalarByVector(fY4, fY4_size, h * b[3]);
 
-    y = sumPuntVectors(y0, fY1, y0Size);
-    y = sumPuntVectors(y, fY2, y0Size);
-    y = sumPuntVectors(y, fY2, y0Size);
-    y = sumPuntVectors(y, fY4, y0Size);
+    double *y = (double *)Calloc(y0Size, sizeof(double));
+    y = sumPuntVectors(fY1, fY2, y0Size);
+    y = sumPuntVectors(fY3, y, y0Size);
+    y = sumPuntVectors(fY4, y, y0Size);
+    y = sumPuntVectors(y, y0, y0Size);
+    *ySize = y0Size;
+
+    return y;
 }
 
 /*
