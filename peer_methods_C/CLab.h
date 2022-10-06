@@ -33,7 +33,7 @@ double *onesD(double *a, int N);
  * Return a vector of size N in which every element
  * has value 0.
  *****************************************************/
-double *zerosD(double *a, int N);
+double *zerosD(int N);
 
 /*******************************************************
  * Return a matrix of size M * N in which every element

@@ -37,10 +37,10 @@ double *onesD(double *a, int N) {
     return a;
 }
 
-double *zerosD(double *a, int N) {
+double *zerosD(int N) {
     // Allocate the array using calloc and initialize automatically
     // every element with 0
-    a = (double *)Calloc(N, sizeof(double));
+    double *a = (double *)Calloc(N, sizeof(double));
     return a;
 }
 

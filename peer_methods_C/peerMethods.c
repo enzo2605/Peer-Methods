@@ -140,30 +140,48 @@ void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, i
     /************************************************
      * Runge-Kutta of order four to initialize stages 
      * **********************************************/
-    /*
-        % Runge-Kutta of order four to initialize stages
-
-        for i = 1:s
-            FYiRK = RK4(funz,c(i)*h,t(1),y0);
-            for k = 1:d
-                Y((i-1)*d+k,n) = FYiRK(k);
-            end
-        end
-
-        y = zeros(d,N+1);
-        for k = 1:d
-            y(k,1) = y0(k);
-        end 
-    */
     double *FYiRK;
     int FYiRK_size;
     for (int i = 0; i < s; i++) {
         FYiRK = RungeKutta4th(c[i] * h, t[0], y0, y0_size, L, Lsize, &FYiRK_size);
         for (int k = 0; k < d1; k++) {
-            Y[(n - 1) * Y_cols + (i * d1 + k)] = FYiRK[k];
+            Y[(n - 1) * Y_rows + (i * d1 + k)] = FYiRK[k];
         }
     }
-
     printDMatrix(Y, Y_rows, Y_cols, "Y");
     printDVector(FYiRK, FYiRK_size, "FYiRK");
+
+    /*
+        Fnm1 = zeros(s*d1,1);
+        Yi = zeros(d1,1);
+        for i = 1:s
+            for k = 1:d1
+                Yi(k) = Y((i-1)*d1+k,n);
+            end
+            FYi = funz(t(n)+c(i)*h,Yi);
+            for k = 1:d1
+                Fnm1((i-1)*d1+k) = FYi(k);
+            end
+        end
+    */
+    int y_rows = d1, y_cols = N + 1;
+    double *y = zerosMatrixD(y_rows, y_cols);
+
+    for (int k = 0; k < d1; k++) {
+        y[0 * y_rows + k] = y0[k];
+    }
+
+    for (int k = 0; k < d1; k++) {
+        y[(n) * y_rows + k] = Y[(n - 1) * Y_rows + ((s - 1) * d1 + k)];
+    }
+
+    printDMatrix(y, y_rows, y_cols, "y");
+
+    int Fnm1_rows = s * d1, Fnm1_cols = 1;
+    double *Fnm1 = zerosMatrixD(Fnm1_rows, Fnm1_cols);
+    double *Yi = zerosD(d1);
+
+    for (int i = 0; i < s; i++) {
+        
+    }
 }
