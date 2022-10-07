@@ -34,9 +34,8 @@ double *Sherratt(double *y0, int y0Size, double *L, int Lsize, int *sherrattSize
 double *RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, int Lsize, int *ySize);
 
 
-void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, 
-                            double *y0, int y0_size, double *yT_ClPeer, int *yT_ClPeer_rows, 
-                            int *yT_ClPeer_cols, double *y_ClPeer, int *y_ClPeer_size, 
-                            double *t,  int *t_size);
+void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, 
+                            int y0_size, double *yT_ClPeer, int *yT_ClPeer_size, double *y_ClPeer, 
+                            int *y_ClPeer_rows, int *y_ClPeer_cols, double *t,  int *t_size);
 
 #endif // !peerMethods_h

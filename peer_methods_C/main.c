@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
      * *********************************************/
     double t_span[2] = { t_start, t_end };
     // for test
-    double Delta_t = 1.0f / 2.0f;
+    double Delta_t = 1.0f / pow(2.0f, 4.0f);
     //double Delta_t = 1.0f / pow(2.0f, 11.0f);
     fprintf(stdout, "Delta_t: %f\n", Delta_t);
 
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
     cblas_dscal(M, 0.7, u10_time, 1);
     // Add the scalar alpha at every element of the array u10_time
     sumScalarByVector(u10_time, M, 1.4f);
-    printDVector(u10_time, M, "u10_time");
+    //printDVector(u10_time, M, "u10_time");
 
     /**** u20_time *****/
     // Allocation of the vector
@@ -91,7 +91,7 @@ int main(int argc, char *argv[]) {
     cblas_dscal(M, 0.7, u20_time, 1);
     // Add the scalar alpha at every element of the array u20_time
     sumScalarByVector(u20_time, M, 1.4f);
-    printDVector(u20_time, M, "u20_time");
+    //printDVector(u20_time, M, "u20_time");
 
     /**** w0_time *****/
     // Allocation of the vector
@@ -103,14 +103,14 @@ int main(int argc, char *argv[]) {
     cblas_dscal(M, 0.07, w0_time, 1);
     // Add the scalar alpha at every element of the array w0_time
     sumScalarByVector(w0_time, M, 0.14f);
-    printDVector(w0_time, M, "w0_time");
+    //printDVector(w0_time, M, "w0_time");
 
     /************************************************************** 
      *  Create vector y0 = [U10;U20;W0] with initial conditions 
      * ***********************************************************/
     int y0Dimension;
     double *y0 = packThreeVectors(M, u10_time, u20_time, w0_time, &y0Dimension);
-    printDVector(y0, y0Dimension, "y0");
+    //printDVector(y0, y0Dimension, "y0");
 
     /********************************************************************
      * Finite differences of order two and periodic boundary conditions
@@ -128,23 +128,25 @@ int main(int argc, char *argv[]) {
     Ldiff = scalarByMatrix(Ldiff, M, M, 1.0f / (Delta_x * Delta_x));
     Ldiff[M - 1] = 1.0f / (Delta_x * Delta_x);
     Ldiff[(M - 1) * M] = 1.0f / (Delta_x * Delta_x);
-    printDMatrix(Ldiff, M, M, "Ldiff");
+    //printDMatrix(Ldiff, M, M, "Ldiff");
 
     // Calculate the matrix L
     int LSize;
     double *DLdiff = scalarByMatrix(Ldiff, M, M, D);
     double *dLdiff = scalarByMatrix(Ldiff, M, M, d);
     double *L = threeBlockDiagD(M, Ldiff, DLdiff, dLdiff, &LSize);
-    printDMatrix(L, LSize, LSize, "L");
+    //printDMatrix(L, LSize, LSize, "L");
 
     /*
+    */
     int ySize;
     double *y = RungeKutta4th(2.0f, 0.0f, y0, y0Dimension, L, LSize, &ySize);
     printDVector(y, ySize, "y");
-    */
-
-    double *yT_ClPeer; int yT_ClPeer_rows; int yT_ClPeer_cols; double *y_ClPeer; int y_ClPeer_size; double *t;  int t_size;
-    fPeerClassic_twoStages(N, t_span, 2, L, LSize, y0, y0Dimension, yT_ClPeer, &yT_ClPeer_rows, &yT_ClPeer_cols, y_ClPeer, &y_ClPeer_size, t, &t_size);
+    fprintf(stdout, "\nHere.\n");
+    double *yT_ClPeer, *y_ClPeer, *t;
+    int yT_ClPeer_size, y_ClPeer_rows, y_ClPeer_cols, t_size;
+    fPeerClassic_twoStages(N, t_span, 2, L, LSize, y0, y0Dimension, yT_ClPeer, &yT_ClPeer_size, y_ClPeer, &y_ClPeer_rows, &y_ClPeer_cols, t, &t_size);
+    fprintf(stdout, "\nsizes:\nsize(yT_ClPeer): %d\nsize(y_ClPeer): %d x %d\nsize(t): %d\n", yT_ClPeer_size, y_ClPeer_rows, y_ClPeer_cols, t_size);
 
     // Free all the memory dynamically allocated
     freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, addend1, Ldiff, DLdiff, dLdiff, L, (void *)0);

@@ -45,28 +45,28 @@ double *RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, in
 
     // Compute Y1
     double *Y1 = y0;
-    printDVector(Y1, y0Size, "Y1");
+    //printDVector(Y1, y0Size, "Y1");
 
     // Compute Y2
     int fY1_size;
     double *fY1 = Sherratt(Y1, y0Size, L, Lsize, &fY1_size);
     scalarByVector(fY1, y0Size, h * A[1][0]);
     double *Y2 = sumPuntVectors(y0, fY1, y0Size);
-    printDVector(Y2, y0Size, "Y2");
+    //printDVector(Y2, y0Size, "Y2");
 
     // Compute Y3
     int fY2_size;
     double *fY2 = Sherratt(Y2, y0Size, L, Lsize, &fY2_size);
     scalarByVector(fY2, fY2_size, h * A[2][1]);
     double *Y3 = sumPuntVectors(y0, fY2, fY2_size);
-    printDVector(Y3, y0Size, "Y3");
+    //printDVector(Y3, y0Size, "Y3");
 
     // Compute Y4
     int fY3_size;
     double *fY3 = Sherratt(Y3, y0Size, L, Lsize, &fY3_size);
     scalarByVector(fY3, fY3_size, h * A[3][2]);
     double *Y4 = sumPuntVectors(y0, fY3, fY3_size);
-    printDVector(Y4, y0Size, "Y4");
+    //printDVector(Y4, y0Size, "Y4");
 
     // Compute y
     int fY4_size;
@@ -87,12 +87,12 @@ double *RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, in
     y = sumPuntVectors(fY4, y, y0Size);
     y = sumPuntVectors(y, y0, y0Size);
     *ySize = y0Size;
-    printDVector(y, *ySize, "y");
+    //printDVector(y, *ySize, "y");
 
     return y;
 }
 
-void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size, double *yT_ClPeer, int *yT_ClPeer_rows, int *yT_ClPeer_cols, double *y_ClPeer, int *y_ClPeer_size, double *t,  int *t_size) {
+void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size, double *yT_ClPeer, int *yT_ClPeer_size, double *y_ClPeer, int *y_ClPeer_rows, int *y_ClPeer_cols, double *t,  int *t_size) {
     /******************************* 
      * Fixing method coefficients 
      * ****************************/
@@ -102,40 +102,41 @@ void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, i
     double a12 = -((b11 + 2 * c1 - 2 * b11 * c1 - pow(c1, 2) + b11 * pow(c1, 2)) / (2 * (-1 + c1)));
     double a21 = -((-1 + b21 - 2 * b21 * c1 + b21 * pow(c1, 2) + 2 * c1 * r21) / (2 * (-1 + c1)));
     double a22 = -((3 + b21 - 2 * c1 - 2 * b21 * c1 + b21 * pow(c1, 2) - 2 * r21) / (2 * (-1 + c1)));
-    fprintf(stdout, "a11: %f\na12: %f\na21: %f\na22: %f\n", a11, a12, a21, a22);
+    //fprintf(stdout, "a11: %f\na12: %f\na21: %f\na22: %f\n", a11, a12, a21, a22);
 
     double c[STAGES] = { c1, c2 };
-    printDVector(c, STAGES, "c");
+    //printDVector(c, STAGES, "c");
 
     double *A = (double *)Calloc(STAGES * STAGES, sizeof(double));
     double tempA[STAGES * STAGES] = { a11, a12, a21, a22 };
     initMatrixByRowWithValuesFromVector(A, STAGES, STAGES, tempA, STAGES * STAGES);
-    printDMatrix(A, STAGES, STAGES, "A");
+    //printDMatrix(A, STAGES, STAGES, "A");
 
     double *B = (double *)Calloc(STAGES * STAGES, sizeof(double));
     double tempB[STAGES * STAGES] = { b11, b12, b21, b22 };
     initMatrixByRowWithValuesFromVector(B, STAGES, STAGES, tempB, STAGES * STAGES);
-    printDMatrix(B, STAGES, STAGES, "B");
+    //printDMatrix(B, STAGES, STAGES, "B");
 
     double *R = (double *)Calloc(STAGES * STAGES, sizeof(double));
     double tempR[STAGES * STAGES] = { 0.0f, 0.0f, r21, 0.0f };
     initMatrixByRowWithValuesFromVector(R, STAGES, STAGES, tempR, STAGES * STAGES);
-    printDMatrix(R, STAGES, STAGES, "R");
+    //printDMatrix(R, STAGES, STAGES, "R");
 
     /******************************* 
      *  Compute the solution
      * ****************************/
     double h = (t_span[1] - t_span[0]) / N;
     t = linspace(t_span[0], t_span[1], N + 1);
+    *t_size = N + 1;
     int n = 1;
 
     int s = STAGES; // Number of stages
     int d1 = y0_size; // Dimension of the problem
     int Y_rows = s * d1, Y_cols = N;
     double *Y = zerosMatrixD(Y_rows, Y_cols);
-    fprintf(stdout, "\nh: %lf\ns: %d\nd1: %d\n", h, s, d1);
-    printDVector(t, N + 1, "t");
-    printDMatrix(Y, Y_rows, Y_cols, "Y");
+    //fprintf(stdout, "\nh: %lf\ns: %d\nd1: %d\n", h, s, d1);
+    //printDVector(t, N + 1, "t");
+    //printDMatrix(Y, Y_rows, Y_cols, "Y");
 
     /************************************************
      * Runge-Kutta of order four to initialize stages 
@@ -148,22 +149,9 @@ void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, i
             Y[(n - 1) * Y_rows + (i * d1 + k)] = FYiRK[k];
         }
     }
-    printDMatrix(Y, Y_rows, Y_cols, "Y");
-    printDVector(FYiRK, FYiRK_size, "FYiRK");
+    //printDMatrix(Y, Y_rows, Y_cols, "Y");
+    //printDVector(FYiRK, FYiRK_size, "FYiRK");
 
-    /*
-        Fnm1 = zeros(s*d1,1);
-        Yi = zeros(d1,1);
-        for i = 1:s
-            for k = 1:d1
-                Yi(k) = Y((i-1)*d1+k,n);
-            end
-            FYi = funz(t(n)+c(i)*h,Yi);
-            for k = 1:d1
-                Fnm1((i-1)*d1+k) = FYi(k);
-            end
-        end
-    */
     int y_rows = d1, y_cols = N + 1;
     double *y = zerosMatrixD(y_rows, y_cols);
 
@@ -174,14 +162,64 @@ void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, i
     for (int k = 0; k < d1; k++) {
         y[(n) * y_rows + k] = Y[(n - 1) * Y_rows + ((s - 1) * d1 + k)];
     }
+    //printDMatrix(y, y_rows, y_cols, "y");
 
-    printDMatrix(y, y_rows, y_cols, "y");
-
-    int Fnm1_rows = s * d1, Fnm1_cols = 1;
-    double *Fnm1 = zerosMatrixD(Fnm1_rows, Fnm1_cols);
+    int Fnm1_size = s * d1;
+    double *Fnm1 = zerosD(Fnm1_size);
     double *Yi = zerosD(d1);
 
     for (int i = 0; i < s; i++) {
-        
+        for (int k = 0; k < d1; k++) {
+            Yi[k] = Y[(n - 1) * Y_rows + ((i) * d1 + k)];
+        }
+        int FYi_size;
+        double *FYi = Sherratt(Yi, d1, L, Lsize, &FYi_size);
+        for (int k = 0; k < d1; k++) {
+            Fnm1[(i) * d1 + k] = FYi[k];
+        }
     }
+    //printDVector(Yi, d1, "Yi");
+    //printDVector(Fnm1, Fnm1_size, "Fnm1");
+
+    for (n = 1; n < N; n++) {
+
+        for (int i = 0; i < s; i++) {
+            for (int k = 0; k < d1; k++) {
+                for (int j = 0; j < s; j++) {
+                    Y[(n - 1) * Y_rows + ((i) * d1 + k)] += B[j * STAGES + i] * Y[(n) * Y_rows + ((j) * d1 + k)] + h * A[j * STAGES + i] * Fnm1[j * d1 + k];
+                }
+            }
+        }
+        //printDMatrix(Y, Y_rows, Y_cols, "Y");
+
+        Fnm1 = zerosD(Fnm1_size);
+        Yi = zerosD(d1);
+        for (int i = 0; i < s; i++) {
+            for (int k = 0; k < d1; k++) {
+                Yi[k] = Y[(n - 1) * Y_rows + ((i) * d1 + k)];
+            }
+            int FYi_size;
+            double *FYi = Sherratt(Yi, d1, L, Lsize, &FYi_size);
+            for (int k = 0; k < d1; k++) {
+                Fnm1[(i) * d1 + k] = FYi[k];
+            }
+        }
+        //printDVector(Yi, d1, "Yi");
+        //printDVector(Fnm1, Fnm1_size, "Fnm1");
+
+        for (int k = 0; k < d1; k++) {
+            y[(n) * y_rows + k] = Y[(n - 1) * Y_rows + ((s - 1) * d1 + k)];
+        }
+        //printDMatrix(y, y_rows, y_cols, "y");
+    }
+
+    yT_ClPeer = zerosD(d1);
+    *yT_ClPeer_size = d1;
+    for (int i = 0; i < d1; i++) {
+        yT_ClPeer[i] = y[(N + 1) * y_cols + i];
+    }
+
+    y_ClPeer = y;
+    *y_ClPeer_rows = y_rows;
+    *y_ClPeer_cols = y_cols;
 }
