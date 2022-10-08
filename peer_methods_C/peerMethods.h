@@ -21,6 +21,10 @@
 #define M  4
 #define STAGES 2
 
+/*********************************************************************************
+ * This struct has been created with the only purpose to return the value
+ * obtained by the fPeerMethod function.
+ ********************************************************************************/
 typedef struct {
     double *yT;
     int yT_size;
@@ -43,7 +47,11 @@ double *Sherratt(double *y0, int y0Size, double *L, int Lsize, int *sherrattSize
  ********************************************************************************/
 double *RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, int Lsize, int *ySize);
 
-
+/*********************************************************************************
+ * Given in input the time span, the L matrix and y0 vector with their relative
+ * sizes, returns a struct called "return_values" that contains the result
+ * of the computation.
+ ********************************************************************************/
 return_values fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size);
 
 #endif // !peerMethods_h

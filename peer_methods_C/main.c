@@ -2,12 +2,8 @@
  * Title: Peer methods
  * Author: Vincenzo Iannucci
  * **/
-#include <math.h>
-#include <cblas.h>
-#include <assert.h>
-#include "CLab.h"
-#include "utilities.h"
 #include "peerMethods.h"
+#include <assert.h>
 
 int main(int argc, char *argv[]) {
     // Random initialization for the seed
@@ -40,8 +36,7 @@ int main(int argc, char *argv[]) {
      * *********************************************/
     double t_span[2] = { t_start, t_end };
     // for test
-    double Delta_t = 2.0f;
-    //double Delta_t = 1.0f / pow(2.0f, 11.0f);
+    double Delta_t = 1.0f / pow(2.0f, 3.0f);
     fprintf(stdout, "Delta_t: %f\n", Delta_t);
 
     double *t_int;
@@ -60,6 +55,7 @@ int main(int argc, char *argv[]) {
     double *x_int;
     int n_points_x;
     x_int = intervalDiscretization(x_int, x_start, x_end, Delta_x, &n_points_x);
+    assert(n_points_x == M + 1);
 
     /*********************************************** 
      *          Define initial conditions 

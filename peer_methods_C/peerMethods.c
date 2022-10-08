@@ -184,7 +184,7 @@ return_values fPeerClassic_twoStages(int N, double *t_span, int t_span_size, dou
     //printDVector(Fnm1, Fnm1_size, "Fnm1");
 
 
-    for (n = 1; n <= N; n++) {
+    for (n = 1; n < N; n++) {
         //fprintf(stdout, "\nn: %d \n", n);
         for (int i = 0; i < s; i++) {
             for (int k = 0; k < d1; k++) {
@@ -211,20 +211,21 @@ return_values fPeerClassic_twoStages(int N, double *t_span, int t_span_size, dou
         //printDVector(Fnm1, Fnm1_size, "Fnm1");
 
         for (int k = 0; k < d1; k++) {
-            y[(n + 1) * y_rows + k] = Y[(n - 1) * Y_rows + ((s - 1) * d1 + k)];
+            y[(n + 1) * y_rows + k] = Y[(n) * Y_rows + ((s - 1) * d1 + k)];
         }
     }
+    //printDMatrix(Y, Y_rows, Y_cols, "Y");
     //printDMatrix(y, y_rows, y_cols, "y");
     //exit(0);
 
     //fprintf(stdout, "Here\n");
     double *yT = zerosD(d1);
     int yT_size = d1;
-    //printDVector(yT, *yT_size, "yT");
     for (int i = 0; i < d1; i++) {
         //fprintf(stdout, "y[(N) * y_cols + i]: %f\n", y[(N) * y_rows + i]);
         yT[i] = y[(N) * y_rows + i];
     }
+    //printDVector(yT, yT_size, "yT");
 
     // After all the calculation, collecting and return the results
     collect_result.y = y;

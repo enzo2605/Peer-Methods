@@ -5,6 +5,7 @@
         "cblas.h": "c",
         "clab.h": "c",
         "utilities.h": "c",
-        "peermethods.h": "c"
+        "peermethods.h": "c",
+        "stdarg.h": "c"
     }
 }
