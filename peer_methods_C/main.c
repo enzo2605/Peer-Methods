@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
      * *********************************************/
     double t_span[2] = { t_start, t_end };
     // for test
-    double Delta_t = 1.0f / pow(2.0f, 4.0f);
+    double Delta_t = 2.0f;
     //double Delta_t = 1.0f / pow(2.0f, 11.0f);
     fprintf(stdout, "Delta_t: %f\n", Delta_t);
 
@@ -157,10 +157,13 @@ int main(int argc, char *argv[]) {
     assert(result.y != NULL);
     assert(result.yT != NULL);
 
+    // Printing values
+    printDVector(result.t, result.t_size, "t");
+    printDVector(result.yT, result.yT_size, "yT_ClPeer");
+    printDMatrix(result.y, result.y_rows, result.y_cols, "y_ClPeer");
+
     // Free all the memory dynamically allocated
-    freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, 
-                    tempDiagOne, tempDiagMinusOne, addend1, Ldiff, DLdiff, 
-                    dLdiff, L, result.t, result.y, result.yT, (void *)0);
+    freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, addend1, Ldiff, DLdiff, dLdiff, L, result.t, result.y, result.yT, (void *)0);
 
     exit(0);
 }
