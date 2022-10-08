@@ -142,10 +142,7 @@ int main(int argc, char *argv[]) {
     
     // Initialize the returning pointers to NULL
     return_values result;
-    result.t = NULL;
-    result.y = NULL;
-    result.yT = NULL;
-
+    initReturnStruct(&result);
     result = fPeerClassic_twoStages(N, t_span, 2, L, LSize, y0, y0Dimension);
 
     // Using assertions to check if the pointers still NULL after the function invocation
@@ -159,7 +156,8 @@ int main(int argc, char *argv[]) {
     printDMatrix(result.y, result.y_rows, result.y_cols, "y_ClPeer");
 
     // Free all the memory dynamically allocated
-    freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, addend1, Ldiff, DLdiff, dLdiff, L, result.t, result.y, result.yT, (void *)0);
+    freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, 
+                    addend1, Ldiff, DLdiff, dLdiff, L, result.t, result.y, result.yT, (void *)0);
 
     exit(0);
 }

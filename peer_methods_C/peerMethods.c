@@ -1,5 +1,11 @@
 #include "peerMethods.h"
 
+void initReturnStruct(return_values *rv) {
+    rv->t = NULL;
+    rv->y = NULL;
+    rv->yT = NULL;
+}
+
 double *Sherratt(double *y0, int y0Size, double *L, int Lsize, int *sherrattSize) {
     // Declaring three dynamic array representing the three function contained in y0
     double *U = (double *)Calloc(M, sizeof(double));

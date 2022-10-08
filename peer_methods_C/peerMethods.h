@@ -35,6 +35,8 @@ typedef struct {
     int t_size;
 } return_values;
 
+void initReturnStruct(return_values *rv);
+
 /*********************************************************************************
  * Given the array y0 with y0Size elements and the matrix L with Lsize elements
  * return the pointer to an array of size sherratSize.
