@@ -98,9 +98,7 @@ double *RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, in
     return y;
 }
 
-return_values fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size) {
-    return_values collect_result;
-
+void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size, return_values *collect_result) {
     /******************************* 
      * Fixing method coefficients 
      * ****************************/
@@ -234,15 +232,13 @@ return_values fPeerClassic_twoStages(int N, double *t_span, int t_span_size, dou
     //printDVector(yT, yT_size, "yT");
 
     // After all the calculation, collecting and return the results
-    collect_result.y = y;
-    collect_result.y_rows = y_rows;
-    collect_result.y_cols = y_cols;
+    collect_result->y = y;
+    collect_result->y_rows = y_rows;
+    collect_result->y_cols = y_cols;
 
-    collect_result.t = t;
-    collect_result.t_size = t_size;
+    collect_result->t = t;
+    collect_result->t_size = t_size;
 
-    collect_result.yT = yT;
-    collect_result.yT_size = yT_size;
-
-    return collect_result;
+    collect_result->yT = yT;
+    collect_result->yT_size = yT_size;
 }

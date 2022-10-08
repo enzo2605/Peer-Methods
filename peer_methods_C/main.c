@@ -140,10 +140,11 @@ int main(int argc, char *argv[]) {
     double *y = RungeKutta4th(2.0f, 0.0f, y0, y0Dimension, L, LSize, &ySize);
     // printDVector(y, ySize, "y");
     
-    // Initialize the returning pointers to NULL
     return_values result;
+    // Initialize the returning pointers to NULL
     initReturnStruct(&result);
-    result = fPeerClassic_twoStages(N, t_span, 2, L, LSize, y0, y0Dimension);
+    // Compute using peer methods with stage = 2
+    fPeerClassic_twoStages(N, t_span, 2, L, LSize, y0, y0Dimension, &result);
 
     // Using assertions to check if the pointers still NULL after the function invocation
     assert(result.t != NULL);

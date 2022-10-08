@@ -54,6 +54,6 @@ double *RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, in
  * sizes, returns a struct called "return_values" that contains the result
  * of the computation.
  ********************************************************************************/
-return_values fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size);
+void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size, return_values *collect_result);
 
 #endif // !peerMethods_h
