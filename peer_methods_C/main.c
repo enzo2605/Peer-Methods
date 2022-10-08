@@ -4,6 +4,7 @@
  * **/
 #include <math.h>
 #include <cblas.h>
+#include <assert.h>
 #include "CLab.h"
 #include "utilities.h"
 #include "peerMethods.h"
@@ -141,15 +142,25 @@ int main(int argc, char *argv[]) {
     */
     int ySize;
     double *y = RungeKutta4th(2.0f, 0.0f, y0, y0Dimension, L, LSize, &ySize);
-    printDVector(y, ySize, "y");
-    fprintf(stdout, "\nHere.\n");
-    double *yT_ClPeer, *y_ClPeer, *t;
-    int yT_ClPeer_size, y_ClPeer_rows, y_ClPeer_cols, t_size;
-    fPeerClassic_twoStages(N, t_span, 2, L, LSize, y0, y0Dimension, yT_ClPeer, &yT_ClPeer_size, y_ClPeer, &y_ClPeer_rows, &y_ClPeer_cols, t, &t_size);
-    fprintf(stdout, "\nsizes:\nsize(yT_ClPeer): %d\nsize(y_ClPeer): %d x %d\nsize(t): %d\n", yT_ClPeer_size, y_ClPeer_rows, y_ClPeer_cols, t_size);
+    // printDVector(y, ySize, "y");
+    
+    // Initialize the returning pointers to NULL
+    return_values result;
+    result.t = NULL;
+    result.y = NULL;
+    result.yT = NULL;
+
+    result = fPeerClassic_twoStages(N, t_span, 2, L, LSize, y0, y0Dimension);
+
+    // Using assertions to check if the pointers still NULL after the function invocation
+    assert(result.t != NULL);
+    assert(result.y != NULL);
+    assert(result.yT != NULL);
 
     // Free all the memory dynamically allocated
-    freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, addend1, Ldiff, DLdiff, dLdiff, L, (void *)0);
+    freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, 
+                    tempDiagOne, tempDiagMinusOne, addend1, Ldiff, DLdiff, 
+                    dLdiff, L, result.t, result.y, result.yT, (void *)0);
 
     exit(0);
 }

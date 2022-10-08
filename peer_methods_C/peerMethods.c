@@ -92,7 +92,9 @@ double *RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, in
     return y;
 }
 
-void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size, double *yT_ClPeer, int *yT_ClPeer_size, double *y_ClPeer, int *y_ClPeer_rows, int *y_ClPeer_cols, double *t,  int *t_size) {
+return_values fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size) {
+    return_values collect_result;
+    
     /******************************* 
      * Fixing method coefficients 
      * ****************************/
@@ -126,8 +128,8 @@ void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, i
      *  Compute the solution
      * ****************************/
     double h = (t_span[1] - t_span[0]) / N;
-    t = linspace(t_span[0], t_span[1], N + 1);
-    *t_size = N + 1;
+    double *t = linspace(t_span[0], t_span[1], N + 1);
+    int t_size = N + 1;
     int n = 1;
 
     int s = STAGES; // Number of stages
@@ -181,8 +183,8 @@ void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, i
     //printDVector(Yi, d1, "Yi");
     //printDVector(Fnm1, Fnm1_size, "Fnm1");
 
-    for (n = 1; n < N; n++) {
-
+    for (n = 1; n <= N; n++) {
+        //fprintf(stdout, "\nn: %d \n", n);
         for (int i = 0; i < s; i++) {
             for (int k = 0; k < d1; k++) {
                 for (int j = 0; j < s; j++) {
@@ -210,16 +212,27 @@ void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, i
         for (int k = 0; k < d1; k++) {
             y[(n) * y_rows + k] = Y[(n - 1) * Y_rows + ((s - 1) * d1 + k)];
         }
-        //printDMatrix(y, y_rows, y_cols, "y");
     }
+    //printDMatrix(y, y_rows, y_cols, "y");
 
-    yT_ClPeer = zerosD(d1);
-    *yT_ClPeer_size = d1;
+    //fprintf(stdout, "Here\n");
+    double *yT = zerosD(d1);
+    int yT_size = d1;
+    //printDVector(yT, *yT_size, "yT");
     for (int i = 0; i < d1; i++) {
-        yT_ClPeer[i] = y[(N + 1) * y_cols + i];
+        //fprintf(stdout, "y[(N) * y_cols + i]: %f\n", y[(N) * y_rows + i]);
+        yT[i] = y[(N) * y_rows + i];
     }
 
-    y_ClPeer = y;
-    *y_ClPeer_rows = y_rows;
-    *y_ClPeer_cols = y_cols;
+    collect_result.y = y;
+    collect_result.y_rows = y_rows;
+    collect_result.y_cols = y_cols;
+
+    collect_result.t = t;
+    collect_result.t_size = t_size;
+
+    collect_result.yT = yT;
+    collect_result.yT_size = yT_size;
+
+    return collect_result;
 }

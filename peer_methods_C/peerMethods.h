@@ -21,6 +21,16 @@
 #define M  4
 #define STAGES 2
 
+typedef struct {
+    double *yT;
+    int yT_size;
+    double *y;
+    int y_rows;
+    int y_cols;
+    double *t;
+    int t_size;
+} return_values;
+
 /*********************************************************************************
  * Given the array y0 with y0Size elements and the matrix L with Lsize elements
  * return the pointer to an array of size sherratSize.
@@ -34,8 +44,6 @@ double *Sherratt(double *y0, int y0Size, double *L, int Lsize, int *sherrattSize
 double *RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, int Lsize, int *ySize);
 
 
-void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, 
-                            int y0_size, double *yT_ClPeer, int *yT_ClPeer_size, double *y_ClPeer, 
-                            int *y_ClPeer_rows, int *y_ClPeer_cols, double *t,  int *t_size);
+return_values fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size);
 
 #endif // !peerMethods_h

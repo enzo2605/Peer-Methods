@@ -33,7 +33,7 @@ void printDVector(double *vector, int N, const char *string) {
     int i;
     fprintf(stdout, "\n%s\nVector size: %d\n", string, N);
     for (i = 0; i < N; i++) {
-        fprintf(stdout, "%10.4lf\n", vector[i]);
+        fprintf(stdout, "%10.5lf\n", vector[i]);
     }
     fprintf(stdout, "\n");
 }
