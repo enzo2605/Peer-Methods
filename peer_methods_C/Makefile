@@ -9,7 +9,7 @@ utest.o: utest.c CLab.h utilities.h
 	gcc -c utest.c
 
 main: main.o CLab.o peerMethods.o utilities.o
-	gcc -Wall -std=c11 -pedantic main.o CLab.o utilities.o peerMethods.o -o main.out -lcblas -lm
+	gcc -Wall -pedantic -std=c11 -mfpmath=387 main.o CLab.o utilities.o peerMethods.o -o main.out -lcblas -lm
 
 main.o: main.c CLab.h peerMethods.h utilities.h
 	gcc -c main.c

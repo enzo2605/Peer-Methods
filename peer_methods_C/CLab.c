@@ -1,10 +1,10 @@
 #include "CLab.h"
 
-double *intervalDiscretization(double *vector, double first, double last, double step, int *N) {
+double_t *intervalDiscretization(double_t *vector, double_t first, double_t last, double_t step, int *N) {
     // Number of elements
     int size = ((int)(last - first) / step) + 1;
     // Allocate the array using calloc
-    vector = (double *)Calloc(size, sizeof(double));
+    vector = (double_t *)Calloc(size, sizeof(double_t));
     // Fill the array
     for (int i = 0; i < size; i++) {
         *(vector + i) = first;
@@ -14,10 +14,10 @@ double *intervalDiscretization(double *vector, double first, double last, double
     return vector;
 }
 
-double *eyeD(double *a, int N) {
+double_t *eyeD(double_t *a, int N) {
     // Allocate the matrix, rembering that we need to allocate
     // the matrix by columns and start from 1
-    a = (double *)Calloc(N * N, sizeof(double));
+    a = (double_t *)Calloc(N * N, sizeof(double_t));
     int k = 0;
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
@@ -27,9 +27,9 @@ double *eyeD(double *a, int N) {
     return a;
 }
 
-double *onesD(double *a, int N) {
+double_t *onesD(double_t *a, int N) {
     // Allocate the array using calloc
-    a = (double *)Calloc(N, sizeof(double));
+    a = (double_t *)Calloc(N, sizeof(double_t));
     // Fill the array
     for (int i = 0; i < N; i++) {
         *(a + i) = 1.0f;
@@ -37,36 +37,36 @@ double *onesD(double *a, int N) {
     return a;
 }
 
-double *zerosD(int N) {
+double_t *zerosD(int N) {
     // Allocate the array using calloc and initialize automatically
     // every element with 0
-    double *a = (double *)Calloc(N, sizeof(double));
+    double_t *a = (double_t *)Calloc(N, sizeof(double_t));
     return a;
 }
 
-double *zerosMatrixD(int M, int N) {
+double_t *zerosMatrixD(int M, int N) {
     // Allocate the array using calloc and initialize automatically
     // every element with 0
-    double *a = (double *)Calloc(M * N, sizeof(double));
+    double_t *a = (double_t *)Calloc(M * N, sizeof(double_t));
     return a;
 }
 
-void sumScalarByVector(double *in, int N, double alpha) {
+void sumScalarByVector(double_t *in, int N, double_t alpha) {
     int i;
     for (i = 0; i < N; i++) {
         in[i] += alpha;
     }
 }
 
-void scalarByVector(double *in, int N, double alpha) {
+void scalarByVector(double_t *in, int N, double_t alpha) {
     int i;
     for (i = 0; i < N; i++) {
         in[i] *= alpha;
     }
 }
 
-double *sumPuntVectors(double *v1, double *v2, int size) {
-    double *res = (double *)Calloc(size, sizeof(double));
+double_t *sumPuntVectors(double_t *v1, double_t *v2, int size) {
+    double_t *res = (double_t *)Calloc(size, sizeof(double_t));
 
     for (int i = 0; i < size; i++) {
         res[i] = v1[i] + v2[i];
@@ -75,13 +75,13 @@ double *sumPuntVectors(double *v1, double *v2, int size) {
     return res;
 }
 
-double *diagD(double *vector, int size, int k, int *matrix_size) {
+double_t *diagD(double_t *vector, int size, int k, int *matrix_size) {
     // The dimension of the final matrix will be N x N
     // with N = k + 1
     int N = size + abs(k);
 
     // Allocate dynamically the new matrix
-    double *matrix = (double *)Calloc(N * N, sizeof(double));
+    double_t *matrix = (double_t *)Calloc(N * N, sizeof(double_t));
 
     // Decide where to place arguments based on the absoulute value of k
     int j = abs(k);
@@ -103,47 +103,47 @@ double *diagD(double *vector, int size, int k, int *matrix_size) {
     return matrix;
 }
 
-double *packThreeMatrices(int n, double *A, double *B, double *C) {
+double_t *packThreeMatrices(int n, double_t *A, double_t *B, double_t *C) {
     // Allocates the new matrix
-    double *pack = (double *)Calloc(n * n * 3, sizeof(double));
+    double_t *pack = (double_t *)Calloc(n * n * 3, sizeof(double_t));
 
     // Copy the three matrix one side by another
-    memcpy(pack, A, n * n * sizeof(double));
-    memcpy(pack + n * n, B, n * n * sizeof(double));
-    memcpy(pack + n * n + n * n, C, n * n * sizeof(double));
+    memcpy(pack, A, n * n * sizeof(double_t));
+    memcpy(pack + n * n, B, n * n * sizeof(double_t));
+    memcpy(pack + n * n + n * n, C, n * n * sizeof(double_t));
 
     return pack;
 }
 
-double *threeBlockDiagD(int n, double *A, double *B, double *C, int *blckSize) {
+double_t *threeBlockDiagD(int n, double_t *A, double_t *B, double_t *C, int *blckSize) {
     // The new size will be the old one multiplied by 3
     int newSize = n * 3;
 
     // Allocates the final matrix
-    double *blockMatrix = (double *)Calloc(newSize * newSize, sizeof(double));
+    double_t *blockMatrix = (double_t *)Calloc(newSize * newSize, sizeof(double_t));
     // Pack the three matrix into one using an apposite function
-    double *pack = packThreeMatrices(n, A, B, C);
+    double_t *pack = packThreeMatrices(n, A, B, C);
 
     // Copy row by row the element of pack into blockMatrix
     for (int i = 0; i < newSize; i += n) {
         for (int j = 0; j < n; j++) {
-            memcpy(blockMatrix + (i * newSize + i) + j * newSize, pack + (i * n) + j * n, n * sizeof(double));
+            memcpy(blockMatrix + (i * newSize + i) + j * newSize, pack + (i * n) + j * n, n * sizeof(double_t));
         }
     }
     *blckSize = newSize;
     return blockMatrix;
 }
 
-double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimension) {
+double_t *packThreeVectors(int n, double_t *A, double_t *B, double_t *C, int *newDimension) {
     int newSize = n * 3;
     
     // Allocates the new vector
-    double *pack = (double *)Calloc(newSize, sizeof(double));
+    double_t *pack = (double_t *)Calloc(newSize, sizeof(double_t));
 
     // Copy the three vector one side by another
-    memcpy(pack, A, n * sizeof(double));
-    memcpy(pack + n, B, n * sizeof(double));
-    memcpy(pack + 2 * n, C, n * sizeof(double));
+    memcpy(pack, A, n * sizeof(double_t));
+    memcpy(pack + n, B, n * sizeof(double_t));
+    memcpy(pack + 2 * n, C, n * sizeof(double_t));
 
     // Saving the new dimension of the vector
     *newDimension = newSize;
@@ -151,11 +151,11 @@ double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimensi
     return pack;
 }
 
-double *sumPuntSquareMatrices(double *matrix1, double *matrix2, int size) {
+double_t *sumPuntSquareMatrices(double_t *matrix1, double_t *matrix2, int size) {
     int i, j;
 
     // Allocate the resulting matrix
-    double *result = (double *)Calloc(size * size, sizeof(double));
+    double_t *result = (double_t *)Calloc(size * size, sizeof(double_t));
 
     // Sum element by element of the matrices
     for (i = 0; i < size; i++) {
@@ -167,9 +167,9 @@ double *sumPuntSquareMatrices(double *matrix1, double *matrix2, int size) {
     return result;
 }
 
-double *scalarByMatrix(double *matrix, int M, int N, double alpha) {
+double_t *scalarByMatrix(double_t *matrix, int M, int N, double_t alpha) {
     int i, j;
-    double *newMatrix = (double *)Calloc(M * N, sizeof(double));
+    double_t *newMatrix = (double_t *)Calloc(M * N, sizeof(double_t));
 
     for (i = 0; i < M; i++) {
         for (j = 0; j < N; j++) {
@@ -180,11 +180,11 @@ double *scalarByMatrix(double *matrix, int M, int N, double alpha) {
     return newMatrix;
 }
 
-double *linspace(double x1, double x2, int n) {
+double_t *linspace(double_t x1, double_t x2, int n) {
     // Allocate the vector of size n dynamically
-    double *v = (double *)Calloc(n, sizeof(double));
+    double_t *v = (double_t *)Calloc(n, sizeof(double_t));
     // Define the spacing between eache element of the vector
-    double step = (x2 - x1) / (n - 1);
+    double_t step = (x2 - x1) / (n - 1);
     // Generate the values of the vector
     v[0] = x1;
     for (int i = 1; i < n; i++) {

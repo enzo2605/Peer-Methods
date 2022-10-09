@@ -9,8 +9,11 @@ int main(int argc, char *argv[]) {
     // Random initialization for the seed
     srand((unsigned int)time(NULL));
 
+    printf("FLT_EVAL_METHOD: %d\n", FLT_EVAL_METHOD);
+    //assert(FLT_EVAL_METHOD == 2);
+
     // Intervals
-    double t_start, t_end, x_start, x_end;
+    double_t t_start, t_end, x_start, x_end;
 
     // Checking arguments passed by the user
     if (argc != 5) {
@@ -34,12 +37,12 @@ int main(int argc, char *argv[]) {
     /*********************************************** 
      *          Time initialization 
      * *********************************************/
-    double t_span[2] = { t_start, t_end };
+    double_t t_span[2] = { t_start, t_end };
     // for test
-    double Delta_t = 1.0f / pow(2.0f, 3.0f);
+    double_t Delta_t = 1.0f / pow(2.0f, 3.0f);
     fprintf(stdout, "Delta_t: %f\n", Delta_t);
 
-    double *t_int;
+    double_t *t_int;
     int n_points_t;
     t_int = intervalDiscretization(t_int, t_start, t_end, Delta_t, &n_points_t);
     int N = (t_span[1] - t_span[0]) / Delta_t;
@@ -48,11 +51,11 @@ int main(int argc, char *argv[]) {
     /*********************************************** 
      *          Space initialization 
      * *********************************************/
-    double x_span[2] = { x_start, x_end };
-    double Delta_x = (x_span[1] - x_span[0]) / M;
+    double_t x_span[2] = { x_start, x_end };
+    double_t Delta_x = (x_span[1] - x_span[0]) / M;
     printf("Delta_x: %f\n",Delta_x);
 
-    double *x_int;
+    double_t *x_int;
     int n_points_x;
     x_int = intervalDiscretization(x_int, x_start, x_end, Delta_x, &n_points_x);
     assert(n_points_x == M + 1);
@@ -62,13 +65,13 @@ int main(int argc, char *argv[]) {
      * *********************************************/
 
     // Test values
-    double test_u10[] = { 0.9528, 0.7041, 0.9539, 0.5982, 0.8407, 0.4428, 0.8368, 0.5187 };
-    double test_u20[] = { 0.0222, 0.3759, 0.8986, 0.4290, 0.1996, 0.3031, 0.5383, 0.9102 };
-    double test_w0[]  = { 0.5253, 0.3068, 0.0345, 0.7153, 0.7687, 0.0595, 0.6271, 0.2652 };
+    double_t test_u10[] = { 0.9528, 0.7041, 0.9539, 0.5982, 0.8407, 0.4428, 0.8368, 0.5187 };
+    double_t test_u20[] = { 0.0222, 0.3759, 0.8986, 0.4290, 0.1996, 0.3031, 0.5383, 0.9102 };
+    double_t test_w0[]  = { 0.5253, 0.3068, 0.0345, 0.7153, 0.7687, 0.0595, 0.6271, 0.2652 };
 
     /**** u10_time *****/
     // Allocation of the vector
-    double *u10_time = (double *)Calloc(M, sizeof(double));
+    double_t *u10_time = (double_t *)Calloc(M, sizeof(double_t));
     // Initialization with random values between 0 and 1
     initVectorWAnotherVector(u10_time, test_u10, M);
     //initializeRandomVector(u10_time, M);
@@ -80,7 +83,7 @@ int main(int argc, char *argv[]) {
 
     /**** u20_time *****/
     // Allocation of the vector
-    double *u20_time = (double *)Calloc(M, sizeof(double));
+    double_t *u20_time = (double_t *)Calloc(M, sizeof(double_t));
     // Initialization with random values between 0 and 1
     initVectorWAnotherVector(u20_time, test_u20, M);
     //initializeRandomVector(u20_time, M);
@@ -92,7 +95,7 @@ int main(int argc, char *argv[]) {
 
     /**** w0_time *****/
     // Allocation of the vector
-    double *w0_time = (double *)Calloc(M, sizeof(double));
+    double_t *w0_time = (double_t *)Calloc(M, sizeof(double_t));
     // Initialization with random values between 0 and 1
     initVectorWAnotherVector(w0_time, test_w0, M);
     //initializeRandomVector(w0_time, M);
@@ -106,7 +109,7 @@ int main(int argc, char *argv[]) {
      *  Create vector y0 = [U10;U20;W0] with initial conditions 
      * ***********************************************************/
     int y0Dimension;
-    double *y0 = packThreeVectors(M, u10_time, u20_time, w0_time, &y0Dimension);
+    double_t *y0 = packThreeVectors(M, u10_time, u20_time, w0_time, &y0Dimension);
     //printDVector(y0, y0Dimension, "y0");
 
     /********************************************************************
@@ -114,13 +117,13 @@ int main(int argc, char *argv[]) {
      * *****************************************************************/
     // Calculate Ldiff
     int sizeTempDiagOne, sizeTempDiagMinusOne;
-    double *eyeM = eyeD(eyeM, M);
+    double_t *eyeM = eyeD(eyeM, M);
     eyeM = scalarByMatrix(eyeM, M, M, -2.0f);
-    double *onesVector = onesD(onesVector, M - 1);
-    double *tempDiagOne = diagD(onesVector, M - 1, 1, &sizeTempDiagOne);
-    double *tempDiagMinusOne = diagD(onesVector, M - 1, -1, &sizeTempDiagMinusOne);
-    double *addend1 = sumPuntSquareMatrices(eyeM, tempDiagOne, M);
-    double *Ldiff = sumPuntSquareMatrices(addend1, tempDiagMinusOne, M);
+    double_t *onesVector = onesD(onesVector, M - 1);
+    double_t *tempDiagOne = diagD(onesVector, M - 1, 1, &sizeTempDiagOne);
+    double_t *tempDiagMinusOne = diagD(onesVector, M - 1, -1, &sizeTempDiagMinusOne);
+    double_t *addend1 = sumPuntSquareMatrices(eyeM, tempDiagOne, M);
+    double_t *Ldiff = sumPuntSquareMatrices(addend1, tempDiagMinusOne, M);
     
     Ldiff = scalarByMatrix(Ldiff, M, M, 1.0f / (Delta_x * Delta_x));
     Ldiff[M - 1] = 1.0f / (Delta_x * Delta_x);
@@ -129,15 +132,15 @@ int main(int argc, char *argv[]) {
 
     // Calculate the matrix L
     int LSize;
-    double *DLdiff = scalarByMatrix(Ldiff, M, M, D);
-    double *dLdiff = scalarByMatrix(Ldiff, M, M, d);
-    double *L = threeBlockDiagD(M, Ldiff, DLdiff, dLdiff, &LSize);
+    double_t *DLdiff = scalarByMatrix(Ldiff, M, M, D);
+    double_t *dLdiff = scalarByMatrix(Ldiff, M, M, d);
+    double_t *L = threeBlockDiagD(M, Ldiff, DLdiff, dLdiff, &LSize);
     //printDMatrix(L, LSize, LSize, "L");
 
     /*
     */
     int ySize;
-    double *y = RungeKutta4th(2.0f, 0.0f, y0, y0Dimension, L, LSize, &ySize);
+    double_t *y = RungeKutta4th(2.0f, 0.0f, y0, y0Dimension, L, LSize, &ySize);
     // printDVector(y, ySize, "y");
     
     return_values result;

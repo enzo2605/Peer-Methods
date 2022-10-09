@@ -18,7 +18,7 @@ void *Calloc(size_t nmemb, size_t size) {
     return res;
 }
 
-void printDMatrix(double *matrix, int M, int N, const char *string) {
+void printDMatrix(double_t *matrix, int M, int N, const char *string) {
     int i, j;
     fprintf(stdout, "\n%s\nMatrix size: %d x %d\n", string, M, N);
     for (i = 0; i < M; i++) {
@@ -29,7 +29,7 @@ void printDMatrix(double *matrix, int M, int N, const char *string) {
     }
 }
 
-void printDVector(double *vector, int N, const char *string) {
+void printDVector(double_t *vector, int N, const char *string) {
     int i;
     fprintf(stdout, "\n%s\nVector size: %d\n", string, N);
     for (i = 0; i < N; i++) {
@@ -38,28 +38,28 @@ void printDVector(double *vector, int N, const char *string) {
     fprintf(stdout, "\n");
 }
 
-void initializeRandomVector(double *vector, int N) {
+void initializeRandomVector(double_t *vector, int N) {
     int i;
-    double randomNumber;
+    double_t randomNumber;
 
     for (i = 0; i < N; i++) {
-        randomNumber = (double)rand() / ((double)RAND_MAX);
+        randomNumber = (double_t)rand() / ((double_t)RAND_MAX);
         vector[i] = randomNumber;
     }
 }
 
-void initializeRandomMatrix(double *matrix, int M, int N) {
+void initializeRandomMatrix(double_t *matrix, int M, int N) {
     int k = 0;
     int i, j;
     // generation by columns starting by the index 1
     for (i = 0; i < N; i++) {
         for (j = 0; j < M; j++) {
-            matrix[i * N + j] = (double)rand() / ((double)RAND_MAX);
+            matrix[i * N + j] = (double_t)rand() / ((double_t)RAND_MAX);
         }
     }
 }
 
-int initMatrixByRowWithValuesFromVector(double *matrix, int M, int N, double *vector, int vector_size) {
+int initMatrixByRowWithValuesFromVector(double_t *matrix, int M, int N, double_t *vector, int vector_size) {
     if (M * N != vector_size) {
         fprintf(stdout, "\nIt has been impossible to initialize the matrix with the vector passed.");
         fprintf(stdout, "\nThe size of matrix and the vector are incompatible.\nReturned -1\n");
@@ -75,7 +75,7 @@ int initMatrixByRowWithValuesFromVector(double *matrix, int M, int N, double *ve
     return 0;
 }
 
-void initVectorWAnotherVector(double *newVector, double *oldVector, int n) {
+void initVectorWAnotherVector(double_t *newVector, double_t *oldVector, int n) {
     int i;
     for (i = 0; i < n; i++) {
         newVector[i] = oldVector[i];
