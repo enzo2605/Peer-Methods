@@ -15,6 +15,8 @@ void saveInFile(const char* fileName, return_values result) {
         fprintf(stdout, "\nError while opening %s.\n", fileName);
         exit(1);
     }
+    int numArrays = 3;
+    fprintf(filePtr, "%d\n", numArrays);
     // Write y_T
     fprintf(filePtr, "%d\n", result.yT_size);
     for (int i = 0; i < result.yT_size; i++) {

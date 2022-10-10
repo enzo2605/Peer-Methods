@@ -24,6 +24,7 @@ class Validator:
         return output
 
     def analize_output_files(self, file_name1, file_name2):
+        results = []
         outputC = self.__read_arrays_from_file(file_name1)
         outputMATLAB = self.__read_arrays_from_file(file_name2)
         ## Checks
@@ -31,13 +32,19 @@ class Validator:
         if (len(outputC) != len(outputMATLAB)):
             print("The array number of the two files is not the same")
             return
-        ## Check the number of element of corrisponding arrays
+        # Check the number of element of corrisponding arrays
         for i in range(0, len(outputC)):
             if (len(outputC[i]) != len(outputMATLAB[i])):
                 print("The array number of the %d-th array is not the same" % i)
                 return
+        # Built the result lsit
+        for i in range(0, len(outputC)):
+            temp_result = all(map(lambda x, y: x == y, outputC[i], outputMATLAB[i]))
+            results.append(temp_result)
+        return results
         
 
 if __name__ == "__main__":
     validator = Validator()
-    validator.analize_output_files(argv[1], argv[2])
+    results = validator.analize_output_files(argv[1], argv[2])
+    print(results)
