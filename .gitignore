@@ -2,6 +2,13 @@
 __pycache__/
 *.py[cod]
 
+### VisualStudioCode ###
+.vscode/*      # Maybe .vscode/**/* instead - see comments
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
 # Build and Release Folders
 bin-debug/
 bin-release/
