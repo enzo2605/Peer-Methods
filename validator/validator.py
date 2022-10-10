@@ -1,3 +1,4 @@
+from decimal import Decimal
 from sys import argv
 from unicodedata import name
 
@@ -15,9 +16,11 @@ class Validator:
             n = int(file.readline())
             temp_list = []
             for i in range(0, n):
-                value = float(file.readline())
+                value = Decimal(file.readline())
                 temp_list.append(value)
             output.append(list(temp_list))
+        # close the file
+        file.close()
         return output
 
     def analize_output_files(self, file_name1, file_name2):

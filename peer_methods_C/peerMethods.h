@@ -18,7 +18,7 @@
 #define S  0.0002 
 #define d  500 
 #define D  0.802
-#define M  64
+#define M  4
 #define STAGES 2
 
 /*********************************************************************************
@@ -36,6 +36,10 @@ typedef struct {
 } return_values;
 
 
+/*********************************************************************************
+ *                          Utilities functions
+ ********************************************************************************/
+void saveInFile(const char* fileName, return_values result);
 void initReturnStruct(return_values *rv);
 
 /*********************************************************************************

@@ -9,26 +9,26 @@ int main(int argc, char *argv[]) {
     // Random initialization for the seed
     srand((unsigned int)time(NULL));
 
-    printf("FLT_EVAL_METHOD: %d\n", FLT_EVAL_METHOD);
-    //assert(FLT_EVAL_METHOD == 2);
-
     // Intervals
     double_t t_start, t_end, x_start, x_end;
+    char fileName[256];
 
     // Checking arguments passed by the user
-    if (argc != 5) {
-        fprintf(stdout, "Usage: %s t_start t_end x_start x_end\n", argv[0]);
+    if (argc != 6) {
+        fprintf(stdout, "Usage: %s t_start t_end x_start x_end file_name\n", argv[0]);
         fprintf(stdout, "Using default parameters...\n\n");
         t_start = 0.0f;
         t_end   = 50.0f;
         x_start = -50.0f;
         x_end   = 50.0f;
+        strcpy(fileName, "outputC.txt");
     }
     else {
         t_start = atof(argv[1]);
         t_end   = atof(argv[2]);
         x_start = atof(argv[3]);
         x_end   = atof(argv[4]);
+        strcpy(fileName, argv[5]);
     }
 
     // Printing the interval used
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
      * *********************************************/
     double_t t_span[2] = { t_start, t_end };
     // for test
-    double_t Delta_t = 1.0f / pow(2.0f, 3.0f);
+    double_t Delta_t = 1.0f / pow(2.0f, 4.0f);
     fprintf(stdout, "Delta_t: %f\n", Delta_t);
 
     double_t *t_int;
@@ -155,9 +155,7 @@ int main(int argc, char *argv[]) {
     assert(result.yT != NULL);
 
     // Printing values
-    printDVector(result.t, result.t_size, "t");
-    printDVector(result.yT, result.yT_size, "yT_ClPeer");
-    printDMatrix(result.y, result.y_rows, result.y_cols, "y_ClPeer");
+    saveInFile(fileName, result);
 
     // Free all the memory dynamically allocated
     freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, 

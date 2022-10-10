@@ -6,6 +6,37 @@ void initReturnStruct(return_values *rv) {
     rv->yT = NULL;
 }
 
+void saveInFile(const char* fileName, return_values result) {
+    // Open the file
+    FILE *filePtr;
+    filePtr = fopen(fileName, "w");
+    // Check possible errors
+    if (filePtr == NULL) {
+        fprintf(stdout, "\nError while opening %s.\n", fileName);
+        exit(1);
+    }
+    // Write y_T
+    fprintf(filePtr, "%d\n", result.yT_size);
+    for (int i = 0; i < result.yT_size; i++) {
+        fprintf(filePtr, "%.4f\n", result.yT[i]);
+    }
+    // Write y
+    fprintf(filePtr, "%d\n", result.y_rows * result.y_cols);
+    for (int i = 0; i < result.y_rows; i++) {
+        for (int j = 0; j < result.y_cols; j++) {
+            fprintf(filePtr, "%.4f\n", result.y[i * result.y_cols + j]);
+        }
+    }
+    // Write t
+    // Write y_T
+    fprintf(filePtr, "%d\n", result.t_size);
+    for (int i = 0; i < result.t_size; i++) {
+        fprintf(filePtr, "%.4f\n", result.t[i]);
+    }
+    // Close the file
+    fclose(filePtr);
+}
+
 double_t *Sherratt(double_t *y0, int y0Size, double_t *L, int Lsize, int *sherrattSize) {
     // Declaring three dynamic array representing the three function contained in y0
     double_t *U = (double_t *)Calloc(M, sizeof(double_t));
