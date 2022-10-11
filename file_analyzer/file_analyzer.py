@@ -1,14 +1,28 @@
-from dataclasses import dataclass
 from decimal import Decimal
 from sys import argv
 from unicodedata import name
 
-class Analyzer:
-    number_wrong_values: int
-    total_values: int
-    percentage_wrong_values: Decimal
+## The array stats class encapsulate the main parameters to make statics on the result
+## and provide a method to print the results
+class ArrayStats:
+    # Constructor
+    def __init__(self, number_wrong_values, total_values, percentage_wrong_values):
+        self.number_wrong_values = number_wrong_values
+        self.total_values = total_values
+        self.percentage_wrong_values = percentage_wrong_values
+    
+    # Print the stats given in input the name of the array
+    def print_stats(self, array_name):
+        print("")
+        print(f"Vector {array_name}")
+        print(f"Number of values analyzed: {self.total_values}")
+        print(f"Number of different values: {self.number_wrong_values}")
+        print(f"Percentage of different values: {self.percentage_wrong_values}")
 
-class Validator:
+## The FileAnalyzer class allows reading data from file passed as argument
+## and a method wich return a list of statics object that will be used
+## to print out the result
+class FileAnalyzer:
     def __read_arrays_from_file(self, file_name):
         # declare the output list
         output = []
@@ -51,15 +65,19 @@ class Validator:
             # Compute the number of wrong values, which means the values in difference
             # that are not equal to zero
             num_wrong_values = len(differences) - differences.count(0)
-            print(f"Number of wrong values for {i}: {num_wrong_values}")
             # Calculate the percentage of the wrong values
             percentage_wrong_values = (num_wrong_values / len(differences)) * 100
-            # Append the percentage to the final results list
-            results.append(percentage_wrong_values)
+            # Encapsulate the calculated data in an object and save it in a list
+            local_stats = ArrayStats(num_wrong_values, len(differences), percentage_wrong_values)
+            results.append(local_stats)
         return results
-        
 
 if __name__ == "__main__":
-    validator = Validator()
-    results = validator.analize_output_files(argv[1], argv[2])
-    print(results)
+    # Create a new FileAnalyzer object
+    file_analyzer = FileAnalyzer()
+    # Call method to analyze each file
+    total_stats = file_analyzer.analize_output_files(argv[1], argv[2])
+    # Print results
+    total_stats[0].print_stats("y")
+    total_stats[1].print_stats("yT")
+    total_stats[2].print_stats("t")
