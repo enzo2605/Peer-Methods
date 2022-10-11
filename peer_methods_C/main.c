@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
      * *********************************************/
     double_t t_span[2] = { t_start, t_end };
     // for test
-    double_t Delta_t = 1.0f / pow(2.0f, 4.0f);
+    double_t Delta_t = 1.0f / pow(2.0f, 8.0f);
     fprintf(stdout, "Delta_t: %f\n", Delta_t);
 
     double_t *t_int;

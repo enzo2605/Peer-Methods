@@ -1,6 +1,12 @@
+from dataclasses import dataclass
 from decimal import Decimal
 from sys import argv
 from unicodedata import name
+
+class Analyzer:
+    number_wrong_values: int
+    total_values: int
+    percentage_wrong_values: Decimal
 
 class Validator:
     def __read_arrays_from_file(self, file_name):
@@ -39,8 +45,17 @@ class Validator:
                 return
         # Built the result lsit
         for i in range(0, len(outputC)):
-            temp_result = all(map(lambda x, y: x == y, outputC[i], outputMATLAB[i]))
-            results.append(temp_result)
+            # Build a list in which each value is a difference between the value from
+            # the list outputC and the value from the list outputMATLAB
+            differences = list(map(lambda x, y: y - x, outputC[i], outputMATLAB[i]))
+            # Compute the number of wrong values, which means the values in difference
+            # that are not equal to zero
+            num_wrong_values = len(differences) - differences.count(0)
+            print(f"Number of wrong values for {i}: {num_wrong_values}")
+            # Calculate the percentage of the wrong values
+            percentage_wrong_values = (num_wrong_values / len(differences)) * 100
+            # Append the percentage to the final results list
+            results.append(percentage_wrong_values)
         return results
         
 
