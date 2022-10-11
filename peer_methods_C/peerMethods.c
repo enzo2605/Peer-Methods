@@ -26,7 +26,7 @@ void saveInFile(const char* fileName, return_values result) {
     fprintf(filePtr, "%d\n", result.y_rows * result.y_cols);
     for (int i = 0; i < result.y_rows; i++) {
         for (int j = 0; j < result.y_cols; j++) {
-            fprintf(filePtr, "%.4f\n", result.y[i * result.y_cols + j]);
+            fprintf(filePtr, "%.4f\n", result.y[j * result.y_rows + i]);
         }
     }
     // Write t
