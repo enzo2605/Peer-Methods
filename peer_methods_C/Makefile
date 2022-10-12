@@ -2,12 +2,6 @@ all: clean main cleanObj
 
 test: clean utest
 
-utest: utest.o CLab.o utilities.o
-	gcc utest.o CLab.o utilities.o -o utest.out -lcblas
-
-utest.o: utest.c CLab.h utilities.h
-	gcc -c utest.c
-
 main: main.o CLab.o peerMethods.o utilities.o
 	gcc -Wall -pedantic -std=c11 -mfpmath=387 main.o CLab.o utilities.o peerMethods.o -o main.out -lcblas -lm
 

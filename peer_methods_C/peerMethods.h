@@ -26,12 +26,12 @@
  * obtained by the fPeerMethod function.
  ********************************************************************************/
 typedef struct {
-    double_t *yT;
+    double *yT;
     int yT_size;
-    double_t *y;
+    double *y;
     int y_rows;
     int y_cols;
-    double_t *t;
+    double *t;
     int t_size;
 } return_values;
 
@@ -39,7 +39,7 @@ typedef struct {
 /*********************************************************************************
  *                          Utilities functions
  ********************************************************************************/
-int initInputVectors(const char *fileName, double_t *u10_time, double_t *u20_time, double_t *w0_time, int dimension);
+int initInputVectors(const char *fileName, double *u10_time, double *u20_time, double *w0_time, int dimension);
 int saveInFile(const char* fileName, return_values result);
 void initReturnStruct(return_values *rv);
 
@@ -47,19 +47,19 @@ void initReturnStruct(return_values *rv);
  * Given the array y0 with y0Size elements and the matrix L with Lsize elements
  * return the pointer to an array of size sherratSize.
  ********************************************************************************/
-double_t *Sherratt(double_t *y0, int y0Size, double_t *L, int Lsize, int *sherrattSize);
+double *Sherratt(double *y0, int y0Size, double *L, int Lsize, int *sherrattSize);
 
 /*********************************************************************************
  * Given the increase h, the initial time t0 and the vector y0 with ySize elements
  * and the matrix L with Lsize elements, return the vector y with ySize element.
  ********************************************************************************/
-double_t *RungeKutta4th(double_t h, double_t t0, double_t *y0, int y0Size, double_t *L, int Lsize, int *ySize);
+double *RungeKutta4th(double h, double t0, double *y0, int y0Size, double *L, int Lsize, int *ySize);
 
 /*********************************************************************************
  * Given in input the time span, the L matrix and y0 vector with their relative
  * sizes, returns a struct called "return_values" that contains the result
  * of the computation.
  ********************************************************************************/
-void fPeerClassic_twoStages(int N, double_t *t_span, int t_span_size, double_t *L, int Lsize, double_t *y0, int y0_size, return_values *collect_result);
+void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, double *L, int Lsize, double *y0, int y0_size, return_values *collect_result);
 
 #endif // !peerMethods_h
