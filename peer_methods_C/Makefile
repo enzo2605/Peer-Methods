@@ -1,4 +1,4 @@
-all: clean main
+all: clean main cleanObj
 
 test: clean utest
 
@@ -22,6 +22,9 @@ CLab.o: CLab.h CLab.c
 
 utilities.o: utilities.h utilities.c
 	gcc -c utilities.c
+
+cleanObj:
+	rm -f *.o
 
 clean:
 	rm -f *.o
