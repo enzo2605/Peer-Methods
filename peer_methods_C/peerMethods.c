@@ -61,20 +61,20 @@ int saveInFile(const char* fileName, return_values result) {
     // Write y_T
     fprintf(filePtr, "%d\n", result.yT_size);
     for (int i = 0; i < result.yT_size; i++) {
-        fprintf(filePtr, "%.4f\n", result.yT[i]);
+        fprintf(filePtr, "%.15f\n", result.yT[i]);
     }
     // Write y
     fprintf(filePtr, "%d\n", result.y_rows * result.y_cols);
     for (int i = 0; i < result.y_rows; i++) {
         for (int j = 0; j < result.y_cols; j++) {
-            fprintf(filePtr, "%.4f\n", result.y[j * result.y_rows + i]);
+            fprintf(filePtr, "%.15f\n", result.y[j * result.y_rows + i]);
         }
     }
     // Write t
     // Write y_T
     fprintf(filePtr, "%d\n", result.t_size);
     for (int i = 0; i < result.t_size; i++) {
-        fprintf(filePtr, "%.4f\n", result.t[i]);
+        fprintf(filePtr, "%.15f\n", result.t[i]);
     }
     // Close the file
     fclose(filePtr);
