@@ -39,7 +39,8 @@ typedef struct {
 /*********************************************************************************
  *                          Utilities functions
  ********************************************************************************/
-void saveInFile(const char* fileName, return_values result);
+int initInputVectors(const char *fileName, double_t *u10_time, double_t *u20_time, double_t *w0_time, int dimension);
+int saveInFile(const char* fileName, return_values result);
 void initReturnStruct(return_values *rv);
 
 /*********************************************************************************

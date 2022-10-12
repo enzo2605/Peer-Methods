@@ -11,24 +11,27 @@ int main(int argc, char *argv[]) {
 
     // Intervals
     double_t t_start, t_end, x_start, x_end;
-    char fileName[256];
+    char inputFileName[MAX_FILE_NAME_CHAR];
+    char outputFileName[MAX_FILE_NAME_CHAR];
 
     // Checking arguments passed by the user
-    if (argc != 6) {
+    if (argc != 7) {
         fprintf(stdout, "Usage: %s t_start t_end x_start x_end file_name\n", argv[0]);
         fprintf(stdout, "Using default parameters...\n\n");
         t_start = 0.0f;
         t_end   = 50.0f;
         x_start = -50.0f;
         x_end   = 50.0f;
-        strcpy(fileName, "outputC.txt");
+        strcpy(inputFileName, "inputC.txt");
+        strcpy(outputFileName, "outputC.txt");
     }
     else {
         t_start = atof(argv[1]);
         t_end   = atof(argv[2]);
         x_start = atof(argv[3]);
         x_end   = atof(argv[4]);
-        strcpy(fileName, argv[5]);
+        strcpy(inputFileName, argv[5]);
+        strcpy(outputFileName, argv[6]);
     }
 
     // Printing the interval used
@@ -64,46 +67,19 @@ int main(int argc, char *argv[]) {
      *          Define initial conditions 
      * *********************************************/
 
-    // Test values
-    double_t test_u10[] = { 0.9528, 0.7041, 0.9539, 0.5982, 0.8407, 0.4428, 0.8368, 0.5187 };
-    double_t test_u20[] = { 0.0222, 0.3759, 0.8986, 0.4290, 0.1996, 0.3031, 0.5383, 0.9102 };
-    double_t test_w0[]  = { 0.5253, 0.3068, 0.0345, 0.7153, 0.7687, 0.0595, 0.6271, 0.2652 };
-
     /**** u10_time *****/
-    // Allocation of the vector
+    // Dynamic allocation of the vectors
     double_t *u10_time = (double_t *)Calloc(M, sizeof(double_t));
-    // Initialization with random values between 0 and 1
-    initVectorWAnotherVector(u10_time, test_u10, M);
-    //initializeRandomVector(u10_time, M);
-    // vector by scalar product
-    cblas_dscal(M, 0.7, u10_time, 1);
-    // Add the scalar alpha at every element of the array u10_time
-    sumScalarByVector(u10_time, M, 1.4f);
-    //printDVector(u10_time, M, "u10_time");
-
-    /**** u20_time *****/
-    // Allocation of the vector
     double_t *u20_time = (double_t *)Calloc(M, sizeof(double_t));
-    // Initialization with random values between 0 and 1
-    initVectorWAnotherVector(u20_time, test_u20, M);
-    //initializeRandomVector(u20_time, M);
-    // vector by scalar product
-    cblas_dscal(M, 0.7, u20_time, 1);
-    // Add the scalar alpha at every element of the array u20_time
-    sumScalarByVector(u20_time, M, 1.4f);
-    //printDVector(u20_time, M, "u20_time");
+    double_t *w0_time  = (double_t *)Calloc(M, sizeof(double_t));
 
-    /**** w0_time *****/
-    // Allocation of the vector
-    double_t *w0_time = (double_t *)Calloc(M, sizeof(double_t));
-    // Initialization with random values between 0 and 1
-    initVectorWAnotherVector(w0_time, test_w0, M);
-    //initializeRandomVector(w0_time, M);
-    // vector by scalar product
-    cblas_dscal(M, 0.07, w0_time, 1);
-    // Add the scalar alpha at every element of the array w0_time
-    sumScalarByVector(w0_time, M, 0.14f);
-    //printDVector(w0_time, M, "w0_time");
+    // Initialize vectors by reading data from a file
+    if (initInputVectors(inputFileName, u10_time, u20_time, w0_time, M) == 0) {
+        fprintf(stdout, "\nVectors have been successfully initialized by the file %s.\n", inputFileName);
+    }
+    else {
+        fprintf(stdout, "\nAn error occurred while initializing vectors.\n");
+    }
 
     /************************************************************** 
      *  Create vector y0 = [U10;U20;W0] with initial conditions 
@@ -154,8 +130,13 @@ int main(int argc, char *argv[]) {
     assert(result.y != NULL);
     assert(result.yT != NULL);
 
-    // Printing values
-    saveInFile(fileName, result);
+    // Saving data into a file
+    if (saveInFile(outputFileName, result) == 0) {
+        fprintf(stdout, "\nData have been successfully saved in the file %s.\n", outputFileName);
+    }
+    else {
+        fprintf(stdout, "\nAn error occoured while saving data in file %s.\n", outputFileName);
+    }
 
     // Free all the memory dynamically allocated
     freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, 

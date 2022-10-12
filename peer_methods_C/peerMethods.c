@@ -1,4 +1,5 @@
 #include "peerMethods.h"
+#include <assert.h>
 
 void initReturnStruct(return_values *rv) {
     rv->t = NULL;
@@ -6,14 +7,54 @@ void initReturnStruct(return_values *rv) {
     rv->yT = NULL;
 }
 
-void saveInFile(const char* fileName, return_values result) {
-    // Open the file
+int initInputVectors(const char *fileName, double_t *u10_time, double_t *u20_time, double_t *w0_time, int dimension) {
     FILE *filePtr;
-    filePtr = fopen(fileName, "w");
+    int readedDimension;
+    // Open the file
+    filePtr = fopen(fileName, "r+");
     // Check possible errors
     if (filePtr == NULL) {
-        fprintf(stdout, "\nError while opening %s.\n", fileName);
-        exit(1);
+        perror("input file error");
+        return 1;
+    }
+    // Che if the file is empty
+    fseek(filePtr, 0, SEEK_END);
+    long size = ftell(filePtr);
+    if (size == 0) {
+        fprintf(stdout, "\nFile %s is empty. Please provide to fill opportunely the file with values.\n", fileName);
+        return 1;
+    }
+    fseek(filePtr, 0, SEEK_SET);
+    // Vector u10_time
+    fscanf(filePtr, "%d", &readedDimension);
+    assert(dimension == readedDimension);
+    for (int i = 0; i < dimension; i++) {
+        fscanf(filePtr, "%lf", (u10_time + i));
+    }
+    // Vector u10_time
+    fscanf(filePtr, "%d", &readedDimension);
+    assert(dimension == readedDimension);
+    for (int i = 0; i < dimension; i++) {
+        fscanf(filePtr, "%lf", (u20_time + i));
+    }
+    // Vector u10_time
+    fscanf(filePtr, "%d", &readedDimension);
+    assert(dimension == readedDimension);
+    for (int i = 0; i < dimension; i++) {
+        fscanf(filePtr, "%lf", (w0_time + i));
+    }
+    fclose(filePtr);
+    return 0;
+}
+
+int saveInFile(const char* fileName, return_values result) {
+    // Open the file
+    FILE *filePtr;
+    filePtr = fopen(fileName, "w+");
+    // Check possible errors
+    if (filePtr == NULL) {
+        perror("output file error");
+        return 1;
     }
     int numArrays = 3;
     fprintf(filePtr, "%d\n", numArrays);
@@ -37,6 +78,7 @@ void saveInFile(const char* fileName, return_values result) {
     }
     // Close the file
     fclose(filePtr);
+    return 0;
 }
 
 double_t *Sherratt(double_t *y0, int y0Size, double_t *L, int Lsize, int *sherrattSize) {

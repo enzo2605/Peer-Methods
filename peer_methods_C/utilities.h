@@ -16,6 +16,8 @@
 #include <math.h>
 #include <float.h>
 
+#define MAX_FILE_NAME_CHAR 256
+
 /*************************************************
  *          Wrapper functions
  ***********************************************/
