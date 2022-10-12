@@ -1,23 +1,6 @@
+from collections import Counter
 from decimal import Decimal
 from sys import argv
-from unicodedata import name
-
-## The array stats class encapsulate the main parameters to make statics on the result
-## and provide a method to print the results
-class ArrayStats:
-    # Constructor
-    def __init__(self, number_wrong_values, total_values, percentage_wrong_values):
-        self.number_wrong_values = number_wrong_values
-        self.total_values = total_values
-        self.percentage_wrong_values = percentage_wrong_values
-    
-    # Print the stats given in input the name of the array
-    def print_stats(self, array_name):
-        print("")
-        print(f"Vector {array_name}")
-        print(f"Number of values analyzed: {self.total_values}")
-        print(f"Number of different values: {self.number_wrong_values}")
-        print(f"Percentage of different values: {self.percentage_wrong_values}")
 
 ## The FileAnalyzer class allows reading data from file passed as argument
 ## and a method wich return a list of statics object that will be used
@@ -61,16 +44,22 @@ class FileAnalyzer:
         for i in range(0, len(outputC)):
             # Build a list in which each value is a difference between the value from
             # the list outputC and the value from the list outputMATLAB
-            differences = list(map(lambda x, y: y - x, outputC[i], outputMATLAB[i]))
-            # Compute the number of wrong values, which means the values in difference
-            # that are not equal to zero
-            num_wrong_values = len(differences) - differences.count(0)
-            # Calculate the percentage of the wrong values
-            percentage_wrong_values = (num_wrong_values / len(differences)) * 100
-            # Encapsulate the calculated data in an object and save it in a list
-            local_stats = ArrayStats(num_wrong_values, len(differences), percentage_wrong_values)
-            results.append(local_stats)
+            differences = list(map(lambda x, y: abs(y - x), outputC[i], outputMATLAB[i]))
+            # Build a dictonary that for each value in the list associates the number
+            # of occourrences of that value
+            local_stats = dict(Counter(differences))
+            # Append to the result a list in which the first element is the number of elements
+            # and the second is the dictonary of occourrences
+            results.append([len(differences), local_stats])
         return results
+
+def print_local_stats(array_name, local_list):
+    print("")
+    print(f"Vector {array_name}")
+    print(f"Number of values analyzed: {local_list[0]}")
+    print("difference -> #values")
+    for key in local_list[1]:
+        print(f"{key} -> {local_list[1][key]} about {(local_list[1][key] / local_list[0] * 100):.2f}%")
 
 if __name__ == "__main__":
     # Create a new FileAnalyzer object
@@ -78,6 +67,6 @@ if __name__ == "__main__":
     # Call method to analyze each file
     total_stats = file_analyzer.analize_output_files(argv[1], argv[2])
     # Print results
-    total_stats[0].print_stats("y")
-    total_stats[1].print_stats("yT")
-    total_stats[2].print_stats("t")
+    print_local_stats("y", total_stats[0])
+    print_local_stats("yT", total_stats[1])
+    print_local_stats("t", total_stats[2])
