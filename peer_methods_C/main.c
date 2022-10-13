@@ -9,6 +9,9 @@ int main(int argc, char *argv[]) {
     // Random initialization for the seed
     srand((unsigned int)time(NULL));
 
+    // Measure time taken by the whole algorithm
+    clock_t start, end;
+
     // Intervals
     double t_start, t_end, x_start, x_end;
     char inputFileName[MAX_FILE_NAME_CHAR];
@@ -36,6 +39,9 @@ int main(int argc, char *argv[]) {
 
     // Printing the interval used
     fprintf(stdout, "Interval used:\ntime span: [%f, %f]\nspace span: [%f, %f]\n", t_start, t_end, x_start, x_end);
+
+    // Timer starting here
+    start = clock();
 
     /*********************************************** 
      *          Time initialization 
@@ -112,12 +118,6 @@ int main(int argc, char *argv[]) {
     double *dLdiff = scalarByMatrix(Ldiff, M, M, d);
     double *L = threeBlockDiagD(M, Ldiff, DLdiff, dLdiff, &LSize);
     //printDMatrix(L, LSize, LSize, "L");
-
-    /*
-    */
-    int ySize;
-    double *y = RungeKutta4th(2.0f, 0.0f, y0, y0Dimension, L, LSize, &ySize);
-    // printDVector(y, ySize, "y");
     
     return_values result;
     // Initialize the returning pointers to NULL
@@ -137,6 +137,13 @@ int main(int argc, char *argv[]) {
     else {
         fprintf(stdout, "\nAn error occoured while saving data in file %s.\n", outputFileName);
     }
+
+    // Timer finishing here
+    end = clock();
+
+    // Compute the time taken
+    double cpuTimeUsed = ((double) (end - start)) / CLOCKS_PER_SEC;
+    fprintf(stdout, "\nTotal time: %lf\n", cpuTimeUsed);
 
     // Free all the memory dynamically allocated
     freeEverything(u10_time, u20_time, w0_time, y0, eyeM, onesVector, tempDiagOne, tempDiagMinusOne, 
