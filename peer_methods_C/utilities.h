@@ -50,6 +50,9 @@ void initializeRandomMatrix(double *matrix, int M, int N);
 int initMatrixByRowWithValuesFromVector(double *matrix, int M, int N, double *vector, int vector_size);
 void initVectorWAnotherVector(double *newVector, double *oldVector, int n);
 double getTimeSpent(struct timeval start, struct timeval end);
+int saveVectorsInFile(const char *fileName, int elements, double *arr1, int dim1, ...);
+int initInputVectors(const char *fileName, double *u10_time, double *u20_time, double *w0_time, int dimension);
+int saveMatrixInFile(const char *fileName, double *matrix, int matrix_rows, int matrix_cols);
 
 /*************************************************
  *  Free all the memory dynamically allocated

@@ -7,7 +7,6 @@
 #define peerMethods_h
 
 #include "utilities.h"
-#include "CLab.h"
 #include "external_libs/CBLAS/include/cblas.h"
 
 #define STAGES 2
@@ -34,10 +33,7 @@ typedef struct {
  *                          Utilities functions
  ********************************************************************************/
 void initReturnStruct(return_values *rv);
-int saveVectorsInFile(const char *fileName, int elements, double *arr1, int dim1, ...);
 int saveResultsInFile(const char* fileName, return_values result);
-int initInputVectors(const char *fileName, double *u10_time, double *u20_time, double *w0_time, int dimension);
-int saveMatrixInFile(const char *fileName, double *matrix, int matrix_rows, int matrix_cols);
 
 
 /*********************************************************************************

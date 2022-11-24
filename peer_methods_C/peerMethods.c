@@ -1,61 +1,10 @@
 #include "peerMethods.h"
+#include "CLab.h"
 
 void initReturnStruct(return_values *rv) {
     rv->t = NULL;
     rv->y = NULL;
     rv->yT = NULL;
-}
-
-int saveVectorsInFile(const char *fileName, int elements, double *arr1, int dim1, ...) {
-    va_list ptr;
-    FILE *filePtr;
-    // Check the number of elements to write on the file
-    if (elements == 0) {
-        return 1;
-    }
-
-    // Initializing argument to the
-    // list pointer
-    va_start(ptr, dim1);
-
-    // Open the file
-    filePtr = fopen(fileName, "w+");
-    // Check possible errors
-    if (filePtr == NULL) {
-        perror("File opening error");
-        return 1;
-    }
-
-    // Write the number of arrays
-    fprintf(filePtr, "%d\n", elements);
-
-    // Write the number of elements of the array
-    fprintf(filePtr, "%d\n", dim1);
-    // Save the array in the file
-    for (int i = 0; i < dim1; i++) {
-        fprintf(filePtr, "%.15lf\n", arr1[i]);
-    }
-
-    // Write the the other vectors
-    for (int i = 0; i < elements - 1; i++) {
-        // Accessing current variable
-        // and pointing to next one
-        double *tempArray = va_arg(ptr, double *);
-        int tempDim = va_arg(ptr, int);
-        
-        // Write the number of elements of the array
-        fprintf(filePtr, "%d\n", tempDim);
-        // Save the array in the file
-        for (int i = 0; i < tempDim; i++) {
-            fprintf(filePtr, "%.15lf\n", tempArray[i]);
-        }
-    }
- 
-    // Ending argument list traversal
-    va_end(ptr);
-    // Close the file
-    fclose(filePtr);
-    return 0;
 }
 
 int saveResultsInFile(const char* fileName, return_values result) {
@@ -88,64 +37,6 @@ int saveResultsInFile(const char* fileName, return_values result) {
         fprintf(filePtr, "%.15f\n", result.t[i]);
     }
     // Close the file
-    fclose(filePtr);
-    return 0;
-}
-
-int saveMatrixInFile(const char *fileName, double *matrix, int matrix_rows, int matrix_cols) {
-    // Open the file
-    FILE *filePtr;
-    filePtr = fopen(fileName, "w+");
-    // Check possible errors
-    if (filePtr == NULL) {
-        perror("output file error");
-        return 1;
-    }
-    int numArrays = 1;
-    fprintf(filePtr, "%d\n", numArrays);
-    fprintf(filePtr, "%d\n", matrix_rows * matrix_cols);
-    for (int i = 0; i < matrix_rows; i++) {
-        for (int j = 0; j < matrix_cols; j++) {
-            fprintf(filePtr, "%.15f\n", matrix[j * matrix_rows + i]);
-        }
-    }
-    fclose(filePtr);
-    return 0;
-}
-
-int initInputVectors(const char *fileName, double *u10_time, double *u20_time, double *w0_time, int dimension) {
-    FILE *filePtr;
-    int readedDimension;
-    // Open the file
-    filePtr = fopen(fileName, "r+");
-    // Check possible errors
-    if (filePtr == NULL) {
-        perror("input file error");
-        return 1;
-    }
-    // Check if the file is empty
-    fseek(filePtr, 0, SEEK_END);
-    long size = ftell(filePtr);
-    if (size == 0) {
-        fprintf(stdout, "\nFile %s is empty. Please provide to fill opportunely the file with values.\n", fileName);
-        return 1;
-    }
-    fseek(filePtr, 0, SEEK_SET);
-    // Vector u10_time
-    fscanf(filePtr, "%d", &readedDimension);
-    for (int i = 0; i < dimension; i++) {
-        fscanf(filePtr, "%lf", (u10_time + i));
-    }
-    // Vector u10_time
-    fscanf(filePtr, "%d", &readedDimension);
-    for (int i = 0; i < dimension; i++) {
-        fscanf(filePtr, "%lf", (u20_time + i));
-    }
-    // Vector u10_time
-    fscanf(filePtr, "%d", &readedDimension);
-    for (int i = 0; i < dimension; i++) {
-        fscanf(filePtr, "%lf", (w0_time + i));
-    }
     fclose(filePtr);
     return 0;
 }
