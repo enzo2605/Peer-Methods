@@ -1,4 +1,6 @@
-#include "CLab.h"
+#include <stdlib.h>
+#include <string.h>
+#include "peerMethods.h"
 
 double *intervalDiscretization(double first, double last, double step, int *N) {
     // Number of elements

@@ -6,8 +6,19 @@
 #ifndef peerMethods_h
 #define peerMethods_h
 
-#include "utilities.h"
+/*
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/time.h>
+#include <time.h>
+#include <unistd.h>
+#include <stdarg.h>
+#include <math.h>
+#include <float.h>
 #include "external_libs/CBLAS/include/cblas.h"
+*/
 
 #define STAGES 2
 
@@ -64,6 +75,87 @@ double *RungeKutta4th(double h, double t0, const double *y0, int y0Size, const d
  * of the computation.
  ********************************************************************************/
 void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, const double *L, int Lsize, const double *y0, int y0_size, return_values *collect_result);
+
+/*************************************************
+ *          Wrapper functions
+ ***********************************************/
+void *Malloc(size_t size);
+void *Calloc(size_t nmemb, size_t size);
+
+/*************************************************
+ *          Initialization functions
+ ***********************************************/
+void initializeRandomVector(double *vector, int N);
+void initializeRandomMatrix(double *matrix, int M, int N);
+int initMatrixByRowWithValuesFromVector(double *matrix, int M, int N, double *vector, int vector_size);
+void initVectorWAnotherVector(double *newVector, double *oldVector, int n);
+
+/*************************************************
+ *  Free all the memory dynamically allocated
+ ***********************************************/
+void freeEverything(void *arg1, ...);
+
+/*******************************************************
+ * Return a vector in which the first element is 
+ * first, the last element is last with a step that is 
+ * represented by step parameters. N represent the
+ * size of the array at the end.
+ *****************************************************/
+double *intervalDiscretization(double first, double last, double step, int *N);
+
+/*******************************************************
+ * Return a square matrix of size N in which the  
+ * elemets at the position i == j assume value 1
+ *****************************************************/
+double *eyeD(int N);
+
+/*******************************************************
+ * Return a vector of size N in which every element
+ * has value 1.
+ *****************************************************/
+double *onesD(int N);
+
+/*******************************************************
+ * Return a vector of size N in which every element
+ * has value 0.
+ *****************************************************/
+double *zerosD(int N);
+
+/*******************************************************
+ * Return a matrix of size M * N in which every element
+ * has value 0.
+ *****************************************************/
+double *zerosMatrixD(int M, int N);
+
+/*******************************************************
+ * Return a matrix of matrix_size x matrix_size elements 
+ * in which each element of the k-th diagonal is an 
+ * element of the vector passed by parameter.
+ *****************************************************/
+double *diagD(double *vector, int size, int k, int *matrix_size);
+
+/*******************************************************
+ * Packing three matrices side by side into one. It's
+ * an utility function for the threeBlockDiagD function
+ *****************************************************/
+double *packThreeMatrices(int n, double *A, double *B, double *C);
+
+/*******************************************************
+ * Return a block diag matrix of three matrices passed
+ * by arguments of size n x n.
+ *****************************************************/
+double *threeBlockDiagD(int n, double *A, double *B, double *C, int *blckSize);
+
+/*******************************************************
+ * Packing three vectors side by side into one.
+ *****************************************************/
+double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimension);
+
+/****************************************************
+ * Generates n points. The spacing between the points 
+ * is (x2-x1)/(n-1)
+ ***************************************************/
+double *linspace(double x1, double x2, int n);
 
 #ifdef __cplusplus
 }
