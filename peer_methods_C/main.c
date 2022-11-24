@@ -4,6 +4,16 @@
  * **/
 #include "peerMethods.h"
 
+double a  = 1.5;
+double B1 = 0.45;
+double B2 = 0.3611;
+double F  = 0.802;
+double H  = 0.802;
+double S  = 0.0002;
+double d  = 500;
+double D  = 0.802;
+int M     = 4;
+
 int main(int argc, char *argv[]) {
     // Random initialization for the seed
     srand((unsigned int)time(NULL));

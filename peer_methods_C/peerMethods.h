@@ -10,16 +10,10 @@
 #include "CLab.h"
 #include "external_libs/CBLAS/include/cblas.h"
 
-#define a  1.5
-#define B1 0.45
-#define B2 0.3611 
-#define F  0.802 
-#define H  0.802 
-#define S  0.0002 
-#define d  500 
-#define D  0.802
-#define M  4
 #define STAGES 2
+
+extern double a, B1, B2, F, H, S, d, D, L;
+extern int M;
 
 /*********************************************************************************
  * This struct has been created with the only purpose to return the value
