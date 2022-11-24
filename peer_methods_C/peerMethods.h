@@ -11,6 +11,10 @@
 
 #define STAGES 2
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 extern double a, B1, B2, F, H, S, d, D, L;
 extern int M;
 
@@ -61,4 +65,7 @@ double *RungeKutta4th(double h, double t0, const double *y0, int y0Size, const d
  ********************************************************************************/
 void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, const double *L, int Lsize, const double *y0, int y0_size, return_values *collect_result);
 
+#ifdef __cplusplus
+}
+#endif
 #endif // !peerMethods_h

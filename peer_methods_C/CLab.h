@@ -7,6 +7,10 @@
 #ifndef CLab_h
 #define CLab_h
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "utilities.h"
 
 /*******************************************************
@@ -71,4 +75,7 @@ double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimensi
  ***************************************************/
 double *linspace(double x1, double x2, int n);
 
+#ifdef __cplusplus
+}
+#endif
 #endif // !CLab_h
