@@ -1,10 +1,10 @@
 #include "CLab.h"
 
-double *intervalDiscretization(double *vector, double first, double last, double step, int *N) {
+double *intervalDiscretization(double first, double last, double step, int *N) {
     // Number of elements
     int size = ((int)(last - first) / step) + 1;
     // Allocate the array using calloc
-    vector = (double *)Calloc(size, sizeof(double));
+    double *vector = (double *)Calloc(size, sizeof(double));
     // Fill the array
     for (int i = 0; i < size; i++) {
         *(vector + i) = first;
@@ -14,11 +14,10 @@ double *intervalDiscretization(double *vector, double first, double last, double
     return vector;
 }
 
-double *eyeD(double *a, int N) {
+double *eyeD(int N) {
     // Allocate the matrix, rembering that we need to allocate
     // the matrix by columns and start from 1
-    a = (double *)Calloc(N * N, sizeof(double));
-    int k = 0;
+    double *a = (double *)Calloc(N * N, sizeof(double));
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             a[i * N + j] = (i == j) ? 1 : 0;
@@ -27,9 +26,9 @@ double *eyeD(double *a, int N) {
     return a;
 }
 
-double *onesD(double *a, int N) {
+double *onesD(int N) {
     // Allocate the array using calloc
-    a = (double *)Calloc(N, sizeof(double));
+    double *a = (double *)Calloc(N, sizeof(double));
     // Fill the array
     for (int i = 0; i < N; i++) {
         *(a + i) = 1.0f;
@@ -49,30 +48,6 @@ double *zerosMatrixD(int M, int N) {
     // every element with 0
     double *a = (double *)Calloc(M * N, sizeof(double));
     return a;
-}
-
-void sumScalarByVector(double *in, int N, double alpha) {
-    int i;
-    for (i = 0; i < N; i++) {
-        in[i] += alpha;
-    }
-}
-
-void scalarByVector(double *in, int N, double alpha) {
-    int i;
-    for (i = 0; i < N; i++) {
-        in[i] *= alpha;
-    }
-}
-
-double *sumPuntVectors(double *v1, double *v2, int size) {
-    double *res = (double *)Calloc(size, sizeof(double));
-
-    for (int i = 0; i < size; i++) {
-        res[i] = v1[i] + v2[i];
-    }
-
-    return res;
 }
 
 double *diagD(double *vector, int size, int k, int *matrix_size) {
@@ -149,35 +124,6 @@ double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimensi
     *newDimension = newSize;
 
     return pack;
-}
-
-double *sumPuntSquareMatrices(double *matrix1, double *matrix2, int size) {
-    int i, j;
-
-    // Allocate the resulting matrix
-    double *result = (double *)Calloc(size * size, sizeof(double));
-
-    // Sum element by element of the matrices
-    for (i = 0; i < size; i++) {
-        for (j = 0; j < size; j++) {
-            result[i * size + j] = matrix1[i * size + j] + matrix2[i * size + j];
-        }
-    }
-
-    return result;
-}
-
-double *scalarByMatrix(double *matrix, int M, int N, double alpha) {
-    int i, j;
-    double *newMatrix = (double *)Calloc(M * N, sizeof(double));
-
-    for (i = 0; i < M; i++) {
-        for (j = 0; j < N; j++) {
-            newMatrix[i * N + j] = matrix[i * N + j] * alpha;
-        }
-    }
-
-    return newMatrix;
 }
 
 double *linspace(double x1, double x2, int n) {

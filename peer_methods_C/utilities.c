@@ -23,9 +23,31 @@ void printDMatrix(double *matrix, int M, int N, const char *string) {
     fprintf(stdout, "\n%s\nMatrix size: %d x %d\n", string, M, N);
     for (i = 0; i < M; i++) {
         for (j = 0; j < N; j++) {
-            fprintf(stdout, "%10.4f", matrix[j * M + i]);
+            fprintf(stdout, " %.15lf", matrix[j * M + i]);
         }
         fprintf(stdout, "\n");
+    }
+}
+
+void printDMatrixRowMajor(double *matrix, int M, int N, const char *string) {
+    int i, j;
+    fprintf(stdout, "\n%s\nMatrix size: %d x %d\n", string, M, N);
+    for (i = 0; i < M; i++) {
+        for (j = 0; j < N; j++) {
+            fprintf(stdout, " %.15f", matrix[i * N + j]);
+        }
+        fprintf(stdout, "\n");
+    }
+}
+
+void printDMatrixStacked(double *matrix, int M, int N, const char *string) {
+    int i, j;
+    fprintf(stdout, "\n%s\nMatrix size: %d x %d\n", string, M, N);
+    for (i = 0; i < M; i++) {
+        for (j = 0; j < N; j++) {
+            fprintf(stdout, "%.15lf\n", matrix[i * N + j]);
+        }
+        //fprintf(stdout, "\n");
     }
 }
 
@@ -33,7 +55,8 @@ void printDVector(double *vector, int N, const char *string) {
     int i;
     fprintf(stdout, "\n%s\nVector size: %d\n", string, N);
     for (i = 0; i < N; i++) {
-        fprintf(stdout, "%10.5lf\n", vector[i]);
+        // 10.5lf
+        fprintf(stdout, "%.15lf\n", vector[i]);
     }
     fprintf(stdout, "\n");
 }
@@ -49,7 +72,6 @@ void initializeRandomVector(double *vector, int N) {
 }
 
 void initializeRandomMatrix(double *matrix, int M, int N) {
-    int k = 0;
     int i, j;
     // generation by columns starting by the index 1
     for (i = 0; i < N; i++) {
@@ -80,6 +102,10 @@ void initVectorWAnotherVector(double *newVector, double *oldVector, int n) {
     for (i = 0; i < n; i++) {
         newVector[i] = oldVector[i];
     }
+}
+
+inline double getTimeSpent(struct timeval start, struct timeval end) {
+    return ((end.tv_sec - start.tv_sec) + ((end.tv_usec - start.tv_usec) / 1e6));
 }
 
 void freeEverything(void *arg1, ...) {

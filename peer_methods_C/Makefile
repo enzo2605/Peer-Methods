@@ -1,25 +1,33 @@
-all: clean main cleanObj
+CC = gcc
+INCLUDE_DIRS = -I external_libs/CBLAS/include
+LINKED_LIB = -L external_libs/CBLAS/lib
+FLAGS = -Wall -pedantic -std=c11 -mfpmath=387 -Wextra
+LIB_FLAGS = -lcblas -lm -lblas
+OBJECTS = main.o CLab.o utilities.o peerMethods.o
 
-test: clean utest
+.PHONY: all
 
-main: main.o CLab.o peerMethods.o utilities.o
-	gcc -Wall -pedantic -std=c11 -mfpmath=387 main.o CLab.o utilities.o peerMethods.o -o main.out -lcblas -lm
+all: cleaner main clean
+
+main: ${OBJECTS}
+	${CC} ${INCLUDE_DIRS} ${FLAGS} ${OBJECTS} -o main.out ${LINKED_LIB} ${LIB_FLAGS}
 
 main.o: main.c CLab.h peerMethods.h utilities.h
-	gcc -c main.c
+	${CC} ${FLAGS} -c main.c ${LIB_FLAGS}
 
 peerMethods.o: peerMethods.h peerMethods.c
-	gcc -c peerMethods.c
+	${CC} ${FLAGS} -c peerMethods.c ${LIB_FLAGS}
 
 CLab.o: CLab.h CLab.c
-	gcc -c CLab.c
+	${CC} ${FLAGS} -c CLab.c
 
 utilities.o: utilities.h utilities.c
-	gcc -c utilities.c
+	${CC} ${FLAGS} -c utilities.c
 
-cleanObj:
-	rm -f *.o
+.PHONY: clean
 
 clean:
 	rm -f *.o
+
+cleaner: clean
 	rm -f *.out
