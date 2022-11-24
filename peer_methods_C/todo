@@ -1,0 +1,6 @@
+1) BLAS e CBLAS fuori da external_libs
+2) clean anche per file .so
+3) Il make principale deve compilare nell'ordine
+    - Libreria BLAS in Fortran
+    - Libreria CBLAS in C
+    - Libreria peerMethods in C

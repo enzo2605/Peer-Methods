@@ -2,6 +2,9 @@
  * Title: Peer methods
  * Author: Vincenzo Iannucci
  * **/
+#include <stdio.h>
+#include <stdlib.h>
+#include "helper.h"
 #include "peerMethods.h"
 
 double a  = 1.5;

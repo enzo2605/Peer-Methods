@@ -3,7 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include <float.h>
-#include "external_libs/CBLAS/include/cblas.h"
+#include "cblas.h"
 #include "peerMethods.h"
 
 void initReturnStruct(return_values *rv) {
