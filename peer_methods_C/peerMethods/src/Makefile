@@ -4,13 +4,14 @@ LINKED_LIB = -L ../external_libs/CBLAS/lib
 FLAGS = -Wall -pedantic -std=c11 -mfpmath=387 -Wextra -fPIC
 LIB_FLAGS = -lcblas -lm -lblas
 OBJECTS = CLab.o utilities.o peerMethods.o
+CLIB = ../lib/libpeerMethods.so
 
 .PHONY: all
 
 all: cleaner lib clean
 
 lib: ${OBJECTS}
-	${CC} ${CFLAGS} -shared -o libpeerMethods.so ${OBJECTS}
+	${CC} ${FLAGS} -shared -o ${CLIB} ${OBJECTS}
 
 peerMethods.o: peerMethods.c
 	${CC} -I../include ${INCLUDE_DIRS} ${FLAGS} -c peerMethods.c ${LINKED_LIB} ${LIB_FLAGS}
@@ -26,5 +27,8 @@ utilities.o: utilities.c
 clean:
 	rm -f *.o
 
-cleaner: clean
+rmlib:
+	rm -f ${CLIB}
+
+cleaner: clean rmlib
 	rm -f *.out
