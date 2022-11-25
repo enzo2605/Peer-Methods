@@ -44,6 +44,6 @@ FFLAGS = -O3 -fPIC
 # Archive programs and flags
 #-----------------------------------------------------------------------------
 
-ARCH = gcc
-ARCHFLAGS = -shared -o
-RANLIB = echo
+ARCH = ar
+ARCHFLAGS = cr
+RANLIB = ranlib

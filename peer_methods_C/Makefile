@@ -1,8 +1,8 @@
 CC = gcc
-INCLUDE_DIRS = -I peerMethods/include -I peerMethods/external_libs/CBLAS/include
-LINKED_LIB = -L peerMethods/lib -L pedantic/external_libs/CBLAS/lib
+INCLUDE_DIRS = -I peerMethods/include
+LINKED_LIB = -L peerMethods/lib
 FLAGS = -Wall -pedantic -std=c11 -mfpmath=387 -Wextra
-LIB_FLAGS = -lcblas -lm -lblas -lpeerMethods
+LIB_FLAGS = -lpeerMethods -lm -lcblas
 OBJECTS = main.o helper.o
 
 .PHONY: all
