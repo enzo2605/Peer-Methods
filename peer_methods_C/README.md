@@ -19,6 +19,5 @@ In order to compile all the needed library and the library peerMethods itself.
 If the compilation goes well, type the following commands in the terminal
 
 ```bash
-$ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path-to-peerMethods-library/peerMethods/lib
-$ export LD_LIBRARY_PATH
+$ echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path-to-peerMethods-library/peerMethods/lib' >> ~/.bashrc
 ```
