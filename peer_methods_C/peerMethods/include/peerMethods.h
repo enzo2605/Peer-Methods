@@ -1,30 +1,16 @@
 /**
- * Author: Vincenzo Iannucci
- * Purpose: The library provides an implementation for the main function
+ * @author Vincenzo Iannucci
+ * @brief The library provides an implementation for the main function
  * for solving peer method.
  * **/
 #ifndef peerMethods_h
 #define peerMethods_h
 
-/*
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/time.h>
-#include <time.h>
-#include <unistd.h>
-#include <stdarg.h>
-#include <math.h>
-#include <float.h>
-#include "external_libs/CBLAS/include/cblas.h"
-*/
-
-#define STAGES 2
-
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define STAGES 2
 
 extern double a, B1, B2, F, H, S, d, D, L;
 extern int M;
@@ -44,10 +30,18 @@ typedef struct {
 } return_values;
 
 
-/*********************************************************************************
- *                          Utilities functions
- ********************************************************************************/
+/**
+ * @brief Initialize the struct return_values.
+ * @param rv pointer to the struct return_values
+*/
 void initReturnStruct(return_values *rv);
+
+/**
+ * @brief Save the struct return_values in a file.
+ * @param fileName the name of the file
+ * @param rv pointer to the struct return
+ * @return 0 if ok, 1 otherwise
+*/
 int saveResultsInFile(const char* fileName, return_values result);
 
 
