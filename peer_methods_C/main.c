@@ -171,7 +171,7 @@ int main(int argc, char *argv[]) {
 
     /*
     // Saving data into a file
-    if (saveInFile(outputFileName, result) == 0) {
+    if (saveResultsInFile(outputFileName, result) == 0) {
         fprintf(stdout, "\nData have been successfully saved in the file %s.\n", outputFileName);
     }
     else {
