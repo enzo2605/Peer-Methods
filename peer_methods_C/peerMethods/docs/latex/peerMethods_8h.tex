@@ -1,0 +1,312 @@
+\hypertarget{peerMethods_8h}{}\doxysection{/home/vincenzo/\+Github/\+Peer-\/\+Methods/peer\+\_\+methods\+\_\+\+C/peer\+Methods/include/peer\+Methods.h File Reference}
+\label{peerMethods_8h}\index{/home/vincenzo/Github/Peer-\/Methods/peer\_methods\_C/peerMethods/include/peerMethods.h@{/home/vincenzo/Github/Peer-\/Methods/peer\_methods\_C/peerMethods/include/peerMethods.h}}
+
+
+The library provides an implementation for the main function for solving peer method.  
+
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structreturn__values}{return\+\_\+values}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{peerMethods_8h_aa0ac20f0f8c058640e746dc75e3ba7ae}\label{peerMethods_8h_aa0ac20f0f8c058640e746dc75e3ba7ae}} 
+\#define {\bfseries S\+T\+A\+G\+ES}~2
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{peerMethods_8h_a7b31b10fc08fa8f2d7a67005f44782d9}{init\+Return\+Struct}} (\mbox{\hyperlink{structreturn__values}{return\+\_\+values}} $\ast$rv)
+\begin{DoxyCompactList}\small\item\em Initialize the struct \mbox{\hyperlink{structreturn__values}{return\+\_\+values}}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{peerMethods_8h_a19655a4c09937cc8daf216363897cd2f}{save\+Results\+In\+File}} (const char $\ast$file\+Name, \mbox{\hyperlink{structreturn__values}{return\+\_\+values}} result)
+\begin{DoxyCompactList}\small\item\em Save the struct \mbox{\hyperlink{structreturn__values}{return\+\_\+values}} in a file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{peerMethods_8h_acc85711e75bb558548c0849d8d20a646}{compute\+L\+Matrix}} (double $\ast$$\ast$L, int $\ast$L\+Size, double Delta\+\_\+x)
+\begin{DoxyCompactList}\small\item\em Build the matrix L. This is an helping function that builds the matrix L. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{peerMethods_8h_ad88d646cfe3fb7584cddc9e6a9e40673}{Sherratt}} (const double $\ast$y0, int y0\+Size, const double $\ast$L, int Lsize, int $\ast$sherratt\+Size)
+\begin{DoxyCompactList}\small\item\em Applies the Sherratt method. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{peerMethods_8h_ac02aba48e11fb2daf893314b41ae3761}{Runge\+Kutta4th}} (double h, double t0, const double $\ast$y0, int y0\+Size, const double $\ast$L, int Lsize, int $\ast$y\+Size)
+\begin{DoxyCompactList}\small\item\em Implicit fourth order method to solving O\+DE (Ordinary Differential Equation). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{peerMethods_8h_a0a09bed7ac235e392effd55e192797c3}{f\+Peer\+Classic\+\_\+two\+Stages}} (int N, double $\ast$t\+\_\+span, int t\+\_\+span\+\_\+size, const double $\ast$L, int Lsize, const double $\ast$y0, int y0\+\_\+size, \mbox{\hyperlink{structreturn__values}{return\+\_\+values}} $\ast$collect\+\_\+result)
+\begin{DoxyCompactList}\small\item\em Compute the P\+DE (Partial Differential Equation) using the M\+OL (Method Of Lines). The function computes the P\+DE (Partial Differential Equation) using M\+OL (Method Of Lines) and deriving a large system of O\+DE (Ordinary Differential Equation). Than, it solves the O\+DE system using the Runge Kutta method of the fourth order. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{peerMethods_8h_a718daa2ee90d164bb8224833535f0b3b}{Malloc}} (size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Function wrapper for malloc() function. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{peerMethods_8h_adb0c0ab84c63461105a8bc37e5d2d7ee}{Calloc}} (size\+\_\+t nmemb, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Function wrapper for calloc() function. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{peerMethods_8h_ac9b0f5ffecd4b428fb975aae38673ab2}\label{peerMethods_8h_ac9b0f5ffecd4b428fb975aae38673ab2}} 
+void {\bfseries initialize\+Random\+Vector} (double $\ast$vector, int N)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a9635bbe9cd6154354e221b77a5eaf2b3}\label{peerMethods_8h_a9635bbe9cd6154354e221b77a5eaf2b3}} 
+void {\bfseries initialize\+Random\+Matrix} (double $\ast$matrix, int M, int N)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a0aeaee59694a570f0d8d2892bd1a8146}\label{peerMethods_8h_a0aeaee59694a570f0d8d2892bd1a8146}} 
+int {\bfseries init\+Matrix\+By\+Row\+With\+Values\+From\+Vector} (double $\ast$matrix, int M, int N, double $\ast$vector, int vector\+\_\+size)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a4f74d3fa8b3351b8d421230e3f105cb2}\label{peerMethods_8h_a4f74d3fa8b3351b8d421230e3f105cb2}} 
+void {\bfseries init\+Vector\+W\+Another\+Vector} (double $\ast$new\+Vector, double $\ast$old\+Vector, int n)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a28540aeb4efbf874e9835b4c83ce0ecd}\label{peerMethods_8h_a28540aeb4efbf874e9835b4c83ce0ecd}} 
+void {\bfseries free\+Everything} (void $\ast$arg1,...)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a3c3763094ecbdc0eacfdcbc3475f5d08}\label{peerMethods_8h_a3c3763094ecbdc0eacfdcbc3475f5d08}} 
+double $\ast$ {\bfseries interval\+Discretization} (double first, double last, double step, int $\ast$N)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a377047c228d55d33796e2a70cc989d47}\label{peerMethods_8h_a377047c228d55d33796e2a70cc989d47}} 
+double $\ast$ {\bfseries eyeD} (int N)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a3562e3f56178b313d8fb7db0007931e9}\label{peerMethods_8h_a3562e3f56178b313d8fb7db0007931e9}} 
+double $\ast$ {\bfseries onesD} (int N)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a39e2346275e706e6d0266085c1e9f004}\label{peerMethods_8h_a39e2346275e706e6d0266085c1e9f004}} 
+double $\ast$ {\bfseries zerosD} (int N)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_ae81183c7f4c82d0c8aa08cae442ff790}\label{peerMethods_8h_ae81183c7f4c82d0c8aa08cae442ff790}} 
+double $\ast$ {\bfseries zeros\+MatrixD} (int M, int N)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a61073300e49e3b52b87b09051a1cb091}\label{peerMethods_8h_a61073300e49e3b52b87b09051a1cb091}} 
+double $\ast$ {\bfseries diagD} (double $\ast$vector, int size, int k, int $\ast$matrix\+\_\+size)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a406d6fbba9f83fb6eb7c6d424f2a2ca1}\label{peerMethods_8h_a406d6fbba9f83fb6eb7c6d424f2a2ca1}} 
+double $\ast$ {\bfseries pack\+Three\+Matrices} (int n, double $\ast$A, double $\ast$B, double $\ast$C)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a26e14412968b9f23e8f10d6a6a770a71}\label{peerMethods_8h_a26e14412968b9f23e8f10d6a6a770a71}} 
+double $\ast$ {\bfseries three\+Block\+DiagD} (int n, double $\ast$A, double $\ast$B, double $\ast$C, int $\ast$blck\+Size)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_aafe5991860335251ebd7247e1b9e27fd}\label{peerMethods_8h_aafe5991860335251ebd7247e1b9e27fd}} 
+double $\ast$ {\bfseries pack\+Three\+Vectors} (int n, double $\ast$A, double $\ast$B, double $\ast$C, int $\ast$new\+Dimension)
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a7c252490f23f7aebecc55ba458b6f011}\label{peerMethods_8h_a7c252490f23f7aebecc55ba458b6f011}} 
+double $\ast$ {\bfseries linspace} (double x1, double x2, int n)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a1031d0e0a97a340abfe0a6ab9e831045}\label{peerMethods_8h_a1031d0e0a97a340abfe0a6ab9e831045}} 
+double {\bfseries a}
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a612bfe392d6bf2d2e1a2f6e65a003f5e}\label{peerMethods_8h_a612bfe392d6bf2d2e1a2f6e65a003f5e}} 
+double {\bfseries B1}
+\item 
+\mbox{\Hypertarget{peerMethods_8h_ac25028524f0b3bb1e35a6f5b62bc4f47}\label{peerMethods_8h_ac25028524f0b3bb1e35a6f5b62bc4f47}} 
+double {\bfseries B2}
+\item 
+\mbox{\Hypertarget{peerMethods_8h_ae3520ebb3ff8d6feab3e6afb47ed4040}\label{peerMethods_8h_ae3520ebb3ff8d6feab3e6afb47ed4040}} 
+double {\bfseries F}
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a982cf43f120ff8978010e078bd49d9a3}\label{peerMethods_8h_a982cf43f120ff8978010e078bd49d9a3}} 
+double {\bfseries H}
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a1f3afedeffb9d5e23fe337fc32161bc0}\label{peerMethods_8h_a1f3afedeffb9d5e23fe337fc32161bc0}} 
+double {\bfseries S}
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a873684cefeb665f3d5e6b495de57fc0d}\label{peerMethods_8h_a873684cefeb665f3d5e6b495de57fc0d}} 
+double {\bfseries d}
+\item 
+\mbox{\Hypertarget{peerMethods_8h_ad8657a5ec76e12f3066fb4b4eb75ace9}\label{peerMethods_8h_ad8657a5ec76e12f3066fb4b4eb75ace9}} 
+double {\bfseries D}
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a2442c8274ae11905a74c1bf95501af09}\label{peerMethods_8h_a2442c8274ae11905a74c1bf95501af09}} 
+double {\bfseries L}
+\item 
+\mbox{\Hypertarget{peerMethods_8h_a5e78dbd5fd0fc01ba7b98dd15e27221e}\label{peerMethods_8h_a5e78dbd5fd0fc01ba7b98dd15e27221e}} 
+int {\bfseries M}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The library provides an implementation for the main function for solving peer method. 
+
+\begin{DoxyAuthor}{Author}
+Vincenzo Iannucci 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/11-\/29 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{peerMethods_8h_adb0c0ab84c63461105a8bc37e5d2d7ee}\label{peerMethods_8h_adb0c0ab84c63461105a8bc37e5d2d7ee}} 
+\index{peerMethods.h@{peerMethods.h}!Calloc@{Calloc}}
+\index{Calloc@{Calloc}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{Calloc()}{Calloc()}}
+{\footnotesize\ttfamily void$\ast$ Calloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{nmemb,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Function wrapper for calloc() function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em nmemb} & number of elements to allocate \\
+\hline
+\mbox{\texttt{ in}}  & {\em size} & Size of the memory allocated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the allocated memory 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_acc85711e75bb558548c0849d8d20a646}\label{peerMethods_8h_acc85711e75bb558548c0849d8d20a646}} 
+\index{peerMethods.h@{peerMethods.h}!computeLMatrix@{computeLMatrix}}
+\index{computeLMatrix@{computeLMatrix}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{computeLMatrix()}{computeLMatrix()}}
+{\footnotesize\ttfamily void compute\+L\+Matrix (\begin{DoxyParamCaption}\item[{double $\ast$$\ast$}]{L,  }\item[{int $\ast$}]{L\+Size,  }\item[{double}]{Delta\+\_\+x }\end{DoxyParamCaption})}
+
+
+
+Build the matrix L. This is an helping function that builds the matrix L. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em L} & returning pointer to the matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em L\+Size} & return the size of the matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em Delta\+\_\+x} & the value of the delta \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{peerMethods_8h_a0a09bed7ac235e392effd55e192797c3}\label{peerMethods_8h_a0a09bed7ac235e392effd55e192797c3}} 
+\index{peerMethods.h@{peerMethods.h}!fPeerClassic\_twoStages@{fPeerClassic\_twoStages}}
+\index{fPeerClassic\_twoStages@{fPeerClassic\_twoStages}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{fPeerClassic\_twoStages()}{fPeerClassic\_twoStages()}}
+{\footnotesize\ttfamily void f\+Peer\+Classic\+\_\+two\+Stages (\begin{DoxyParamCaption}\item[{int}]{N,  }\item[{double $\ast$}]{t\+\_\+span,  }\item[{int}]{t\+\_\+span\+\_\+size,  }\item[{const double $\ast$}]{L,  }\item[{int}]{Lsize,  }\item[{const double $\ast$}]{y0,  }\item[{int}]{y0\+\_\+size,  }\item[{\mbox{\hyperlink{structreturn__values}{return\+\_\+values}} $\ast$}]{collect\+\_\+result }\end{DoxyParamCaption})}
+
+
+
+Compute the P\+DE (Partial Differential Equation) using the M\+OL (Method Of Lines). The function computes the P\+DE (Partial Differential Equation) using M\+OL (Method Of Lines) and deriving a large system of O\+DE (Ordinary Differential Equation). Than, it solves the O\+DE system using the Runge Kutta method of the fourth order. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em N} & the size of the temporal grid \\
+\hline
+\mbox{\texttt{ in}}  & {\em t\+\_\+span} & an array representing the temporal grid itself \\
+\hline
+\mbox{\texttt{ in}}  & {\em t\+\_\+span\+\_\+size} & the spatial dimension of the temporal grid \\
+\hline
+\mbox{\texttt{ in}}  & {\em L} & pointer to the matrix L \\
+\hline
+\mbox{\texttt{ in}}  & {\em L\+Size} & size of the matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em y0} & pointer to the y0 vector \\
+\hline
+\mbox{\texttt{ in}}  & {\em y0\+Size} & size of the y0 vector \\
+\hline
+\mbox{\texttt{ out}}  & {\em collect\+\_\+result} & size of the result vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the y resulting vector. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_a7b31b10fc08fa8f2d7a67005f44782d9}\label{peerMethods_8h_a7b31b10fc08fa8f2d7a67005f44782d9}} 
+\index{peerMethods.h@{peerMethods.h}!initReturnStruct@{initReturnStruct}}
+\index{initReturnStruct@{initReturnStruct}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{initReturnStruct()}{initReturnStruct()}}
+{\footnotesize\ttfamily void init\+Return\+Struct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structreturn__values}{return\+\_\+values}} $\ast$}]{rv }\end{DoxyParamCaption})}
+
+
+
+Initialize the struct \mbox{\hyperlink{structreturn__values}{return\+\_\+values}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rv} & pointer to the struct \mbox{\hyperlink{structreturn__values}{return\+\_\+values}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{peerMethods_8h_a718daa2ee90d164bb8224833535f0b3b}\label{peerMethods_8h_a718daa2ee90d164bb8224833535f0b3b}} 
+\index{peerMethods.h@{peerMethods.h}!Malloc@{Malloc}}
+\index{Malloc@{Malloc}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{Malloc()}{Malloc()}}
+{\footnotesize\ttfamily void$\ast$ Malloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Function wrapper for malloc() function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em size} & Size of the memory allocated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the allocated memory 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_ac02aba48e11fb2daf893314b41ae3761}\label{peerMethods_8h_ac02aba48e11fb2daf893314b41ae3761}} 
+\index{peerMethods.h@{peerMethods.h}!RungeKutta4th@{RungeKutta4th}}
+\index{RungeKutta4th@{RungeKutta4th}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{RungeKutta4th()}{RungeKutta4th()}}
+{\footnotesize\ttfamily double$\ast$ Runge\+Kutta4th (\begin{DoxyParamCaption}\item[{double}]{h,  }\item[{double}]{t0,  }\item[{const double $\ast$}]{y0,  }\item[{int}]{y0\+Size,  }\item[{const double $\ast$}]{L,  }\item[{int}]{Lsize,  }\item[{int $\ast$}]{y\+Size }\end{DoxyParamCaption})}
+
+
+
+Implicit fourth order method to solving O\+DE (Ordinary Differential Equation). 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em h} & number of conditions to achieve the solution \\
+\hline
+\mbox{\texttt{ in}}  & {\em t0} & starting time \\
+\hline
+\mbox{\texttt{ in}}  & {\em y0} & pointer to the y0 vector \\
+\hline
+\mbox{\texttt{ in}}  & {\em y0\+Size} & size of the y0 vector \\
+\hline
+\mbox{\texttt{ in}}  & {\em L} & pointer to the matrix L \\
+\hline
+\mbox{\texttt{ in}}  & {\em L\+Size} & size of the matrix \\
+\hline
+\mbox{\texttt{ out}}  & {\em y\+Size} & size of the result vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the y resulting vector. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_a19655a4c09937cc8daf216363897cd2f}\label{peerMethods_8h_a19655a4c09937cc8daf216363897cd2f}} 
+\index{peerMethods.h@{peerMethods.h}!saveResultsInFile@{saveResultsInFile}}
+\index{saveResultsInFile@{saveResultsInFile}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{saveResultsInFile()}{saveResultsInFile()}}
+{\footnotesize\ttfamily int save\+Results\+In\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{file\+Name,  }\item[{\mbox{\hyperlink{structreturn__values}{return\+\_\+values}}}]{result }\end{DoxyParamCaption})}
+
+
+
+Save the struct \mbox{\hyperlink{structreturn__values}{return\+\_\+values}} in a file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em file\+Name} & the name of the file \\
+\hline
+\mbox{\texttt{ out}}  & {\em rv} & pointer to the struct return \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if ok, 1 otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_ad88d646cfe3fb7584cddc9e6a9e40673}\label{peerMethods_8h_ad88d646cfe3fb7584cddc9e6a9e40673}} 
+\index{peerMethods.h@{peerMethods.h}!Sherratt@{Sherratt}}
+\index{Sherratt@{Sherratt}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{Sherratt()}{Sherratt()}}
+{\footnotesize\ttfamily double$\ast$ Sherratt (\begin{DoxyParamCaption}\item[{const double $\ast$}]{y0,  }\item[{int}]{y0\+Size,  }\item[{const double $\ast$}]{L,  }\item[{int}]{Lsize,  }\item[{int $\ast$}]{sherratt\+Size }\end{DoxyParamCaption})}
+
+
+
+Applies the Sherratt method. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em y0} & pointer to the y0 vector \\
+\hline
+\mbox{\texttt{ in}}  & {\em y0\+Size} & size of the y0 vector \\
+\hline
+\mbox{\texttt{ in}}  & {\em L} & pointer to the matrix L \\
+\hline
+\mbox{\texttt{ in}}  & {\em L\+Size} & size of the matrix \\
+\hline
+\mbox{\texttt{ out}}  & {\em sherratt\+Size} & returing size of the vector calculated by the function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer the resulting vector after applying the Sherratt method. 
+\end{DoxyReturn}
