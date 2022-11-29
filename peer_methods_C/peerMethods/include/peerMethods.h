@@ -10,8 +10,10 @@
 extern "C" {
 #endif
 
+/* Number of stages. */
 #define STAGES 2
 
+/* Variable that need to be set in the calling method. */
 extern double a, B1, B2, F, H, S, d, D, L;
 extern int M;
 
@@ -29,7 +31,6 @@ typedef struct {
     int t_size;
 } return_values;
 
-
 /**
  * @brief Initialize the struct return_values.
  * @param rv pointer to the struct return_values
@@ -40,40 +41,77 @@ void initReturnStruct(return_values *rv);
  * @brief Save the struct return_values in a file.
  * @param fileName the name of the file
  * @param rv pointer to the struct return
- * @return 0 if ok, 1 otherwise
+ * @return 0 if ok, 1 otherwise.
 */
 int saveResultsInFile(const char* fileName, return_values result);
 
-
-/*********************************************************************************
- * Given a double pointer to matrix L, a pointer to its size and Delta_x, the 
- * function compute the matrix L of size LSize * LSize.
- ********************************************************************************/
+/**
+ * @brief Build the matrix L.
+ * This is an helping function that builds the matrix L.
+ * @param L returning pointer to the matrix
+ * @param LSize return the size of the matrix
+ * @param Delta_x the value of the delta
+*/
 void computeLMatrix(double **L, int *LSize, double Delta_x);
 
-/*********************************************************************************
- * Given the array y0 with y0Size elements and the matrix L with Lsize elements
- * return the pointer to an array of size sherratSize.
- ********************************************************************************/
+/**
+ * @brief Applies the Sherratt method.
+ * @param y0 pointer to the y0 vector
+ * @param y0Size size of the y0 vector
+ * @param L pointer to the matrix L
+ * @param LSize size of the matrix
+ * @param sherrattSize returing size of the vector calculated by the function
+ * @return a pointer the resulting vector after applying the Sherratt method.
+*/
 double *Sherratt(const double *y0, int y0Size, const double *L, int Lsize, int *sherrattSize);
 
-/*********************************************************************************
- * Given the increase h, the initial time t0 and the vector y0 with ySize elements
- * and the matrix L with Lsize elements, return the vector y with ySize element.
- ********************************************************************************/
+/**
+ * @brief Implicit fourth order method to solving ODE (Ordinary Differential Equation).
+ * @param h number of conditions to achieve the solution
+ * @param t0 starting time
+ * @param y0 pointer to the y0 vector
+ * @param y0Size size of the y0 vector
+ * @param L pointer to the matrix L
+ * @param LSize size of the matrix
+ * @param ySize size of the result vector
+ * @return a pointer to the y resulting vector.
+*/
 double *RungeKutta4th(double h, double t0, const double *y0, int y0Size, const double *L, int Lsize, int *ySize);
 
-/*********************************************************************************
- * Given in input the time span, the L matrix and y0 vector with their relative
- * sizes, returns a struct called "return_values" that contains the result
- * of the computation.
- ********************************************************************************/
+/**
+ * @brief Compute the PDE (Partial Differential Equation) using the MOL (Method Of Lines).
+ * The function computes the PDE (Partial Differential Equation) using MOL (Method Of Lines) and deriving 
+ * a large system of ODE (Ordinary Differential Equation). Than, it solves the ODE system using the Runge
+ * Kutta method of the fourth order.
+ * @param N the size of the temporal grid
+ * @param t_span an array representing the temporal grid itself
+ * @param t_span_size the spatial dimension of the temporal grid
+ * @param L pointer to the matrix L
+ * @param LSize size of the matrix
+ * @param y0 pointer to the y0 vector
+ * @param y0Size size of the y0 vector
+ * @param collect_result size of the result vector
+ * @return a pointer to the y resulting vector.
+*/
 void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, const double *L, int Lsize, const double *y0, int y0_size, return_values *collect_result);
 
 /*************************************************
  *          Wrapper functions
  ***********************************************/
+
+/**
+ * @brief Function wrapper for malloc() function.
+ * @param size Size of the memory allocated
+ * @return a pointer to the allocated memory
+*/
 void *Malloc(size_t size);
+
+/**
+ * @brief Function wrapper for calloc() function.
+ * @param nmemb number of elements to allocate
+ * @param size Size of the memory allocated
+ * @return a pointer to the allocated memory
+*/
 void *Calloc(size_t nmemb, size_t size);
 
 /*************************************************
