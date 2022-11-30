@@ -8,5 +8,6 @@
         "peermethods.h": "c",
         "stdarg.h": "c",
         "flt-eval-method.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
 }

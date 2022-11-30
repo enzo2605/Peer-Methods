@@ -102,9 +102,9 @@ double *RungeKutta4th(double h, double t0, const double *y0, int y0Size, const d
 */
 void fPeerClassic_twoStages(int N, double *t_span, int t_span_size, const double *L, int Lsize, const double *y0, int y0_size, return_values *collect_result);
 
-/*************************************************
- *          Wrapper functions
- ***********************************************/
+/********************************************************************************
+ *                              Wrapper functions
+ *******************************************************************************/
 
 /**
  * @brief Function wrapper for malloc() function.
@@ -121,79 +121,152 @@ void *Malloc(size_t size);
 */
 void *Calloc(size_t nmemb, size_t size);
 
-/*************************************************
- *          Initialization functions
- ***********************************************/
+/**********************************************************************************
+ *                          Initialization functions
+ **********************************************************************************/
+
+/**
+ * @brief Initialize a vector with random values. NOTE: the seed must be initialized
+ * in the calling method.
+ * @param[in] vector pointer to the vector
+ * @param[in] N dimension of the vector
+*/
 void initializeRandomVector(double *vector, int N);
+
+/**
+ * @brief Initialize a matrix with random values. NOTE: the seed must be initialized
+ * in the calling method.
+ * @param[in] matrix pointer to the first element of the matrix
+ * @param[in] M number of rows
+ * @param[in] N number of columns
+*/
 void initializeRandomMatrix(double *matrix, int M, int N);
+
+/**
+ * @brief Using a vector to initialize the matrix. The matrix and the vector must have the
+ * same dimension. For example, if the matrix A has 3 x 4 elements, the vector B must have 12
+ * elements.
+ * @param[in out] matrix pointer to the matrix
+ * @param[in] M rows of the matrix
+ * @param[in] N columns of the matrix
+ * @param[in] vector pointer to the vector
+ * @param[in] vector_size size of the vector (must be equal to M x N)
+ * @return 0 if ok, 1 otherwise
+*/
 int initMatrixByRowWithValuesFromVector(double *matrix, int M, int N, double *vector, int vector_size);
+
+/**
+ * @brief Using a vector to initialize another vector. The vectors must have the
+ * same dimension.
+ * @param[in out] newVector pointer to the new vector
+ * @param[in] oldVector pointer to the old vector
+ * @param[in] n size of the vectors
+*/
 void initVectorWAnotherVector(double *newVector, double *oldVector, int n);
 
 /*************************************************
  *  Free all the memory dynamically allocated
  ***********************************************/
+/**
+ * @brief Free a variable number of pointers.
+ * @param[in] arg1 pointer
+*/
 void freeEverything(void *arg1, ...);
 
-/*******************************************************
- * Return a vector in which the first element is 
- * first, the last element is last with a step that is 
- * represented by step parameters. N represent the
- * size of the array at the end.
- *****************************************************/
+/**********************************************************************************
+ *                      MATLAB functions written in C
+ **********************************************************************************/
+
+/**
+ * @brief Provide the discretization of an interval starting with first
+ * and ending with last.
+ * @param first starting of the interval
+ * @param last ending of the interval
+ * @param step the spacing between each value of the array
+ * @param N the size of the final array returned
+ * @return pointer to an array of double, representing the discretized interval
+ */
 double *intervalDiscretization(double first, double last, double step, int *N);
 
-/*******************************************************
- * Return a square matrix of size N in which the  
- * elemets at the position i == j assume value 1
- *****************************************************/
+/**
+ * @brief Create identity matrix, a matrix in which the values on the 
+ * main diagonal have value 1. 
+ * @param N size of the output array
+ * @return pointer to the new array
+*/
 double *eyeD(int N);
 
-/*******************************************************
- * Return a vector of size N in which every element
- * has value 1.
- *****************************************************/
+/**
+ * @brief Create array of all ones.
+ * @param N
+ * @return pointer to the new array
+*/
 double *onesD(int N);
 
-/*******************************************************
- * Return a vector of size N in which every element
- * has value 0.
- *****************************************************/
+/**
+ * @brief Create array of all zeros.
+ * @param N dimension of the array
+ * @return pointer to the new array
+*/
 double *zerosD(int N);
 
-/*******************************************************
- * Return a matrix of size M * N in which every element
- * has value 0.
- *****************************************************/
+/**
+ * @brief Create matrix of all zeros.
+ * @param M the number of rows
+ * @param N the number of columns
+ * @return pointer to the new matrix allocated by rows
+*/
 double *zerosMatrixD(int M, int N);
 
-/*******************************************************
- * Return a matrix of matrix_size x matrix_size elements 
- * in which each element of the k-th diagonal is an 
- * element of the vector passed by parameter.
- *****************************************************/
+/**
+ * @brief Create diagonal matrix with all the elements of 
+ * vector on the k-th diagonal.
+ * @param vector pointer to the vector
+ * @param size size of the vector
+ * @param k the number of diagonal
+ * @param matrix_size the size of the output matrix
+ * @return pointer to the new matrix allocated by rows
+*/
 double *diagD(double *vector, int size, int k, int *matrix_size);
 
-/*******************************************************
- * Packing three matrices side by side into one. It's
- * an utility function for the threeBlockDiagD function
- *****************************************************/
+/**
+ * @brief Packing three square matrices side by side with the 
+ * same dimension into a new big one.
+ * @param n number of rows
+ * @param A pointer the first matrix
+ * @param B pointer the second matrix
+ * @param C pointer the third matrix
+ * @return pointer to the new matrix
+*/
 double *packThreeMatrices(int n, double *A, double *B, double *C);
 
-/*******************************************************
- * Return a block diag matrix of three matrices passed
- * by arguments of size n x n.
- *****************************************************/
+/**
+ * @brief Create a square block diagonal matrix made up of three matrices.
+ * @param n number of rows
+ * @param A pointer the first matrix
+ * @param B pointer the second matrix
+ * @param C pointer the third matrix
+ * @param blockSize the size of the output matrix
+ * @return pointer to the output matrix
+*/
 double *threeBlockDiagD(int n, double *A, double *B, double *C, int *blckSize);
 
-/*******************************************************
- * Packing three vectors side by side into one.
- *****************************************************/
+/**
+ * @brief Packing three vectors side by side into one.
+ * @param n number of rows
+ * @param A pointer the first matrix
+ * @param B pointer the second matrix
+ * @param C pointer the third matrix
+ * @param newDimension the size of the output vector
+ * @return pointer to the new vector
+*/
 double *packThreeVectors(int n, double *A, double *B, double *C, int *newDimension);
 
-/****************************************************
- * Generates n points. The spacing between the points 
- * is (x2-x1)/(n-1)
- ***************************************************/
+/**
+ * @brief Generate linearly spaced vector. 
+ * @example linspace(double x1, double x2, int n) generates n points. The spacing between the points is (x2-x1)/(n-1).
+ * @return pointer to the new vector
+*/
 double *linspace(double x1, double x2, int n);
 
 #ifdef __cplusplus
