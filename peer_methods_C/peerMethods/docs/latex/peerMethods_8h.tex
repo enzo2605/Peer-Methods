@@ -1,5 +1,5 @@
-\hypertarget{peerMethods_8h}{}\doxysection{/home/vincenzo/\+Github/\+Peer-\/\+Methods/peer\+\_\+methods\+\_\+\+C/peer\+Methods/include/peer\+Methods.h File Reference}
-\label{peerMethods_8h}\index{/home/vincenzo/Github/Peer-\/Methods/peer\_methods\_C/peerMethods/include/peerMethods.h@{/home/vincenzo/Github/Peer-\/Methods/peer\_methods\_C/peerMethods/include/peerMethods.h}}
+\hypertarget{peerMethods_8h}{}\doxysection{/home/vincenzo/\+Universita/\+Peer-\/\+Methods/peer\+\_\+methods\+\_\+\+C/peer\+Methods/include/peer\+Methods.h File Reference}
+\label{peerMethods_8h}\index{/home/vincenzo/Universita/Peer-\/Methods/peer\_methods\_C/peerMethods/include/peerMethods.h@{/home/vincenzo/Universita/Peer-\/Methods/peer\_methods\_C/peerMethods/include/peerMethods.h}}
 
 
 The library provides an implementation for the main function for solving peer method.  
@@ -35,48 +35,34 @@ void $\ast$ \mbox{\hyperlink{peerMethods_8h_a718daa2ee90d164bb8224833535f0b3b}{M
 \begin{DoxyCompactList}\small\item\em Function wrapper for malloc() function. \end{DoxyCompactList}\item 
 void $\ast$ \mbox{\hyperlink{peerMethods_8h_adb0c0ab84c63461105a8bc37e5d2d7ee}{Calloc}} (size\+\_\+t nmemb, size\+\_\+t size)
 \begin{DoxyCompactList}\small\item\em Function wrapper for calloc() function. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{peerMethods_8h_ac9b0f5ffecd4b428fb975aae38673ab2}\label{peerMethods_8h_ac9b0f5ffecd4b428fb975aae38673ab2}} 
-void {\bfseries initialize\+Random\+Vector} (double $\ast$vector, int N)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_a9635bbe9cd6154354e221b77a5eaf2b3}\label{peerMethods_8h_a9635bbe9cd6154354e221b77a5eaf2b3}} 
-void {\bfseries initialize\+Random\+Matrix} (double $\ast$matrix, int M, int N)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_a0aeaee59694a570f0d8d2892bd1a8146}\label{peerMethods_8h_a0aeaee59694a570f0d8d2892bd1a8146}} 
-int {\bfseries init\+Matrix\+By\+Row\+With\+Values\+From\+Vector} (double $\ast$matrix, int M, int N, double $\ast$vector, int vector\+\_\+size)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_a4f74d3fa8b3351b8d421230e3f105cb2}\label{peerMethods_8h_a4f74d3fa8b3351b8d421230e3f105cb2}} 
-void {\bfseries init\+Vector\+W\+Another\+Vector} (double $\ast$new\+Vector, double $\ast$old\+Vector, int n)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_a28540aeb4efbf874e9835b4c83ce0ecd}\label{peerMethods_8h_a28540aeb4efbf874e9835b4c83ce0ecd}} 
-void {\bfseries free\+Everything} (void $\ast$arg1,...)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_a3c3763094ecbdc0eacfdcbc3475f5d08}\label{peerMethods_8h_a3c3763094ecbdc0eacfdcbc3475f5d08}} 
-double $\ast$ {\bfseries interval\+Discretization} (double first, double last, double step, int $\ast$N)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_a377047c228d55d33796e2a70cc989d47}\label{peerMethods_8h_a377047c228d55d33796e2a70cc989d47}} 
-double $\ast$ {\bfseries eyeD} (int N)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_a3562e3f56178b313d8fb7db0007931e9}\label{peerMethods_8h_a3562e3f56178b313d8fb7db0007931e9}} 
-double $\ast$ {\bfseries onesD} (int N)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_a39e2346275e706e6d0266085c1e9f004}\label{peerMethods_8h_a39e2346275e706e6d0266085c1e9f004}} 
-double $\ast$ {\bfseries zerosD} (int N)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_ae81183c7f4c82d0c8aa08cae442ff790}\label{peerMethods_8h_ae81183c7f4c82d0c8aa08cae442ff790}} 
-double $\ast$ {\bfseries zeros\+MatrixD} (int M, int N)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_a61073300e49e3b52b87b09051a1cb091}\label{peerMethods_8h_a61073300e49e3b52b87b09051a1cb091}} 
-double $\ast$ {\bfseries diagD} (double $\ast$vector, int size, int k, int $\ast$matrix\+\_\+size)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_a406d6fbba9f83fb6eb7c6d424f2a2ca1}\label{peerMethods_8h_a406d6fbba9f83fb6eb7c6d424f2a2ca1}} 
-double $\ast$ {\bfseries pack\+Three\+Matrices} (int n, double $\ast$A, double $\ast$B, double $\ast$C)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_a26e14412968b9f23e8f10d6a6a770a71}\label{peerMethods_8h_a26e14412968b9f23e8f10d6a6a770a71}} 
-double $\ast$ {\bfseries three\+Block\+DiagD} (int n, double $\ast$A, double $\ast$B, double $\ast$C, int $\ast$blck\+Size)
-\item 
-\mbox{\Hypertarget{peerMethods_8h_aafe5991860335251ebd7247e1b9e27fd}\label{peerMethods_8h_aafe5991860335251ebd7247e1b9e27fd}} 
-double $\ast$ {\bfseries pack\+Three\+Vectors} (int n, double $\ast$A, double $\ast$B, double $\ast$C, int $\ast$new\+Dimension)
-\item 
+void \mbox{\hyperlink{peerMethods_8h_ac9b0f5ffecd4b428fb975aae38673ab2}{initialize\+Random\+Vector}} (double $\ast$vector, int N)
+\begin{DoxyCompactList}\small\item\em Initialize a vector with random values. N\+O\+TE\+: the seed must be initialized in the calling method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{peerMethods_8h_a9635bbe9cd6154354e221b77a5eaf2b3}{initialize\+Random\+Matrix}} (double $\ast$matrix, int M, int N)
+\begin{DoxyCompactList}\small\item\em Initialize a matrix with random values. N\+O\+TE\+: the seed must be initialized in the calling method. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{peerMethods_8h_a0aeaee59694a570f0d8d2892bd1a8146}{init\+Matrix\+By\+Row\+With\+Values\+From\+Vector}} (double $\ast$matrix, int M, int N, double $\ast$vector, int vector\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Using a vector to initialize the matrix. The matrix and the vector must have the same dimension. For example, if the matrix A has 3 x 4 elements, the vector B must have 12 elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{peerMethods_8h_a4f74d3fa8b3351b8d421230e3f105cb2}{init\+Vector\+W\+Another\+Vector}} (double $\ast$new\+Vector, double $\ast$old\+Vector, int n)
+\begin{DoxyCompactList}\small\item\em Using a vector to initialize another vector. The vectors must have the same dimension. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{peerMethods_8h_a28540aeb4efbf874e9835b4c83ce0ecd}{free\+Everything}} (void $\ast$arg1,...)
+\begin{DoxyCompactList}\small\item\em Free a variable number of pointers. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{peerMethods_8h_a3c3763094ecbdc0eacfdcbc3475f5d08}{interval\+Discretization}} (double first, double last, double step, int $\ast$N)
+\begin{DoxyCompactList}\small\item\em Provide the discretization of an interval starting with first and ending with last. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{peerMethods_8h_a377047c228d55d33796e2a70cc989d47}{eyeD}} (int N)
+\begin{DoxyCompactList}\small\item\em Create identity matrix, a matrix in which the values on the main diagonal have value 1. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{peerMethods_8h_a3562e3f56178b313d8fb7db0007931e9}{onesD}} (int N)
+\begin{DoxyCompactList}\small\item\em Create array of all ones. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{peerMethods_8h_a39e2346275e706e6d0266085c1e9f004}{zerosD}} (int N)
+\begin{DoxyCompactList}\small\item\em Create array of all zeros. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{peerMethods_8h_ae81183c7f4c82d0c8aa08cae442ff790}{zeros\+MatrixD}} (int M, int N)
+\begin{DoxyCompactList}\small\item\em Create matrix of all zeros. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{peerMethods_8h_a61073300e49e3b52b87b09051a1cb091}{diagD}} (double $\ast$vector, int size, int k, int $\ast$matrix\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Create diagonal matrix with all the elements of vector on the k-\/th diagonal. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{peerMethods_8h_a406d6fbba9f83fb6eb7c6d424f2a2ca1}{pack\+Three\+Matrices}} (int n, double $\ast$A, double $\ast$B, double $\ast$C)
+\begin{DoxyCompactList}\small\item\em Packing three square matrices side by side with the same dimension into a new big one. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{peerMethods_8h_a26e14412968b9f23e8f10d6a6a770a71}{three\+Block\+DiagD}} (int n, double $\ast$A, double $\ast$B, double $\ast$C, int $\ast$blck\+Size)
+\begin{DoxyCompactList}\small\item\em Create a square block diagonal matrix made up of three matrices. \end{DoxyCompactList}\item 
+double $\ast$ \mbox{\hyperlink{peerMethods_8h_aafe5991860335251ebd7247e1b9e27fd}{pack\+Three\+Vectors}} (int n, double $\ast$A, double $\ast$B, double $\ast$C, int $\ast$new\+Dimension)
+\begin{DoxyCompactList}\small\item\em Packing three vectors side by side into one. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{peerMethods_8h_a7c252490f23f7aebecc55ba458b6f011}\label{peerMethods_8h_a7c252490f23f7aebecc55ba458b6f011}} 
 double $\ast$ {\bfseries linspace} (double x1, double x2, int n)
 \end{DoxyCompactItemize}
@@ -169,6 +155,48 @@ Build the matrix L. This is an helping function that builds the matrix L.
 \mbox{\texttt{ in}}  & {\em Delta\+\_\+x} & the value of the delta \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{peerMethods_8h_a61073300e49e3b52b87b09051a1cb091}\label{peerMethods_8h_a61073300e49e3b52b87b09051a1cb091}} 
+\index{peerMethods.h@{peerMethods.h}!diagD@{diagD}}
+\index{diagD@{diagD}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{diagD()}{diagD()}}
+{\footnotesize\ttfamily double$\ast$ diagD (\begin{DoxyParamCaption}\item[{double $\ast$}]{vector,  }\item[{int}]{size,  }\item[{int}]{k,  }\item[{int $\ast$}]{matrix\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Create diagonal matrix with all the elements of vector on the k-\/th diagonal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & pointer to the vector \\
+\hline
+{\em size} & size of the vector \\
+\hline
+{\em k} & the number of diagonal \\
+\hline
+{\em matrix\+\_\+size} & the size of the output matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the new matrix allocated by rows 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_a377047c228d55d33796e2a70cc989d47}\label{peerMethods_8h_a377047c228d55d33796e2a70cc989d47}} 
+\index{peerMethods.h@{peerMethods.h}!eyeD@{eyeD}}
+\index{eyeD@{eyeD}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{eyeD()}{eyeD()}}
+{\footnotesize\ttfamily double$\ast$ eyeD (\begin{DoxyParamCaption}\item[{int}]{N }\end{DoxyParamCaption})}
+
+
+
+Create identity matrix, a matrix in which the values on the main diagonal have value 1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em N} & size of the output array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the new array 
+\end{DoxyReturn}
 \mbox{\Hypertarget{peerMethods_8h_a0a09bed7ac235e392effd55e192797c3}\label{peerMethods_8h_a0a09bed7ac235e392effd55e192797c3}} 
 \index{peerMethods.h@{peerMethods.h}!fPeerClassic\_twoStages@{fPeerClassic\_twoStages}}
 \index{fPeerClassic\_twoStages@{fPeerClassic\_twoStages}!peerMethods.h@{peerMethods.h}}
@@ -201,6 +229,83 @@ Compute the P\+DE (Partial Differential Equation) using the M\+OL (Method Of Lin
 \begin{DoxyReturn}{Returns}
 a pointer to the y resulting vector. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_a28540aeb4efbf874e9835b4c83ce0ecd}\label{peerMethods_8h_a28540aeb4efbf874e9835b4c83ce0ecd}} 
+\index{peerMethods.h@{peerMethods.h}!freeEverything@{freeEverything}}
+\index{freeEverything@{freeEverything}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{freeEverything()}{freeEverything()}}
+{\footnotesize\ttfamily void free\+Everything (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg1,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+Free a variable number of pointers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em arg1} & pointer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{peerMethods_8h_a9635bbe9cd6154354e221b77a5eaf2b3}\label{peerMethods_8h_a9635bbe9cd6154354e221b77a5eaf2b3}} 
+\index{peerMethods.h@{peerMethods.h}!initializeRandomMatrix@{initializeRandomMatrix}}
+\index{initializeRandomMatrix@{initializeRandomMatrix}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{initializeRandomMatrix()}{initializeRandomMatrix()}}
+{\footnotesize\ttfamily void initialize\+Random\+Matrix (\begin{DoxyParamCaption}\item[{double $\ast$}]{matrix,  }\item[{int}]{M,  }\item[{int}]{N }\end{DoxyParamCaption})}
+
+
+
+Initialize a matrix with random values. N\+O\+TE\+: the seed must be initialized in the calling method. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em matrix} & pointer to the first element of the matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em M} & number of rows \\
+\hline
+\mbox{\texttt{ in}}  & {\em N} & number of columns \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{peerMethods_8h_ac9b0f5ffecd4b428fb975aae38673ab2}\label{peerMethods_8h_ac9b0f5ffecd4b428fb975aae38673ab2}} 
+\index{peerMethods.h@{peerMethods.h}!initializeRandomVector@{initializeRandomVector}}
+\index{initializeRandomVector@{initializeRandomVector}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{initializeRandomVector()}{initializeRandomVector()}}
+{\footnotesize\ttfamily void initialize\+Random\+Vector (\begin{DoxyParamCaption}\item[{double $\ast$}]{vector,  }\item[{int}]{N }\end{DoxyParamCaption})}
+
+
+
+Initialize a vector with random values. N\+O\+TE\+: the seed must be initialized in the calling method. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em vector} & pointer to the vector \\
+\hline
+\mbox{\texttt{ in}}  & {\em N} & dimension of the vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{peerMethods_8h_a0aeaee59694a570f0d8d2892bd1a8146}\label{peerMethods_8h_a0aeaee59694a570f0d8d2892bd1a8146}} 
+\index{peerMethods.h@{peerMethods.h}!initMatrixByRowWithValuesFromVector@{initMatrixByRowWithValuesFromVector}}
+\index{initMatrixByRowWithValuesFromVector@{initMatrixByRowWithValuesFromVector}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{initMatrixByRowWithValuesFromVector()}{initMatrixByRowWithValuesFromVector()}}
+{\footnotesize\ttfamily int init\+Matrix\+By\+Row\+With\+Values\+From\+Vector (\begin{DoxyParamCaption}\item[{double $\ast$}]{matrix,  }\item[{int}]{M,  }\item[{int}]{N,  }\item[{double $\ast$}]{vector,  }\item[{int}]{vector\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Using a vector to initialize the matrix. The matrix and the vector must have the same dimension. For example, if the matrix A has 3 x 4 elements, the vector B must have 12 elements. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em \mbox{[}in} & out\mbox{]} matrix pointer to the matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em M} & rows of the matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em N} & columns of the matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em vector} & pointer to the vector \\
+\hline
+\mbox{\texttt{ in}}  & {\em vector\+\_\+size} & size of the vector (must be equal to M x N) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if ok, 1 otherwise 
+\end{DoxyReturn}
 \mbox{\Hypertarget{peerMethods_8h_a7b31b10fc08fa8f2d7a67005f44782d9}\label{peerMethods_8h_a7b31b10fc08fa8f2d7a67005f44782d9}} 
 \index{peerMethods.h@{peerMethods.h}!initReturnStruct@{initReturnStruct}}
 \index{initReturnStruct@{initReturnStruct}!peerMethods.h@{peerMethods.h}}
@@ -216,6 +321,49 @@ Initialize the struct \mbox{\hyperlink{structreturn__values}{return\+\_\+values}
 {\em rv} & pointer to the struct \mbox{\hyperlink{structreturn__values}{return\+\_\+values}} \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{peerMethods_8h_a4f74d3fa8b3351b8d421230e3f105cb2}\label{peerMethods_8h_a4f74d3fa8b3351b8d421230e3f105cb2}} 
+\index{peerMethods.h@{peerMethods.h}!initVectorWAnotherVector@{initVectorWAnotherVector}}
+\index{initVectorWAnotherVector@{initVectorWAnotherVector}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{initVectorWAnotherVector()}{initVectorWAnotherVector()}}
+{\footnotesize\ttfamily void init\+Vector\+W\+Another\+Vector (\begin{DoxyParamCaption}\item[{double $\ast$}]{new\+Vector,  }\item[{double $\ast$}]{old\+Vector,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Using a vector to initialize another vector. The vectors must have the same dimension. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em \mbox{[}in} & out\mbox{]} new\+Vector pointer to the new vector \\
+\hline
+\mbox{\texttt{ in}}  & {\em old\+Vector} & pointer to the old vector \\
+\hline
+\mbox{\texttt{ in}}  & {\em n} & size of the vectors \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{peerMethods_8h_a3c3763094ecbdc0eacfdcbc3475f5d08}\label{peerMethods_8h_a3c3763094ecbdc0eacfdcbc3475f5d08}} 
+\index{peerMethods.h@{peerMethods.h}!intervalDiscretization@{intervalDiscretization}}
+\index{intervalDiscretization@{intervalDiscretization}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{intervalDiscretization()}{intervalDiscretization()}}
+{\footnotesize\ttfamily double$\ast$ interval\+Discretization (\begin{DoxyParamCaption}\item[{double}]{first,  }\item[{double}]{last,  }\item[{double}]{step,  }\item[{int $\ast$}]{N }\end{DoxyParamCaption})}
+
+
+
+Provide the discretization of an interval starting with first and ending with last. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em first} & starting of the interval \\
+\hline
+{\em last} & ending of the interval \\
+\hline
+{\em step} & the spacing between each value of the array \\
+\hline
+{\em N} & the size of the final array returned \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to an array of double, representing the discretized interval 
+\end{DoxyReturn}
 \mbox{\Hypertarget{peerMethods_8h_a718daa2ee90d164bb8224833535f0b3b}\label{peerMethods_8h_a718daa2ee90d164bb8224833535f0b3b}} 
 \index{peerMethods.h@{peerMethods.h}!Malloc@{Malloc}}
 \index{Malloc@{Malloc}!peerMethods.h@{peerMethods.h}}
@@ -233,6 +381,74 @@ Function wrapper for malloc() function.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 a pointer to the allocated memory 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_a3562e3f56178b313d8fb7db0007931e9}\label{peerMethods_8h_a3562e3f56178b313d8fb7db0007931e9}} 
+\index{peerMethods.h@{peerMethods.h}!onesD@{onesD}}
+\index{onesD@{onesD}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{onesD()}{onesD()}}
+{\footnotesize\ttfamily double$\ast$ onesD (\begin{DoxyParamCaption}\item[{int}]{N }\end{DoxyParamCaption})}
+
+
+
+Create array of all ones. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em N} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the new array 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_a406d6fbba9f83fb6eb7c6d424f2a2ca1}\label{peerMethods_8h_a406d6fbba9f83fb6eb7c6d424f2a2ca1}} 
+\index{peerMethods.h@{peerMethods.h}!packThreeMatrices@{packThreeMatrices}}
+\index{packThreeMatrices@{packThreeMatrices}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{packThreeMatrices()}{packThreeMatrices()}}
+{\footnotesize\ttfamily double$\ast$ pack\+Three\+Matrices (\begin{DoxyParamCaption}\item[{int}]{n,  }\item[{double $\ast$}]{A,  }\item[{double $\ast$}]{B,  }\item[{double $\ast$}]{C }\end{DoxyParamCaption})}
+
+
+
+Packing three square matrices side by side with the same dimension into a new big one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of rows \\
+\hline
+{\em A} & pointer the first matrix \\
+\hline
+{\em B} & pointer the second matrix \\
+\hline
+{\em C} & pointer the third matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the new matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_aafe5991860335251ebd7247e1b9e27fd}\label{peerMethods_8h_aafe5991860335251ebd7247e1b9e27fd}} 
+\index{peerMethods.h@{peerMethods.h}!packThreeVectors@{packThreeVectors}}
+\index{packThreeVectors@{packThreeVectors}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{packThreeVectors()}{packThreeVectors()}}
+{\footnotesize\ttfamily double$\ast$ pack\+Three\+Vectors (\begin{DoxyParamCaption}\item[{int}]{n,  }\item[{double $\ast$}]{A,  }\item[{double $\ast$}]{B,  }\item[{double $\ast$}]{C,  }\item[{int $\ast$}]{new\+Dimension }\end{DoxyParamCaption})}
+
+
+
+Packing three vectors side by side into one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of rows \\
+\hline
+{\em A} & pointer the first matrix \\
+\hline
+{\em B} & pointer the second matrix \\
+\hline
+{\em C} & pointer the third matrix \\
+\hline
+{\em new\+Dimension} & the size of the output vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the new vector 
 \end{DoxyReturn}
 \mbox{\Hypertarget{peerMethods_8h_ac02aba48e11fb2daf893314b41ae3761}\label{peerMethods_8h_ac02aba48e11fb2daf893314b41ae3761}} 
 \index{peerMethods.h@{peerMethods.h}!RungeKutta4th@{RungeKutta4th}}
@@ -309,4 +525,68 @@ Applies the Sherratt method.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 a pointer the resulting vector after applying the Sherratt method. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_a26e14412968b9f23e8f10d6a6a770a71}\label{peerMethods_8h_a26e14412968b9f23e8f10d6a6a770a71}} 
+\index{peerMethods.h@{peerMethods.h}!threeBlockDiagD@{threeBlockDiagD}}
+\index{threeBlockDiagD@{threeBlockDiagD}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{threeBlockDiagD()}{threeBlockDiagD()}}
+{\footnotesize\ttfamily double$\ast$ three\+Block\+DiagD (\begin{DoxyParamCaption}\item[{int}]{n,  }\item[{double $\ast$}]{A,  }\item[{double $\ast$}]{B,  }\item[{double $\ast$}]{C,  }\item[{int $\ast$}]{blck\+Size }\end{DoxyParamCaption})}
+
+
+
+Create a square block diagonal matrix made up of three matrices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & number of rows \\
+\hline
+{\em A} & pointer the first matrix \\
+\hline
+{\em B} & pointer the second matrix \\
+\hline
+{\em C} & pointer the third matrix \\
+\hline
+{\em block\+Size} & the size of the output matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the output matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_a39e2346275e706e6d0266085c1e9f004}\label{peerMethods_8h_a39e2346275e706e6d0266085c1e9f004}} 
+\index{peerMethods.h@{peerMethods.h}!zerosD@{zerosD}}
+\index{zerosD@{zerosD}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{zerosD()}{zerosD()}}
+{\footnotesize\ttfamily double$\ast$ zerosD (\begin{DoxyParamCaption}\item[{int}]{N }\end{DoxyParamCaption})}
+
+
+
+Create array of all zeros. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em N} & dimension of the array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the new array 
+\end{DoxyReturn}
+\mbox{\Hypertarget{peerMethods_8h_ae81183c7f4c82d0c8aa08cae442ff790}\label{peerMethods_8h_ae81183c7f4c82d0c8aa08cae442ff790}} 
+\index{peerMethods.h@{peerMethods.h}!zerosMatrixD@{zerosMatrixD}}
+\index{zerosMatrixD@{zerosMatrixD}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{zerosMatrixD()}{zerosMatrixD()}}
+{\footnotesize\ttfamily double$\ast$ zeros\+MatrixD (\begin{DoxyParamCaption}\item[{int}]{M,  }\item[{int}]{N }\end{DoxyParamCaption})}
+
+
+
+Create matrix of all zeros. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em M} & the number of rows \\
+\hline
+{\em N} & the number of columns \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the new matrix allocated by rows 
 \end{DoxyReturn}
