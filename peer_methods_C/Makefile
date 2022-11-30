@@ -1,7 +1,7 @@
 CC = gcc
 INCLUDE_DIRS = -I peerMethods/include
 LINKED_LIB = -L peerMethods/lib
-FLAGS = -Wall -pedantic -std=c11 -mfpmath=387 -Wextra
+CFLAGS = -Wall -pedantic -std=c11 -mfpmath=387 -Wextra
 LIB_FLAGS = -lpeerMethods -lm -lcblas
 OBJECTS = main.o helper.o
 
@@ -10,13 +10,13 @@ OBJECTS = main.o helper.o
 all: cleaner main clean
 
 main: ${OBJECTS}
-	${CC} ${INCLUDE_DIRS} ${FLAGS} ${OBJECTS} -o main.out ${LINKED_LIB} ${LIB_FLAGS}
+	${CC} ${INCLUDE_DIRS} ${CFLAGS} ${OBJECTS} -o $@.out ${LINKED_LIB} ${LIB_FLAGS}
 
 main.o: main.c helper.h
-	${CC} ${INCLUDE_DIRS} ${FLAGS} -c main.c ${LIB_FLAGS}
+	${CC} ${INCLUDE_DIRS} ${CFLAGS} -c $< ${LIB_FLAGS}
 
-helper.o: helper.h helper.c
-	${CC} ${FLAGS} -c helper.c
+helper.o: helper.c helper.h
+	${CC} ${CFLAGS} -c $<
 
 .PHONY: clean
 
