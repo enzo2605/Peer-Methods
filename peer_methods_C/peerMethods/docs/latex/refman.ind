@@ -1,0 +1,110 @@
+\begin{theindex}
+
+  \item {/home/vincenzo/Universita/Peer-\/Methods/peer\_methods\_C/peerMethods/include/peerMethods.h}, 
+		\hyperpage{7}
+
+  \indexspace
+
+  \item {Calloc}
+    \subitem {peerMethods.h}, \hyperpage{9}
+  \item {computeLMatrix}
+    \subitem {peerMethods.h}, \hyperpage{9}
+
+  \indexspace
+
+  \item {diagD}
+    \subitem {peerMethods.h}, \hyperpage{10}
+
+  \indexspace
+
+  \item {eyeD}
+    \subitem {peerMethods.h}, \hyperpage{10}
+
+  \indexspace
+
+  \item {fPeerClassic\_twoStages}
+    \subitem {peerMethods.h}, \hyperpage{10}
+  \item {freeEverything}
+    \subitem {peerMethods.h}, \hyperpage{11}
+
+  \indexspace
+
+  \item {initializeRandomMatrix}
+    \subitem {peerMethods.h}, \hyperpage{11}
+  \item {initializeRandomVector}
+    \subitem {peerMethods.h}, \hyperpage{12}
+  \item {initMatrixByRowWithValuesFromVector}
+    \subitem {peerMethods.h}, \hyperpage{12}
+  \item {initReturnStruct}
+    \subitem {peerMethods.h}, \hyperpage{13}
+  \item {initVectorWAnotherVector}
+    \subitem {peerMethods.h}, \hyperpage{13}
+  \item {intervalDiscretization}
+    \subitem {peerMethods.h}, \hyperpage{13}
+
+  \indexspace
+
+  \item {Malloc}
+    \subitem {peerMethods.h}, \hyperpage{14}
+
+  \indexspace
+
+  \item {onesD}
+    \subitem {peerMethods.h}, \hyperpage{14}
+
+  \indexspace
+
+  \item {packThreeMatrices}
+    \subitem {peerMethods.h}, \hyperpage{14}
+  \item {packThreeVectors}
+    \subitem {peerMethods.h}, \hyperpage{15}
+  \item {peerMethods.h}
+    \subitem {Calloc}, \hyperpage{9}
+    \subitem {computeLMatrix}, \hyperpage{9}
+    \subitem {diagD}, \hyperpage{10}
+    \subitem {eyeD}, \hyperpage{10}
+    \subitem {fPeerClassic\_twoStages}, \hyperpage{10}
+    \subitem {freeEverything}, \hyperpage{11}
+    \subitem {initializeRandomMatrix}, \hyperpage{11}
+    \subitem {initializeRandomVector}, \hyperpage{12}
+    \subitem {initMatrixByRowWithValuesFromVector}, \hyperpage{12}
+    \subitem {initReturnStruct}, \hyperpage{13}
+    \subitem {initVectorWAnotherVector}, \hyperpage{13}
+    \subitem {intervalDiscretization}, \hyperpage{13}
+    \subitem {Malloc}, \hyperpage{14}
+    \subitem {onesD}, \hyperpage{14}
+    \subitem {packThreeMatrices}, \hyperpage{14}
+    \subitem {packThreeVectors}, \hyperpage{15}
+    \subitem {RungeKutta4th}, \hyperpage{15}
+    \subitem {saveResultsInFile}, \hyperpage{16}
+    \subitem {Sherratt}, \hyperpage{16}
+    \subitem {threeBlockDiagD}, \hyperpage{17}
+    \subitem {zerosD}, \hyperpage{17}
+    \subitem {zerosMatrixD}, \hyperpage{17}
+
+  \indexspace
+
+  \item {return\_values}, \hyperpage{5}
+  \item {RungeKutta4th}
+    \subitem {peerMethods.h}, \hyperpage{15}
+
+  \indexspace
+
+  \item {saveResultsInFile}
+    \subitem {peerMethods.h}, \hyperpage{16}
+  \item {Sherratt}
+    \subitem {peerMethods.h}, \hyperpage{16}
+
+  \indexspace
+
+  \item {threeBlockDiagD}
+    \subitem {peerMethods.h}, \hyperpage{17}
+
+  \indexspace
+
+  \item {zerosD}
+    \subitem {peerMethods.h}, \hyperpage{17}
+  \item {zerosMatrixD}
+    \subitem {peerMethods.h}, \hyperpage{17}
+
+\end{theindex}
