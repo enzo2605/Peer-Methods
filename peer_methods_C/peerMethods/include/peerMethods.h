@@ -59,7 +59,7 @@ int saveResultsInFile(const char* fileName, return_values result);
  * @param[in] LSize return the size of the matrix
  * @param[in] Delta_x the value of the delta
 */
-void computeLMatrix(double **L, int *LSize, double Delta_x);
+void defineLMatrix(double **L, int *LSize, double Delta_x);
 
 /**
  * @brief Applies the Sherratt method.

@@ -1,11 +1,10 @@
-CC = gcc
-INCLUDE_DIRS = -I ../external_libs/CBLAS/include
-LINKED_LIB = -L ../external_libs/CBLAS/lib
-CFLAGS = -Wall -pedantic -std=c11 -mfpmath=387 -Wextra -fPIC
-ARCHFLAGS = -Wl,--whole-archive -shared
-LIB_FLAGS = -lcblas -lm -lblas
+# This makefile compiles the peerMethods routines
+# and creates the corrisponding shared library
+
+dlvl = ../.
+include $(dlvl)/Makefile.in
+
 OBJECTS = CLab.o utilities.o peerMethods.o
-CLIB = ../lib/libpeerMethods.so
 
 .PHONY: all
 

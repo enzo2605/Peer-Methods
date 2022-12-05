@@ -134,8 +134,8 @@ int main(int argc, char *argv[]) {
     double *L;
     int LSize;
     double LMatrixCPUTimeUsed = 0.0f;
-    EVALUATE_EXECUTION_TIME(computeLMatrix(&L, &LSize, Delta_x), LMatrixCPUTimeUsed);
-    fprintf(stdout, "\nTime taken by computeLMatrix module: %lf\n", LMatrixCPUTimeUsed);
+    EVALUATE_EXECUTION_TIME(defineLMatrix(&L, &LSize, Delta_x), LMatrixCPUTimeUsed);
+    fprintf(stdout, "\nTime taken by defineLMatrix module: %lf\n", LMatrixCPUTimeUsed);
     //saveMatrixInFile("../parallel/good.txt", L, LSize, LSize);
     //exit(0);
 

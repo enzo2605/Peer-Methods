@@ -1,5 +1,5 @@
-\hypertarget{peerMethods_8h}{}\doxysection{/home/vincenzo/\+Universita/\+Peer-\/\+Methods/peer\+\_\+methods\+\_\+\+C/peer\+Methods/include/peer\+Methods.h File Reference}
-\label{peerMethods_8h}\index{/home/vincenzo/Universita/Peer-\/Methods/peer\_methods\_C/peerMethods/include/peerMethods.h@{/home/vincenzo/Universita/Peer-\/Methods/peer\_methods\_C/peerMethods/include/peerMethods.h}}
+\hypertarget{peerMethods_8h}{}\doxysection{/home/vincenzo/\+Github/\+Peer-\/\+Methods/peer\+\_\+methods\+\_\+\+C/peer\+Methods/include/peer\+Methods.h File Reference}
+\label{peerMethods_8h}\index{/home/vincenzo/Github/Peer-\/Methods/peer\_methods\_C/peerMethods/include/peerMethods.h@{/home/vincenzo/Github/Peer-\/Methods/peer\_methods\_C/peerMethods/include/peerMethods.h}}
 
 
 The library provides an implementation for the main function for solving peer method.  
@@ -23,7 +23,7 @@ void \mbox{\hyperlink{peerMethods_8h_a7b31b10fc08fa8f2d7a67005f44782d9}{init\+Re
 \begin{DoxyCompactList}\small\item\em Initialize the struct \mbox{\hyperlink{structreturn__values}{return\+\_\+values}}. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{peerMethods_8h_a19655a4c09937cc8daf216363897cd2f}{save\+Results\+In\+File}} (const char $\ast$file\+Name, \mbox{\hyperlink{structreturn__values}{return\+\_\+values}} result)
 \begin{DoxyCompactList}\small\item\em Save the struct \mbox{\hyperlink{structreturn__values}{return\+\_\+values}} in a file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{peerMethods_8h_acc85711e75bb558548c0849d8d20a646}{compute\+L\+Matrix}} (double $\ast$$\ast$L, int $\ast$L\+Size, double Delta\+\_\+x)
+void \mbox{\hyperlink{peerMethods_8h_ad1e4d4f104c391c53a1e9e90caca6cb1}{define\+L\+Matrix}} (double $\ast$$\ast$L, int $\ast$L\+Size, double Delta\+\_\+x)
 \begin{DoxyCompactList}\small\item\em Build the matrix L. This is an helping function that builds the matrix L. \end{DoxyCompactList}\item 
 double $\ast$ \mbox{\hyperlink{peerMethods_8h_ad88d646cfe3fb7584cddc9e6a9e40673}{Sherratt}} (const double $\ast$y0, int y0\+Size, const double $\ast$L, int Lsize, int $\ast$sherratt\+Size)
 \begin{DoxyCompactList}\small\item\em Applies the Sherratt method. \end{DoxyCompactList}\item 
@@ -136,11 +136,11 @@ Function wrapper for calloc() function.
 \begin{DoxyReturn}{Returns}
 a pointer to the allocated memory 
 \end{DoxyReturn}
-\mbox{\Hypertarget{peerMethods_8h_acc85711e75bb558548c0849d8d20a646}\label{peerMethods_8h_acc85711e75bb558548c0849d8d20a646}} 
-\index{peerMethods.h@{peerMethods.h}!computeLMatrix@{computeLMatrix}}
-\index{computeLMatrix@{computeLMatrix}!peerMethods.h@{peerMethods.h}}
-\doxysubsubsection{\texorpdfstring{computeLMatrix()}{computeLMatrix()}}
-{\footnotesize\ttfamily void compute\+L\+Matrix (\begin{DoxyParamCaption}\item[{double $\ast$$\ast$}]{L,  }\item[{int $\ast$}]{L\+Size,  }\item[{double}]{Delta\+\_\+x }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{peerMethods_8h_ad1e4d4f104c391c53a1e9e90caca6cb1}\label{peerMethods_8h_ad1e4d4f104c391c53a1e9e90caca6cb1}} 
+\index{peerMethods.h@{peerMethods.h}!defineLMatrix@{defineLMatrix}}
+\index{defineLMatrix@{defineLMatrix}!peerMethods.h@{peerMethods.h}}
+\doxysubsubsection{\texorpdfstring{defineLMatrix()}{defineLMatrix()}}
+{\footnotesize\ttfamily void define\+L\+Matrix (\begin{DoxyParamCaption}\item[{double $\ast$$\ast$}]{L,  }\item[{int $\ast$}]{L\+Size,  }\item[{double}]{Delta\+\_\+x }\end{DoxyParamCaption})}
 
 
 

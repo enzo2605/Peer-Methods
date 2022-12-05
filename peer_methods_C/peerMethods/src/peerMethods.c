@@ -46,7 +46,7 @@ int saveResultsInFile(const char* fileName, return_values result) {
     return 0;
 }
 
-void computeLMatrix(double **L, int *LSize, double Delta_x) {
+void defineLMatrix(double **L, int *LSize, double Delta_x) {
     // Calculate Ldiff
     int sizeTempDiagOne, sizeTempDiagMinusOne;
     // Multiply identity matrix by a scalar -2.0f
@@ -72,17 +72,17 @@ void computeLMatrix(double **L, int *LSize, double Delta_x) {
     Ldiff[M - 1] = alpha;
     Ldiff[(M - 1) * M] = alpha;
 
-    // Compute DLdiff
+    // Define DLdiff
     double *DLdiff = (double *)Calloc(M * M, sizeof(double));
     memcpy(DLdiff, Ldiff, M * M * sizeof(double));
     cblas_dscal(M * M, D, DLdiff, 1);
 
-    // Compute dLdiff
+    // Define dLdiff
     double *dLdiff = (double *)Calloc(M * M, sizeof(double));
     memcpy(dLdiff, Ldiff, M * M * sizeof(double));
     cblas_dscal(M * M, d, dLdiff, 1);
 
-    // Compute matrix L
+    // Define matrix L
     *L = threeBlockDiagD(M, Ldiff, DLdiff, dLdiff, LSize);
 
     // Free all the memory dynamically allocated
